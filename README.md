@@ -26,9 +26,9 @@
 
 ## 开始使用
 
-开始使用 DSYCLauncher，只需前往 [GitHub Releases](https://github.com/UNIkeEN/DSYCLauncher/releases) 下载最新版即可。
+开始使用 DSYCLauncher，只需前往 [GitHub Releases](https://github.com/dingshangyue/DSYCLauncher/releases) 下载最新版即可。
 
-您也可以在 [GitHub Releases](https://github.com/UNIkeEN/DSYCLauncher/releases) 获取旧版本，包括周期性构建。
+您也可以在 [GitHub Releases](https://github.com/dingshangyue/DSYCLauncher/releases) 获取旧版本，包括周期性构建。
 
 DSYCLauncher 目前支持以下平台：
 
