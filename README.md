@@ -1,3 +1,5 @@
+<img src="/logo.png" alt="DSYCLauncher" />
+
 [![Test Build](https://img.shields.io/github/actions/workflow/status/dingshangyue/DSYC-Launcher/test.yml?label=test%20build&logo=github&style=for-the-badge)](https://github.com/dingshangyue/DSYC-Launcher/blob/main/.github/workflows/test.yml)
 ![Downloads](https://img.shields.io/github/downloads/dingshangyue/DSYC-Launcher/total?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/dingshangyue/DSYC-Launcher?style=for-the-badge)
