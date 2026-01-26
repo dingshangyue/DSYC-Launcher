@@ -1,145 +1,125 @@
-<img src="docs/figs/banner.png" alt="DSYCLauncher" />
-
 [![Test Build](https://img.shields.io/github/actions/workflow/status/dingshangyue/DSYC-Launcher/test.yml?label=test%20build&logo=github&style=for-the-badge)](https://github.com/dingshangyue/DSYC-Launcher/blob/main/.github/workflows/test.yml)
 ![Downloads](https://img.shields.io/github/downloads/dingshangyue/DSYC-Launcher/total?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/dingshangyue/DSYC-Launcher?style=for-the-badge)
 ![Runs](https://img.shields.io/badge/dynamic/json?color=blue&style=for-the-badge&label=runs&query=$.total_count_str&url=https%3A%2F%2Fmc.sjtu.cn%2Fapi-sjmcl%2Fcount)
 [![Deepwiki](https://img.shields.io/badge/Ask-DeepWiki-20B2AA?logo=&style=for-the-badge)](https://deepwiki.com/dingshangyue/DSYC-Launcher)
 
-**English** · [简体中文](docs/README.zh-Hans.md) · [繁體中文](docs/README.zh-Hant.md)
+**简体中文**
 
-## Features
+## 功能特性
 
-* **Cross Platform**: Supports Windows 10/11, macOS and Linux.
-* **Efficient Instance Management**: Supports multiple game directories and instances, allowing the management of all instance resources (such as saves, mods, resource packs, shaders, screenshots, etc.) and settings in one place.
-* **Convenient Resource Download**: Supports downloading game clients, mod loaders, various game resources and modpacks from CurseForge and Modrinth.
-* **Multi-Account System Support**: Built-in Microsoft login and third-party authentication server support, compatible with the OAuth login process proposed by the Yggdrasil Connect proposal.
-* **Deeplink Integration**: Integrates with external websites and tool collections, providing convenient features such as desktop shortcuts for launching instances through system deeplinks.
+* **跨平台支持**：兼容 Windows 10/11、macOS 与 Linux。
+* **高效的实例管理**：支持多个游戏目录与实例，集中管理所有实例资源（如存档、模组、资源包、光影包、截图等）与设置。
+* **便捷的资源下载**：支持从 CurseForge 与 Modrinth 等源下载游戏客户端、Mod 加载器、各类游戏资源与整合包。
+* **多账户系统支持**：内置 Microsoft 登录与第三方认证服务器支持，兼容 Yggdrasil Connect 的 OAuth 登录流程规范提案。
+* **深度链接集成**：可与外部网站与工具集联动，支持通过系统深度链接、桌面快捷方式一键启动实例等便捷功能。
 
-> Note: some features may be limited by region, platform, or bundle type.
+> 注意：部分功能可能受地区、运行平台或程序分发类型限制。
 
-### Built with
+### 技术栈
 
 [![Tauri](https://img.shields.io/badge/Tauri-v2-FFC131?style=for-the-badge&logo=tauri&logoColor=white&labelColor=24C8DB)](https://tauri.app/)
 [![Next JS](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![Chakra UI](https://img.shields.io/badge/chakra_ui-v2-38B2AC?style=for-the-badge&logo=chakraui&logoColor=white&labelColor=319795)](https://v2.chakra-ui.com/)
 
-## Getting Started
+## 开始使用
 
-Getting started with DSYCLauncher is simple, just download the latest release from the [Official Website](https://mc.sjtu.cn/sjmcl/en).
+开始使用 DSYCLauncher，只需前往 [GitHub Releases](https://github.com/UNIkeEN/DSYCLauncher/releases) 下载最新版即可。
 
-You can also find all the releases, including the nightly versions, on [GitHub Releases](https://github.com/UNIkeEN/DSYCLauncher/releases).
+您也可以在 [GitHub Releases](https://github.com/UNIkeEN/DSYCLauncher/releases) 获取旧版本，包括周期性构建。
 
-DSYCLauncher currently supports the following platforms:
+DSYCLauncher 目前支持以下平台：
 
-| Platform  | Versions            | Architectures              | Provided Bundles                        |
-|-----------|---------------------|----------------------------|-----------------------------------------|
-| Windows   | 7 and above         | `aarch64`, `i686`, `x86_64`| installer `.exe`, portable `.exe`                 |
-| macOS     | 10.15 and above     | `aarch64`, `x86_64`        | `.app`, `.dmg`                          |
-| Linux     | webkit2gtk 4.1 (e.g., Ubuntu 22.04) | `aarch64`, `x86_64`   | `.AppImage`, `.deb`, `.rpm`, portable binary |
+| 平台    | 系统版本            | 架构               | 提供的的分发类型                              |
+|---------|---------------------|--------------------|--------------------------------------------|
+| Windows | 7 及以上           | `aarch64`, `i686`, `x86_64`  | 安装版 `.exe`，便携版 `.exe` |
+| macOS   | 10.15 及以上        | `aarch64`, `x86_64` | `.app`，`.dmg`                   |
+| Linux   | webkit2gtk 4.1 (如 Ubuntu 22.04) | `aarch64`, `x86_64` | `.AppImage`, `.deb`, `.rpm`, 便携版二进制文件 |
 
-To learn about how to use DSYCLauncher’s features and browse frequently asked questions, please refer to the [User Documentation](https://mc.sjtu.cn/sjmcl/en/docs).
+了解更多功能与常见问题，请参阅 [用户文档](https://mc.sjtu.cn/sjmcl/zh/docs)。
 
 ### Windows 7
 
-If you need to run DSYCLauncher on Windows 7, please first [download the Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download) and install it. We recommend choosing the 'Evergreen Bootstrapper'.
+如果您需要在 Windows 7 运行 DSYCLauncher，请先 [下载 Microsoft Edge WebView2 运行时](https://developer.microsoft.com/zh-cn/microsoft-edge/webview2#download) 并安装之，推荐选择“常青引导程序”。
 
 <details>
-<summary><h3>Install from Command Line</h3></summary>
+<summary><h3>从命令行安装</h3></summary>
 
 <details>
 <summary><h4>Arch Linux</h4></summary>
 
-DSYCLauncher is available on the Arch User Repository (AUR). You can install it using a common [AUR helper](https://wiki.archlinux.org/title/AUR_helpers):
-
-```bash
-yay -S sjmcl-bin
-```
-
-Manual installation without an AUR helper:
-
-```bash
-git clone https://aur.archlinux.org/sjmcl-bin.git
-cd sjmcl-bin
-makepkg -si
-```
-
 </details>
 </details>
 
-## Development and Contributing
+## 开发与贡献
 
-To get started, clone the repository and install the required dependencies:
+首先克隆本项目并安装前端依赖：
 
 ```bash
-git clone git@github.com:UNIkeEN/DSYCLauncher.git
+git clone git@github.com:dingshangyue/DSYCLauncher.git
 npm install
 ```
 
-To run the project in development mode:
+使用开发模式运行：
 
 ```bash
 npm run tauri dev
 ```
 
-We warmly invite contributions from everyone. 
+我们热烈欢迎每一位开发者的贡献。
 
-* Before you get started, please take a moment to review our [Contributing Guide](https://github.com/UNIkeEN/DSYCLauncher/blob/main/CONTRIBUTING.md) (includes more details on the development workflow). 
-* API references and some developers’ insights can be found in the [Developer Documentation](https://mc.sjtu.cn/sjmcl/en/dev).
-* Feel free to share your ideas through [Pull Requests](https://github.com/UNIkeEN/DSYCLauncher/pulls) or [GitHub Issues](https://github.com/UNIkeEN/DSYCLauncher/issues).
+* 在开始前，请先阅读我们的 [贡献指南](https://github.com/dingshangyue/DSYCLauncher/blob/main/CONTRIBUTING.md)（内含开发流程详细说明）。
+* 欢迎通过 [Pull Request](https://github.com/dingshangyue/DSYCLauncher/pulls) 或 [GitHub Issues](https://github.com/dingshangyue/DSYCLauncher/issues) 分享您的想法。
 
-### Repo Activity
+## 版权声明
 
-![Repo Activity](https://repobeats.axiom.co/api/embed/ee2f4be0fbc708179a6b40c83cd8ce80702fe6fe.svg "Repobeats analytics image")
+版权所有 © 2024-2026 DSYCLauncher 团队。
 
-## Copyright
+> 本软件并非官方 Minecraft 服务。未获得 Mojang 或 Microsoft 批准或关联许可。
 
-Copyright © 2024-2026 DSYCLauncher Team.
+本项目基于 [GNU 通用公共许可证 v3.0](../LICENSE) 发布。
 
-> NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
+依据 GPLv3 第 7 条款，当您分发本软件的修改版本时，除遵守 GPLv3 外，还须遵守以下 [附加条款](../LICENSE.EXTRA)：
 
-The software is distributed under [GNU General Public License v3.0](/LICENSE).
+1. 必须更换软件名称，禁止使用 DSYCLauncher 或 DSYC Launcher；
+2. 在您的仓库 README、分发网站或相关文档、软件的关于页面中，须明确标注您的程序基于 DSYCLauncher，并注明原仓库链接。
+3. 当对本软件的修改仅限于**增加**（而非修改或删除）预置认证服务器（`src-tauri/src/account/helpers/authlib_injector/constants.rs`）时，前述第 1 条限制不适用。在该情形下，您可继续使用原始的软件名称进行编译与分发。
 
-By GPLv3 License term 7, we require that when you distribute a modified version of the software, you must obey GPLv3 License as well as the following [additional terms](/LICENSE.EXTRA): 
+另根据我们网站的用户协议，当您分发本软件的修改版本时，请仅向我们的信息统计服务器（`src-tauri/src/utils/sys_info.rs`）发送带前缀（不少于两个字母，如 `XX-0.0.1`）的版本号，除非您的修改满足上述第 3 条限制。
 
-1. Use a different software name than DSYCLauncher or DSYC Launcher;
-2. Mark clearly in your repository README file, your distribution website or thread, Support documents, About Page in the software that your program is based on DSYCLauncher and give out the url of the origin repository.
-3. When your modifications to this software are limited solely to **adding** (without modifying or deleting) preset authentication servers (`src-tauri/src/account/helpers/authlib_injector/constants.rs`), the restrictions set forth in Clauses 1 above shall not apply. In this case, you may continue to compile and distribute the software under its original name.
+## 联系我们
 
-Besides, per term of use of our website, when distributing a modified version of the software, please send version numbers with prefix (more than two letters, e.g. `XX-0.0.1`) to our statistics server (`src-tauri/src/utils/sys_info.rs`) unless your modifications meets Clauses 3 above.
+DSYCLauncher 用户 QQ 交流群：860851380
 
-## Contact Us
+您还可以发送邮件至 [launcher@sjmc.club](mailto:launcher@sjmc.club) 来联系我们。
 
-QQ Group for DSYCLauncher Users: 860851380
+## 社区合作伙伴
 
-You can also send email to [launcher@sjmc.club](mailto:launcher@sjmc.club) if you want to contact us.
-
-## Community Partners
-
-We sincerely thank the following organizations for their development and community support throughout the DSYCLauncher project.
+该软件由 SJMCL 软件二次分发
+衷心感谢以下组织对 DSYCLauncher 项目开发与社区的支持。
 
 [
   <picture>
-    <source srcset="docs/figs/partners/sjmc-dark.png" media="(prefers-color-scheme: dark)">
-    <source srcset="docs/figs/partners/sjmc.png" media="(prefers-color-scheme: light)">
-    <img src="docs/figs/partners/sjmc.png" alt="DSYC" style="height: 65px;">
+    <source srcset="figs/partners/sjmc-dark.png" media="(prefers-color-scheme: dark)">
+    <source srcset="figs/partners/sjmc.png" media="(prefers-color-scheme: light)">
+    <img src="figs/partners/sjmc.png" alt="DSYC" style="height: 65px;">
   </picture>
-](https://mc.sjtu.cn/en/)
+](https://mc.sjtu.cn)
 &nbsp;&nbsp;
-[<img src="docs/figs/partners/sues-mc.png" alt="SUES-MC" style="height: 65px;"/>](https://www.suesmc.ltd/)
+[<img src="figs/partners/sues-mc.png" alt="SUES-MC" style="height: 65px;"/>](https://www.suesmc.ltd/)
 
 [
   <picture>
-    <source srcset="docs/figs/partners/mua-dark.png" media="(prefers-color-scheme: dark)">
-    <source srcset="docs/figs/partners/mua.png" media="(prefers-color-scheme: light)">
-    <img src="docs/figs/partners/mua.png" alt="MUA" style="height: 45px;">
+    <source srcset="figs/partners/mua-dark.png" media="(prefers-color-scheme: dark)">
+    <source srcset="figs/partners/mua.png" media="(prefers-color-scheme: light)">
+    <img src="figs/partners/mua.png" alt="MUA" style="height: 45px;">
   </picture>
-](https://www.mualliance.cn/en)
+](https://www.mualliance.cn)
 &nbsp;&nbsp;&nbsp;&nbsp;
 [
   <picture>
-    <source srcset="docs/figs/partners/gnwork-dark.png" media="(prefers-color-scheme: dark)">
-    <source srcset="docs/figs/partners/gnwork.png" media="(prefers-color-scheme: light)">
-    <img src="docs/figs/partners/gnwork.png" alt="GNWORK" style="height: 45px;">
+    <source srcset="figs/partners/gnwork-dark.png" media="(prefers-color-scheme: dark)">
+    <source srcset="figs/partners/gnwork.png" media="(prefers-color-scheme: light)">
+    <img src="figs/partners/gnwork.png" alt="GNWORK" style="height: 45px;">
   </picture>
 ](https://space.bilibili.com/403097853)
