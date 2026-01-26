@@ -103,7 +103,7 @@ jobs:
       - name: Download non-macOS artifacts
         uses: actions/download-artifact@v4
         with:
-          pattern: 'SJMCL_${{ needs.Version-Check.outputs.version }}_*'
+          pattern: 'DSYCLauncher_${{ needs.Version-Check.outputs.version }}_*'
           path: artifacts
           merge-multiple: true
 
@@ -123,12 +123,12 @@ jobs:
           mkdir -p release-artifacts
           
           # Copy non-macOS artifacts
-          find artifacts -name "SJMCL_${{ env.VERSION }}_windows_*" -exec cp {} release-artifacts/ \;
-          find artifacts -name "SJMCL_${{ env.VERSION }}_linux_*" -exec cp {} release-artifacts/ \;
+          find artifacts -name "DSYCLauncher_${{ env.VERSION }}_windows_*" -exec cp {} release-artifacts/ \;
+          find artifacts -name "DSYCLauncher_${{ env.VERSION }}_linux_*" -exec cp {} release-artifacts/ \;
           
           # Copy unsigned macOS artifacts
           echo "⚠️ WARNING: Using unsigned macOS artifacts (signing was skipped)"
-          find artifacts -name "SJMCL_${{ env.VERSION }}_macos_*" -exec cp {} release-artifacts/ \;
+          find artifacts -name "DSYCLauncher_${{ env.VERSION }}_macos_*" -exec cp {} release-artifacts/ \;
 
           # Collect all SHA256 files into one summary
           touch SHA256SUMS.txt
@@ -196,9 +196,9 @@ jobs:
         run: |
           RELEASE_TAG="${{ env.VERSION }}"
           
-          # Create the release
+          # Create release
           gh release create "$GITHUB_REF_NAME" \
-            --title "SJMCL ${{ env.VERSION }}" \
+            --title "DSYCLauncher ${{ env.VERSION }}" \
             --draft \
             $PRERELEASE \
             --notes-file release-notes.md \
