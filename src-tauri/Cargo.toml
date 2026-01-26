@@ -1,10 +1,10 @@
 [package]
 name = "DSYCLauncher"
-version = "0.9.6"
+version = "0.9.7"
 description = "A Minecraft launcher from DSYC"
 authors = ["DSYCLauncher Team"]
 license = "GNU General Public License v3.0 (with additional terms)"
-repository = "https://github.com/UNIkeEN/DSYCLauncher"
+repository = "https://github.com/dingshangyue/DSYC-Launcher"
 edition = "2021"
 rust-version = "1.91.0"
 
