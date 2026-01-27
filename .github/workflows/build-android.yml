@@ -58,7 +58,10 @@ jobs:
           npm install --legacy-peer-deps
 
       - name: Build Android APK
-        run: cd android-app && eas build --platform android --profile production --output ../artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk --non-interactive
+        run: |
+          mkdir -p artifacts
+          cd android-app
+          eas build --platform android --profile production --local --output ../artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk --non-interactive
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
