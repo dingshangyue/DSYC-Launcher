@@ -59,6 +59,6 @@ next-env.d.ts
 *.sw?
 
 # Android app
-android-app/
-android-app/**/*
+# android-app/
+# android-app/**/*
 logs_*
