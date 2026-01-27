@@ -1,11 +1,5 @@
-import {
-  Button,
-  HStack,
-  Text,
-  useToast as useChakraToast,
-} from "@chakra-ui/react";
+import { Text, useToast as useChakraToast } from "@chakra-ui/react";
 import { openUrl } from "@tauri-apps/plugin-opener";
-import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CommonIconButton } from "@/components/common/common-icon-button";
 import {
@@ -16,7 +10,6 @@ import { TitleFullWithLogo } from "@/components/logo-title";
 import { useLauncherConfig } from "@/contexts/config";
 import { useSharedModals } from "@/contexts/shared-modal";
 import { useToast } from "@/contexts/toast";
-import { isValidSemanticVersion } from "@/utils/string";
 
 const AboutSettingsPage = () => {
   const { t } = useTranslation();
@@ -36,8 +29,6 @@ const AboutSettingsPage = () => {
     sjtu: "https://mc.sjtu.cn/",
     sjtu_minecraft: "https://mc.sjtu.cn/",
   };
-
-
 
   const aboutSettingGroups: OptionItemGroupProps[] = [
     {

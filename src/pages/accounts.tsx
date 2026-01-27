@@ -77,16 +77,16 @@ const AccountsPage = () => {
   useEffect(() => {
     const serverList = getAuthServerList() || [];
     // 过滤掉SJMC和MUA用户中心
-    const filteredServerList = serverList.filter(server => {
+    const filteredServerList = serverList.filter((server) => {
       const serverName = server.name.toLowerCase();
       const serverUrl = server.authUrl.toLowerCase();
       // 过滤条件：排除包含SJMC、MUA、用户中心的服务器
       return !(
-        serverName.includes('sjmc') ||
-        serverName.includes('mua') ||
-        serverName.includes('用户中心') ||
-        serverUrl.includes('skin.mc.sjtu.cn') ||
-        serverUrl.includes('skin.mualliance.ltd')
+        serverName.includes("sjmc") ||
+        serverName.includes("mua") ||
+        serverName.includes("用户中心") ||
+        serverUrl.includes("skin.mc.sjtu.cn") ||
+        serverUrl.includes("skin.mualliance.ltd")
       );
     });
     setAuthServerList(filteredServerList);

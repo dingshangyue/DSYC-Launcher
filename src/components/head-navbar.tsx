@@ -16,7 +16,6 @@ import { useTranslation } from "react-i18next";
 import {
   LuBox,
   LuCircleUserRound,
-  LuCompass,
   LuSearch,
   LuSettings,
   LuZap,

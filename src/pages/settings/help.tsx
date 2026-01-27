@@ -9,7 +9,6 @@ import {
 const HelpSettingsPage = () => {
   const { t } = useTranslation();
   const helpSettingGroups: OptionItemGroupProps[] = [
-
     {
       title: t("HelpSettingsPage.minecraft.title"),
       items: [
