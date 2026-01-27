@@ -6,7 +6,9 @@ use std::io::Read;
 use std::path::{Path, PathBuf};
 use zip::ZipArchive;
 
-pub fn load_resourcepack_from_zip(path: &PathBuf) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+pub fn load_resourcepack_from_zip(
+  path: &PathBuf,
+) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
   let file = match fs::File::open(path) {
     Ok(val) => val,
     Err(e) => return Err(DSYCLauncherError::from(e)),
@@ -54,7 +56,9 @@ pub fn load_resourcepack_from_zip(path: &PathBuf) -> DSYCLauncherResult<(String,
   Ok((description, icon_src))
 }
 
-pub async fn load_resourcepack_from_dir(path: &Path) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+pub async fn load_resourcepack_from_dir(
+  path: &Path,
+) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
   let mut description = String::new();
 
   if let Ok(mut contents) = tokio::fs::read_to_string(path.join("pack.mcmeta")).await {

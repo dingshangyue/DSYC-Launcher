@@ -410,7 +410,10 @@ pub async fn libraries_to_info(
   (game_version, loader_version, loader_type, None)
 }
 
-fn rules_is_allowed(rules: &Vec<InstructionRule>, feature: &FeaturesInfo) -> DSYCLauncherResult<bool> {
+fn rules_is_allowed(
+  rules: &Vec<InstructionRule>,
+  feature: &FeaturesInfo,
+) -> DSYCLauncherResult<bool> {
   let mut weak_allowed = true;
   for rule in rules {
     let (allow, strong) = rule.is_allowed(feature)?;
@@ -466,8 +469,8 @@ pub fn load_native_libraries_replace_map(
   app: &AppHandle,
 ) -> DSYCLauncherResult<HashMap<String, HashMap<String, Option<LibrariesValue>>>> {
   let path = get_app_resource_filepath(app, "assets/game/natives.json")?;
-  let txt =
-    fs::read_to_string(&path).map_err(|e| DSYCLauncherError(format!("read natives.json failed: {e}")))?;
+  let txt = fs::read_to_string(&path)
+    .map_err(|e| DSYCLauncherError(format!("read natives.json failed: {e}")))?;
   let map: HashMap<String, HashMap<String, Option<LibrariesValue>>> = serde_json::from_str(&txt)
     .map_err(|e| DSYCLauncherError(format!("parse natives.json failed: {e}")))?;
   Ok(map)

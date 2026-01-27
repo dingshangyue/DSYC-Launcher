@@ -43,7 +43,9 @@ pub async fn install_fabric_loader(
 
   let int_path = meta["intermediary"]["maven"]
     .as_str()
-    .ok_or(DSYCLauncherError("meta missing intermediary maven".to_string()))?;
+    .ok_or(DSYCLauncherError(
+      "meta missing intermediary maven".to_string(),
+    ))?;
 
   let main_class = meta["launcherMeta"]["mainClass"]["client"]
     .as_str()
@@ -136,7 +138,8 @@ pub async fn remove_fabric_api_mods<P: AsRef<Path>>(mods_dir: P) -> DSYCLauncher
       .and_then(|s| s.to_str())
       .unwrap_or_default()
       .to_string();
-    fs::remove_file(&p).map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
+    fs::remove_file(&p)
+      .map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
   }
 
   Ok(())

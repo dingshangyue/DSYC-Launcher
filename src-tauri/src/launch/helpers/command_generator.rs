@@ -63,8 +63,8 @@ pub struct LaunchArguments {
 
 impl LaunchArguments {
   pub fn into_hashmap(self) -> DSYCLauncherResult<HashMap<String, String>> {
-    let value =
-      serde_json::to_value(self).map_err(|e| DSYCLauncherError(format!("Serialization error: {}", e)))?;
+    let value = serde_json::to_value(self)
+      .map_err(|e| DSYCLauncherError(format!("Serialization error: {}", e)))?;
     let obj = value
       .as_object()
       .ok_or_else(|| DSYCLauncherError("Failed to convert LaunchParams to HashMap".to_string()))?;
@@ -338,101 +338,148 @@ pub async fn generate_launch_command(
     }
 
     // Get library paths based on platform
-      let mut lib_paths = Vec::new();
-      
-      // Add VC libs path
-      #[cfg(target_os = "windows")]
-      {
-        use std::env;
-        use std::path::PathBuf;
-        if let Ok(exe_path) = env::current_exe() {
-          if let Some(app_dir) = exe_path.parent() {
-            #[cfg(target_arch = "x86")]
-            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("windows").join("x86");
-            #[cfg(target_arch = "x86_64")]
-            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("windows").join("x64");
-            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("windows").join(if cfg!(target_arch = "x86") { "x86" } else { "x64" });
-            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
-            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
-          }
+    let mut lib_paths = Vec::new();
+
+    // Add VC libs path
+    #[cfg(target_os = "windows")]
+    {
+      use std::env;
+      use std::path::PathBuf;
+      if let Ok(exe_path) = env::current_exe() {
+        if let Some(app_dir) = exe_path.parent() {
+          #[cfg(target_arch = "x86")]
+          let vc_libs_dir = app_dir
+            .join("assets")
+            .join("vc-libs")
+            .join("windows")
+            .join("x86");
+          #[cfg(target_arch = "x86_64")]
+          let vc_libs_dir = app_dir
+            .join("assets")
+            .join("vc-libs")
+            .join("windows")
+            .join("x64");
+          let common_libs_dir = app_dir
+            .join("assets")
+            .join("libs")
+            .join("natives")
+            .join("windows")
+            .join(if cfg!(target_arch = "x86") {
+              "x86"
+            } else {
+              "x64"
+            });
+          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
         }
       }
-      #[cfg(target_os = "macos")]
-      {
-        use std::env;
-        use std::path::PathBuf;
-        if let Ok(exe_path) = env::current_exe() {
-          if let Some(app_dir) = exe_path.parent() {
+    }
+    #[cfg(target_os = "macos")]
+    {
+      use std::env;
+      use std::path::PathBuf;
+      if let Ok(exe_path) = env::current_exe() {
+        if let Some(app_dir) = exe_path.parent() {
+          if let Some(app_dir) = app_dir.parent() {
             if let Some(app_dir) = app_dir.parent() {
-              if let Some(app_dir) = app_dir.parent() {
-                let vc_libs_dir = app_dir.join("Contents").join("Resources").join("assets").join("vc-libs").join("macos");
-                let common_libs_dir = app_dir.join("Contents").join("Resources").join("assets").join("libs").join("natives").join("macos");
-                lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
-                lib_paths.push(common_libs_dir.to_string_lossy().to_string());
-              }
+              let vc_libs_dir = app_dir
+                .join("Contents")
+                .join("Resources")
+                .join("assets")
+                .join("vc-libs")
+                .join("macos");
+              let common_libs_dir = app_dir
+                .join("Contents")
+                .join("Resources")
+                .join("assets")
+                .join("libs")
+                .join("natives")
+                .join("macos");
+              lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+              lib_paths.push(common_libs_dir.to_string_lossy().to_string());
             }
           }
         }
       }
-      #[cfg(target_os = "linux")]
-      {
-        use std::env;
-        use std::path::PathBuf;
-        if let Ok(exe_path) = env::current_exe() {
-          if let Some(app_dir) = exe_path.parent() {
-            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("linux");
-            #[cfg(target_arch = "x86_64")]
-            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("linux").join("x64");
-            #[cfg(target_arch = "aarch64")]
-            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("linux").join("arm64");
-            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
-            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
-          }
+    }
+    #[cfg(target_os = "linux")]
+    {
+      use std::env;
+      use std::path::PathBuf;
+      if let Ok(exe_path) = env::current_exe() {
+        if let Some(app_dir) = exe_path.parent() {
+          let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("linux");
+          #[cfg(target_arch = "x86_64")]
+          let common_libs_dir = app_dir
+            .join("assets")
+            .join("libs")
+            .join("natives")
+            .join("linux")
+            .join("x64");
+          #[cfg(target_arch = "aarch64")]
+          let common_libs_dir = app_dir
+            .join("assets")
+            .join("libs")
+            .join("natives")
+            .join("linux")
+            .join("arm64");
+          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
         }
       }
-      #[cfg(target_os = "android")]
-      {
-        use std::env;
-        use std::path::PathBuf;
-        if let Ok(exe_path) = env::current_exe() {
-          if let Some(app_dir) = exe_path.parent() {
-            // Android app structure: app/lib/[arch]/
-            #[cfg(target_arch = "aarch64")]
-            let arch_dir = "arm64-v8a";
-            #[cfg(target_arch = "arm")]
-            let arch_dir = "armeabi-v7a";
-            #[cfg(target_arch = "x86")]
-            let arch_dir = "x86";
-            #[cfg(target_arch = "x86_64")]
-            let arch_dir = "x86_64";
-            
-            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("android").join(arch_dir);
-            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("android").join(arch_dir);
-            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
-            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
-          }
+    }
+    #[cfg(target_os = "android")]
+    {
+      use std::env;
+      use std::path::PathBuf;
+      if let Ok(exe_path) = env::current_exe() {
+        if let Some(app_dir) = exe_path.parent() {
+          // Android app structure: app/lib/[arch]/
+          #[cfg(target_arch = "aarch64")]
+          let arch_dir = "arm64-v8a";
+          #[cfg(target_arch = "arm")]
+          let arch_dir = "armeabi-v7a";
+          #[cfg(target_arch = "x86")]
+          let arch_dir = "x86";
+          #[cfg(target_arch = "x86_64")]
+          let arch_dir = "x86_64";
+
+          let vc_libs_dir = app_dir
+            .join("assets")
+            .join("vc-libs")
+            .join("android")
+            .join(arch_dir);
+          let common_libs_dir = app_dir
+            .join("assets")
+            .join("libs")
+            .join("natives")
+            .join("android")
+            .join(arch_dir);
+          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
         }
       }
-      
-      // Combine natives directory and all library paths
-      let mut java_library_path = "${natives_directory}".to_string();
-      
-      #[cfg(target_os = "windows")]
-      let separator = ";";
-      #[cfg(not(target_os = "windows"))]
-      let separator = ":";
-      
-      for lib_path in lib_paths {
-        if !lib_path.is_empty() {
-          java_library_path.push_str(&format!("{}{}", separator, lib_path));
-        }
+    }
+
+    // Combine natives directory and all library paths
+    let mut java_library_path = "${natives_directory}".to_string();
+
+    #[cfg(target_os = "windows")]
+    let separator = ";";
+    #[cfg(not(target_os = "windows"))]
+    let separator = ":";
+
+    for lib_path in lib_paths {
+      if !lib_path.is_empty() {
+        java_library_path.push_str(&format!("{}{}", separator, lib_path));
       }
-      
-      client_jvm_args.extend(vec![
-        format!("-Djava.library.path={}", java_library_path),
-        "-Dminecraft.launcher.brand=${launcher_name}".to_string(),
-        "-Dminecraft.launcher.version=${launcher_version}".to_string(),
-      ]);
+    }
+
+    client_jvm_args.extend(vec![
+      format!("-Djava.library.path={}", java_library_path),
+      "-Dminecraft.launcher.brand=${launcher_name}".to_string(),
+      "-Dminecraft.launcher.version=${launcher_version}".to_string(),
+    ]);
     cmd.extend(replace_arguments(client_jvm_args, &map));
   }
 

@@ -2,7 +2,7 @@ use crate::error::DSYCLauncherResult;
 use crate::tasks::download::DownloadTask;
 use crate::tasks::events::GEventStatus;
 use crate::tasks::monitor::TaskMonitor;
-use crate::tasks::{PTaskGroupDesc, PTaskParam, DSYCLauncherFutureDesc, THandle};
+use crate::tasks::{DSYCLauncherFutureDesc, PTaskGroupDesc, PTaskParam, THandle};
 use crate::utils::fs::extract_filename;
 use std::pin::Pin;
 use std::time::Duration;
@@ -76,7 +76,11 @@ pub fn create_transient_task(app: AppHandle, desc: THandle) -> DSYCLauncherResul
 }
 
 #[tauri::command]
-pub fn set_transient_task_state(app: AppHandle, task_id: u32, state: String) -> DSYCLauncherResult<()> {
+pub fn set_transient_task_state(
+  app: AppHandle,
+  task_id: u32,
+  state: String,
+) -> DSYCLauncherResult<()> {
   let monitor = app.state::<Pin<Box<TaskMonitor>>>();
   monitor.set_transient_task(app.clone(), task_id, state);
   Ok(())
@@ -131,7 +135,10 @@ pub fn cancel_progressive_task_group(app: AppHandle, task_group: String) -> DSYC
 }
 
 #[tauri::command]
-pub async fn resume_progressive_task_group(app: AppHandle, task_group: String) -> DSYCLauncherResult<()> {
+pub async fn resume_progressive_task_group(
+  app: AppHandle,
+  task_group: String,
+) -> DSYCLauncherResult<()> {
   let monitor = app.state::<Pin<Box<TaskMonitor>>>();
   monitor.resume_progressive_task_group(task_group).await;
   Ok(())

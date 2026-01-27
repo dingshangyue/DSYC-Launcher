@@ -64,7 +64,10 @@ pub enum HmclAccountEntry {
   ThirdParty(HmclThirdPartyAccount),
 }
 
-async fn offline_to_player(app: &AppHandle, acc: &HmclOfflineAccount) -> DSYCLauncherResult<PlayerInfo> {
+async fn offline_to_player(
+  app: &AppHandle,
+  acc: &HmclOfflineAccount,
+) -> DSYCLauncherResult<PlayerInfo> {
   let uuid = uuid::Uuid::parse_str(&acc.uuid).map_err(|_| AccountError::ParseError)?;
   let textures = load_preset_skin(app, PresetRole::Steve)?;
   Ok(

@@ -75,7 +75,10 @@ async fn fetch_xbl_token(app: &AppHandle, microsoft_token: String) -> DSYCLaunch
   Ok(response["Token"].as_str().unwrap_or("").to_string())
 }
 
-async fn fetch_xsts_token(app: &AppHandle, xbl_token: String) -> DSYCLauncherResult<(String, String)> {
+async fn fetch_xsts_token(
+  app: &AppHandle,
+  xbl_token: String,
+) -> DSYCLauncherResult<(String, String)> {
   let client = app.state::<reqwest::Client>();
 
   let response = client
@@ -206,7 +209,10 @@ async fn parse_profile(app: &AppHandle, tokens: &OAuthTokens) -> DSYCLauncherRes
   )
 }
 
-pub async fn login(app: &AppHandle, auth_info: DeviceAuthResponseInfo) -> DSYCLauncherResult<PlayerInfo> {
+pub async fn login(
+  app: &AppHandle,
+  auth_info: DeviceAuthResponseInfo,
+) -> DSYCLauncherResult<PlayerInfo> {
   let client = app.state::<reqwest::Client>();
   let sender = client.post(OAUTH_TOKEN_ENDPOINT).form(&[
     ("client_id", CLIENT_ID),

@@ -194,7 +194,10 @@ pub fn retrieve_instance_game_config(
 }
 
 #[tauri::command]
-pub async fn reset_instance_game_config(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+pub async fn reset_instance_game_config(
+  app: AppHandle,
+  instance_id: String,
+) -> DSYCLauncherResult<()> {
   let instance = {
     let binding = app.state::<Mutex<HashMap<String, Instance>>>();
     let mut state = binding.lock().unwrap();
@@ -844,7 +847,10 @@ pub async fn retrieve_world_details(
 }
 
 #[tauri::command]
-pub fn create_launch_desktop_shortcut(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+pub fn create_launch_desktop_shortcut(
+  app: AppHandle,
+  instance_id: String,
+) -> DSYCLauncherResult<()> {
   let binding = app.state::<Mutex<HashMap<String, Instance>>>();
   let state = binding
     .lock()
@@ -1065,7 +1071,10 @@ pub async fn create_instance(
 }
 
 #[tauri::command]
-pub async fn finish_mod_loader_install(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+pub async fn finish_mod_loader_install(
+  app: AppHandle,
+  instance_id: String,
+) -> DSYCLauncherResult<()> {
   let instance = {
     let binding = app.state::<Mutex<HashMap<String, Instance>>>();
     let state = binding.lock()?;

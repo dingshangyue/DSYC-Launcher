@@ -4,7 +4,7 @@ version = 4
 
 [[package]]
 name = "DSYCLauncher"
-version = "0.9.8"
+version = "0.9.9"
 dependencies = [
  "async-speed-limit",
  "async-trait",

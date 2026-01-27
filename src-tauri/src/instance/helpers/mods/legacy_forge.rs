@@ -33,12 +33,16 @@ pub fn get_mod_metadata_from_jar<R: Read + Seek>(
     Err(e) => return Err(DSYCLauncherError::from(e)),
   };
   if meta.is_empty() {
-    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+    return Err(DSYCLauncherError(
+      "len of LegacyForgeModMetadata is 0".to_string(),
+    ));
   }
   Ok(meta.remove(0))
 }
 
-pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LegacyForgeModMetadata> {
+pub async fn get_mod_metadata_from_dir(
+  dir_path: &Path,
+) -> DSYCLauncherResult<LegacyForgeModMetadata> {
   let legacy_forge_file_path = dir_path.join("mcmod.info");
   let mut meta: Vec<LegacyForgeModMetadata> =
     match tokio::fs::read_to_string(legacy_forge_file_path).await {
@@ -49,7 +53,9 @@ pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<Le
       Err(e) => return Err(DSYCLauncherError::from(e)),
     };
   if meta.is_empty() {
-    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+    return Err(DSYCLauncherError(
+      "len of LegacyForgeModMetadata is 0".to_string(),
+    ));
   }
   Ok(meta.remove(0))
 }

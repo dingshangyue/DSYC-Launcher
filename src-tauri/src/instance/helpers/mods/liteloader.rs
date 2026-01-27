@@ -36,7 +36,9 @@ pub fn get_mod_metadata_from_jar<R: Read + Seek>(
   Ok(meta)
 }
 
-pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LiteloaderModMetadata> {
+pub async fn get_mod_metadata_from_dir(
+  dir_path: &Path,
+) -> DSYCLauncherResult<LiteloaderModMetadata> {
   let liteloader_file_path = dir_path.join("litemod.json");
   let meta: LiteloaderModMetadata = serde_json::from_str(
     tokio::fs::read_to_string(liteloader_file_path)

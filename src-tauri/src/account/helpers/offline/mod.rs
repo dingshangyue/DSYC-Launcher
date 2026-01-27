@@ -11,7 +11,10 @@ use strum::IntoEnumIterator;
 use tauri::AppHandle;
 use uuid::Uuid;
 
-pub fn load_preset_skin(app: &AppHandle, preset_role: PresetRole) -> DSYCLauncherResult<Vec<Texture>> {
+pub fn load_preset_skin(
+  app: &AppHandle,
+  preset_role: PresetRole,
+) -> DSYCLauncherResult<Vec<Texture>> {
   let texture_path = get_app_resource_filepath(app, &format!("assets/skins/{}.png", preset_role))
     .map_err(|_| AccountError::TextureError)?;
 
@@ -29,7 +32,11 @@ pub fn load_preset_skin(app: &AppHandle, preset_role: PresetRole) -> DSYCLaunche
   }])
 }
 
-pub async fn login(app: &AppHandle, username: String, raw_uuid: String) -> DSYCLauncherResult<PlayerInfo> {
+pub async fn login(
+  app: &AppHandle,
+  username: String,
+  raw_uuid: String,
+) -> DSYCLauncherResult<PlayerInfo> {
   let name_with_prefix = format!("OfflinePlayer:{}", username);
   let uuid = if let Ok(id) = Uuid::parse_str(&raw_uuid) {
     id

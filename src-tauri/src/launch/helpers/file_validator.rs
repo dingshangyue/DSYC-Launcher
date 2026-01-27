@@ -207,7 +207,10 @@ fn parse_sem_version(version: &str) -> Version {
   })
 }
 
-pub fn convert_library_name_to_path(name: &str, native: Option<String>) -> DSYCLauncherResult<String> {
+pub fn convert_library_name_to_path(
+  name: &str,
+  native: Option<String>,
+) -> DSYCLauncherResult<String> {
   let LibraryParts {
     path,
     pack_name,

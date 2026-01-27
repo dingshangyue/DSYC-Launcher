@@ -152,7 +152,10 @@ pub fn get_subdirectories<P: AsRef<Path>>(path: P) -> DSYCLauncherResult<Vec<Pat
 /// ```rust
 /// let mod_paths = get_files_with_regex(&mods_dir, &valid_extensions).unwrap_or_default();
 /// ```
-pub fn get_files_with_regex<P: AsRef<Path>>(path: P, pattern: &Regex) -> DSYCLauncherResult<Vec<PathBuf>> {
+pub fn get_files_with_regex<P: AsRef<Path>>(
+  path: P,
+  pattern: &Regex,
+) -> DSYCLauncherResult<Vec<PathBuf>> {
   let dir_entries = fs::read_dir(&path).map_err(|e| {
     let error_message = match e.kind() {
       io::ErrorKind::NotFound => "Path does not exist".to_string(),
@@ -441,7 +444,10 @@ pub fn calculate_sha256(path: &Path) -> DSYCLauncherResult<String> {
   }
 }
 
-pub fn create_zip_from_dirs(paths: Vec<PathBuf>, zip_file_path: PathBuf) -> DSYCLauncherResult<String> {
+pub fn create_zip_from_dirs(
+  paths: Vec<PathBuf>,
+  zip_file_path: PathBuf,
+) -> DSYCLauncherResult<String> {
   let zip_file = std::fs::File::create(&zip_file_path)
     .map_err(|e| DSYCLauncherError(format!("Failed to create zip file: {}", e)))?;
   let mut zip = ZipWriter::new(zip_file);

@@ -73,7 +73,9 @@ pub fn get_mod_metadata_from_jar<R: Read + Seek>(
           valid_logo_file: None,
         })
       } else {
-        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+        Err(DSYCLauncherError(
+          "no mods.toml or MANIFEST.MF found".to_string(),
+        ))
       }
     }
   };
@@ -142,7 +144,9 @@ pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<Fo
           valid_logo_file: None,
         })
       } else {
-        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+        Err(DSYCLauncherError(
+          "no mods.toml or MANIFEST.MF found".to_string(),
+        ))
       }
     }
   };

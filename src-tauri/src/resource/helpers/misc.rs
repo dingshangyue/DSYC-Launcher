@@ -26,7 +26,10 @@ pub fn get_source_priority_list(launcher_config: &LauncherConfig) -> Vec<SourceT
 }
 
 // https://bmclapidoc.bangbang93.com/
-pub fn get_download_api(source: SourceType, resource_type: ResourceType) -> DSYCLauncherResult<Url> {
+pub fn get_download_api(
+  source: SourceType,
+  resource_type: ResourceType,
+) -> DSYCLauncherResult<Url> {
   match source {
     SourceType::Official => match resource_type {
       ResourceType::VersionManifest => Ok(Url::parse("https://launchermeta.mojang.com/mc/game/version_manifest.json")?),

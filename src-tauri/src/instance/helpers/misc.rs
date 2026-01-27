@@ -90,7 +90,10 @@ pub fn get_instance_subdir_path_by_id(
   get_instance_subdir_paths(app, instance, &[directory_type]).and_then(|mut paths| paths.pop())
 }
 
-pub fn unify_instance_name(src_version_path: &PathBuf, tgt_name: &String) -> DSYCLauncherResult<PathBuf> {
+pub fn unify_instance_name(
+  src_version_path: &PathBuf,
+  tgt_name: &String,
+) -> DSYCLauncherResult<PathBuf> {
   if !sanitize_filename::is_sanitized(tgt_name) {
     return Err(InstanceError::InvalidNameError.into());
   }

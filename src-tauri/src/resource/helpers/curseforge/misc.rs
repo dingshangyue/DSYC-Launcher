@@ -21,8 +21,8 @@ where
   T: serde::de::DeserializeOwned,
   P: serde::Serialize,
 {
-  let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
-    .map_err(|_| ResourceError::MissingApiKey)?;
+  let curseforge_api_key =
+    env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
 
   let request_builder = match request_type {
     OtherResourceRequestType::GetWithParams(params) => client.get(url).query(params),
@@ -524,8 +524,8 @@ pub async fn translate_description_curseforge(
   resource_id: &str,
 ) -> DSYCLauncherResult<Option<String>> {
   let result = async {
-    let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
-      .map_err(|_| ResourceError::MissingApiKey)?;
+    let curseforge_api_key =
+      env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
 
     let url = get_curseforge_api(OtherResourceApiEndpoint::TranslateDesc, Some(resource_id))?;
     let client = app.state::<reqwest::Client>();

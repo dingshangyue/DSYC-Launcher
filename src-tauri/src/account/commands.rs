@@ -53,7 +53,11 @@ pub fn retrieve_player_list(app: AppHandle) -> DSYCLauncherResult<Vec<Player>> {
 }
 
 #[tauri::command]
-pub async fn add_player_offline(app: AppHandle, username: String, uuid: String) -> DSYCLauncherResult<()> {
+pub async fn add_player_offline(
+  app: AppHandle,
+  username: String,
+  uuid: String,
+) -> DSYCLauncherResult<()> {
   let new_player = offline::login(&app, username, uuid).await?;
 
   let account_binding = app.state::<Mutex<AccountInfo>>();

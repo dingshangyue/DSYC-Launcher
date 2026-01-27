@@ -33,7 +33,11 @@ pub fn retrieve_launcher_config(app: AppHandle) -> DSYCLauncherResult<LauncherCo
 }
 
 #[tauri::command]
-pub fn update_launcher_config(app: AppHandle, key_path: String, value: String) -> DSYCLauncherResult<()> {
+pub fn update_launcher_config(
+  app: AppHandle,
+  key_path: String,
+  value: String,
+) -> DSYCLauncherResult<()> {
   let config_binding = app.state::<Mutex<LauncherConfig>>();
   let mut config_state = config_binding.lock()?;
   let key_path = camel_to_snake_case(key_path.as_str());
@@ -369,7 +373,10 @@ pub async fn check_launcher_update(app: AppHandle) -> DSYCLauncherResult<Version
 }
 
 #[tauri::command]
-pub async fn download_launcher_update(app: AppHandle, version: VersionMetaInfo) -> DSYCLauncherResult<()> {
+pub async fn download_launcher_update(
+  app: AppHandle,
+  version: VersionMetaInfo,
+) -> DSYCLauncherResult<()> {
   if version.version.is_empty() || version.version == "up2date" {
     Ok(())
   } else {

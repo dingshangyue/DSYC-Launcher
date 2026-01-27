@@ -150,8 +150,8 @@ impl ModpackManifest for CurseForgeManifest {
       let project_id = file.project_id;
 
       async move {
-        let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
-          .map_err(|_| InstanceError::MissingApiKey)?;
+        let curseforge_api_key =
+          env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| InstanceError::MissingApiKey)?;
 
         let class_id = {
           let project_resp = client
