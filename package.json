@@ -1,10 +1,10 @@
 {
   "name": "dsyclauncher",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "./build.sh",
+    "build": "node build.js",
     "start": "next start",
     "lint": "eslint",
     "tauri": "tauri",
