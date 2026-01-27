@@ -101,7 +101,13 @@ jobs:
           echo "Artifact Name: $ARTIFACT_NAME"
           mkdir -p artifacts
 
-          cp "${ARTIFACT_NAME}.sha256" artifacts/
+          # Only copy SHA256 file if it exists
+          SHA256_FILE="${ARTIFACT_NAME}.sha256"
+          if [ -f "$SHA256_FILE" ]; then
+            cp "$SHA256_FILE" artifacts/
+          else
+            echo "⚠️ SHA256 file not found, skipping copy"
+          fi
 
           # For Android, APK files are already in artifacts from the build step
           echo "Android APK files are in artifacts/"
