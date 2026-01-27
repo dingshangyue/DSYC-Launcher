@@ -1,6 +1,6 @@
 [package]
 name = "DSYCLauncher"
-version = "1.0.9"
+version = "1.0.10"
 description = "A Minecraft launcher from DSYC"
 authors = ["DSYCLauncher Team"]
 license = "GNU General Public License v3.0 (with additional terms)"
