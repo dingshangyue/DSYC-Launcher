@@ -103,9 +103,20 @@ jobs:
           key: ${{ matrix.platform }}-${{ matrix.target }}
 
       - name: Build app
+        if: matrix.platform != 'android'
         run: npm run tauri build -- --target ${{ matrix.target }}
         env:
           DSYCLauncher_CURSEFORGE_API_KEY: ${{ secrets.DSYCLauncher_CURSEFORGE_API_KEY }}
+
+      - name: Build Android app
+        if: matrix.platform == 'android'
+        run: |
+          cd android-app
+          npm install
+          # Build Android APK using EAS Build
+          npx eas build --platform android --profile production --output ../artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Patch portable executable
         if: matrix.platform == 'windows' || matrix.platform == 'linux'
@@ -123,6 +134,7 @@ jobs:
           echo "ARTIFACT_NAME=DSYCLauncher_${{ inputs.version }}_${{ matrix.platform }}_${{ matrix.arch }}" >> $GITHUB_ENV
 
       - name: Calculate SHA256 checksums
+        if: matrix.platform != 'android'
         shell: bash
         run: |
           ARTIFACT_NAME="${{ env.ARTIFACT_NAME }}"
@@ -140,6 +152,15 @@ jobs:
 
           cat "${ARTIFACT_NAME}.sha256"
 
+      - name: Calculate SHA256 checksums for Android
+        if: matrix.platform == 'android'
+        shell: bash
+        run: |
+          ARTIFACT_NAME="${{ env.ARTIFACT_NAME }}"
+          touch "${ARTIFACT_NAME}.sha256"
+          echo "$(sha256sum artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk | awk '{print $1}') ${ARTIFACT_NAME}" >> "${ARTIFACT_NAME}.sha256"
+          cat "${ARTIFACT_NAME}.sha256"
+
       - name: Prepare release artifact
         shell: bash
         env:
@@ -147,7 +168,7 @@ jobs:
         run: |
           ARTIFACT_NAME="${{ env.ARTIFACT_NAME }}"
           echo "Artifact Name: $ARTIFACT_NAME"
-          mkdir artifacts
+          mkdir -p artifacts
 
           cp "${ARTIFACT_NAME}.sha256" artifacts/
 
@@ -163,6 +184,9 @@ jobs:
             mv "src-tauri/target/${{ matrix.target }}/release/bundle/deb/"*.deb artifacts/"$ARTIFACT_NAME".deb
             mv "src-tauri/target/${{ matrix.target }}/release/bundle/rpm/"*.rpm artifacts/"$ARTIFACT_NAME".rpm
             mv "src-tauri/target/${{ matrix.target }}/release/DSYCLauncher-patched" artifacts/"$ARTIFACT_NAME"_portable
+          elif [ "${{ matrix.platform }}" = "android" ]; then
+            # For Android, APK files are already in artifacts from the build step
+            echo "Android APK files are in artifacts/"
           fi
 
           ls -la artifacts

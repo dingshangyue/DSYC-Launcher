@@ -39,6 +39,7 @@ DSYCLauncher 目前支持以下平台：
 | Windows | 7 及以上           | `aarch64`, `i686`, `x86_64`  | 安装版 `.exe`，便携版 `.exe` |
 | macOS   | 10.15 及以上        | `aarch64`, `x86_64` | `.app`，`.dmg`                   |
 | Linux   | webkit2gtk 4.1 (如 Ubuntu 22.04) | `aarch64`, `x86_64` | `.AppImage`, `.deb`, `.rpm`, 便携版二进制文件 |
+| Android | 5.0 及以上         | `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` | `.apk` |
 
 了解更多功能与常见问题，请参阅 [用户文档](https://mc.sjtu.cn/sjmcl/zh/docs)。
 

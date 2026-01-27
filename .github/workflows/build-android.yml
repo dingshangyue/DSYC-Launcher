@@ -1,0 +1,103 @@
+name: Build Android APK
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: 'Version to build'
+        required: true
+        type: string
+      upload_artifacts:
+        description: 'Whether to upload artifacts'
+        required: false
+        type: boolean
+        default: true
+      branch:
+        description: 'Git branch to checkout'
+        required: false
+        type: string
+        default: '' # leave empty to use triggering ref
+    secrets:
+      EXPO_TOKEN:
+        required: true
+
+jobs:
+  Build-Android:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm64-v8a
+          - arch: armeabi-v7a
+          - arch: x86
+          - arch: x86_64
+
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch || github.ref || 'main' }} 
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: |
+          cd android-app
+          npm install
+
+      - name: Build Android APK
+        run: |
+          cd android-app
+          # Build Android APK using EAS Build
+          npx eas build --platform android --profile production --output ../artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Setup artifact name
+        shell: bash
+        run: |
+          echo "ARTIFACT_NAME=DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}" >> $GITHUB_ENV
+
+      - name: Calculate SHA256 checksums
+        shell: bash
+        run: |
+          ARTIFACT_NAME="${{ env.ARTIFACT_NAME }}"
+          touch "${ARTIFACT_NAME}.sha256"
+          echo "$(sha256sum artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk | awk '{print $1}') ${ARTIFACT_NAME}" >> "${ARTIFACT_NAME}.sha256"
+          cat "${ARTIFACT_NAME}.sha256"
+
+      - name: Prepare release artifact
+        shell: bash
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          ARTIFACT_NAME="${{ env.ARTIFACT_NAME }}"
+          echo "Artifact Name: $ARTIFACT_NAME"
+          mkdir -p artifacts
+
+          cp "${ARTIFACT_NAME}.sha256" artifacts/
+
+          # For Android, APK files are already in artifacts from the build step
+          echo "Android APK files are in artifacts/"
+
+          ls -la artifacts
+
+      - name: Upload artifact
+        if: inputs.upload_artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: "artifacts/*"
+          if-no-files-found: error 

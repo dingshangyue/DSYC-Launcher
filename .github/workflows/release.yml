@@ -68,6 +68,16 @@ jobs:
     secrets:
       DSYCLauncher_CURSEFORGE_API_KEY: ${{ secrets.DSYCLauncher_CURSEFORGE_API_KEY }}
 
+  Build-Android:
+    needs: [Version-Check]
+    uses: ./.github/workflows/build-android.yml
+    with:
+      version: ${{ needs.Version-Check.outputs.version }}
+      branch: ${{ github.ref }}
+      upload_artifacts: true
+    secrets:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
   # Code-Sign-macOS:
   #   needs: [Version-Check, Build-and-Release]
   #   uses: ./.github/workflows/sign-macos.yml
@@ -91,7 +101,7 @@ jobs:
   #     AUR_SSH_PRIVATE_KEY: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
 
   Create-Release:
-    needs: [Version-Check, Build-and-Release]
+    needs: [Version-Check, Build-and-Release, Build-Android]
     if: always() && needs.Build-and-Release.result == 'success'
     runs-on: ubuntu-latest
     
@@ -125,6 +135,7 @@ jobs:
           # Copy non-macOS artifacts
           find artifacts -name "DSYCLauncher_${{ env.VERSION }}_windows_*" -exec cp {} release-artifacts/ \;
           find artifacts -name "DSYCLauncher_${{ env.VERSION }}_linux_*" -exec cp {} release-artifacts/ \;
+          find artifacts -name "DSYCLauncher_${{ env.VERSION }}_android_*" -exec cp {} release-artifacts/ \;
           
           # Copy unsigned macOS artifacts
           echo "⚠️ WARNING: Using unsigned macOS artifacts (signing was skipped)"

@@ -102,11 +102,11 @@
       }
     },
     "resources": [
-      "assets/skins/*",
-      "assets/game/*",
-      "assets/icons/icon.ico",
-      "assets/icons/icon.png",
-      "assets/db/*"
+      "assets/skins",
+      "assets/game",
+      "assets/icons",
+      "assets/db",
+      "assets/vc-libs"
     ]
   },
   "plugins": {
