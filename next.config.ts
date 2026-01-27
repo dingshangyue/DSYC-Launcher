@@ -13,8 +13,16 @@ const nextConfig = {
     unoptimized: true,
   },
   // Configure assetPrefix or else the server won't properly resolve your assets.
-  assetPrefix: isProd ? null : `http://${internalHost}:3000`,
+  assetPrefix: isProd ? "" : `http://${internalHost}:3000`,
   devIndicators: false,
+  // Exclude android-app directory from Next.js processing
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
+  experimental: {
+    // Exclude android-app directory from file watching
+    excludeFile: (filename: string) => {
+      return filename.includes('android-app/');
+    }
+  }
 };
 
 // Now can run `ANALYZE=true npm run build` to analyze frontend bundle size
