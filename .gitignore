@@ -57,3 +57,8 @@ next-env.d.ts
 *.njsproj
 *.sln
 *.sw?
+
+# Android app
+android-app/
+android-app/**/*
+logs_*

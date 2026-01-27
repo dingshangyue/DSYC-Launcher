@@ -17,18 +17,11 @@ const nextConfig = {
   devIndicators: false,
   // Exclude android-app directory from Next.js processing
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
-  // Use webpack configuration to exclude android-app directory
-  webpack: (config: any, { isServer }: { isServer: boolean }) => {
-    if (isServer) {
-      config.plugins.push(
-        new (require('webpack').IgnorePlugin)({
-          checkResource: (resource: string) => {
-            return resource.includes('android-app/');
-          },
-        })
-      );
+  // Use experimental excludeFile to exclude android-app directory
+  experimental: {
+    excludeFile: (filename: string) => {
+      return filename.includes('android-app/');
     }
-    return config;
   }
 };
 
