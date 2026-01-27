@@ -18,10 +18,7 @@ on:
         description: 'Git branch to checkout'
         required: false
         type: string
-        default: '' # leave empty to use triggering ref
-    secrets:
-      EXPO_TOKEN:
-        required: true
+        default: ''
 
 jobs:
   Build-Android:
@@ -39,80 +36,63 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.branch || github.ref || 'main' }} 
+          ref: ${{ inputs.branch || github.ref || 'main' }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
-      - name: Setup EAS
-        uses: expo/expo-github-action@v8
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Install dependencies
         run: |
           cd android-app
           npm install --legacy-peer-deps
 
+      - name: Prebuild Android project
+        run: |
+          cd android-app
+          npx expo prebuild --clean
+
       - name: Build Android APK
         run: |
-          mkdir -p artifacts
-          cd android-app
-          # Try to build with EXPO_TOKEN if available, otherwise skip
-          if [ -n "${{ secrets.EXPO_TOKEN }}" ]; then
-            eas build --platform android --profile production --local --output ../artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk --non-interactive
-          else
-            echo "⚠️ EXPO_TOKEN not set, skipping Android build"
-            # Create a placeholder file to avoid workflow failure
-            echo "Android build skipped - EXPO_TOKEN not configured" > ../artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}_skipped.txt
-          fi
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          cd android-app/android
+          # Build APK for specific architecture
+          ./gradlew assembleRelease -x lint
+          # Find the generated APK
+          find app/build/outputs/apk/release -name "*.apk" -type f
 
       - name: Setup artifact name
         shell: bash
         run: |
           echo "ARTIFACT_NAME=DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}" >> $GITHUB_ENV
 
-      - name: Calculate SHA256 checksums
+      - name: Prepare and copy artifacts
         shell: bash
         run: |
-          ARTIFACT_NAME="${{ env.ARTIFACT_NAME }}"
-          APK_FILE="artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk"
-          
-          # Only calculate SHA256 if APK file exists
-          if [ -f "$APK_FILE" ]; then
-            touch "${ARTIFACT_NAME}.sha256"
-            echo "$(sha256sum "$APK_FILE" | awk '{print $1}') ${ARTIFACT_NAME}" >> "${ARTIFACT_NAME}.sha256"
-            cat "${ARTIFACT_NAME}.sha256"
-          else
-            echo "⚠️ APK file not found, skipping SHA256 calculation"
-          fi
-
-      - name: Prepare release artifact
-        shell: bash
-        env:
-          VERSION: ${{ inputs.version }}
-        run: |
-          ARTIFACT_NAME="${{ env.ARTIFACT_NAME }}"
-          echo "Artifact Name: $ARTIFACT_NAME"
           mkdir -p artifacts
-
-          # Only copy SHA256 file if it exists
-          SHA256_FILE="${ARTIFACT_NAME}.sha256"
-          if [ -f "$SHA256_FILE" ]; then
-            cp "$SHA256_FILE" artifacts/
+          ARTIFACT_NAME="${{ env.ARTIFACT_NAME }}"
+          
+          # Find and copy the APK file
+          APK_FILE=$(find android-app/android/app/build/outputs/apk/release -name "*.apk" -type f | head -1)
+          
+          if [ -n "$APK_FILE" ]; then
+            cp "$APK_FILE" "artifacts/${ARTIFACT_NAME}.apk"
+            echo "Copied APK: $APK_FILE"
+            
+            # Calculate SHA256
+            SHA256=$(sha256sum "artifacts/${ARTIFACT_NAME}.apk" | awk '{print $1}')
+            echo "${SHA256} ${ARTIFACT_NAME}" > "artifacts/${ARTIFACT_NAME}.sha256"
+            echo "SHA256: ${SHA256}"
           else
-            echo "⚠️ SHA256 file not found, skipping copy"
+            echo "❌ APK file not found"
+            exit 1
           fi
-
-          # For Android, APK files are already in artifacts from the build step
-          echo "Android APK files are in artifacts/"
-
-          ls -la artifacts
 
       - name: Upload artifact
         if: inputs.upload_artifacts
@@ -120,4 +100,4 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: "artifacts/*"
-          if-no-files-found: error 
+          if-no-files-found: error
