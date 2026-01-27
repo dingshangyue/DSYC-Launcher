@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "DSYCLauncher",
-  "version": "0.9.7",
+  "version": "1.0.2",
   "identifier": "DSYCLauncher",
   "build": {
     "frontendDist": "../out",
