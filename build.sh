@@ -6,29 +6,36 @@ set -e
 # 显示当前工作目录
 echo "Current directory: $(pwd)"
 
+# 定义临时目录路径（在项目根目录之外）
+TEMP_DIR="/tmp/android-app-backup-$(date +%s)"
+
 # 检查 android-app 目录是否存在
 if [ -d "android-app" ]; then
-    echo "Found android-app directory, renaming..."
-    # 临时重命名 android-app 目录，避免 Next.js 构建时解析 React Native 依赖
-    mv android-app android-app-temp
-    echo "Renamed android-app to android-app-temp"
+    echo "Found android-app directory, moving to temporary location..."
+    # 创建临时目录
+    mkdir -p "$TEMP_DIR"
+    # 移动 android-app 目录到临时位置
+    mv android-app "$TEMP_DIR/"
+    echo "Moved android-app to $TEMP_DIR"
 else
-    echo "No android-app directory found, skipping rename"
+    echo "No android-app directory found, skipping move"
 fi
 
-# 运行 Next.js 构建（直接运行 next build 而不是 npm run build）
+# 运行 Next.js 构建
 echo "Running Next.js build..."
 ./node_modules/.bin/next build
 
 echo "Next.js build completed successfully!"
 
-# 恢复 android-app 目录名称
-if [ -d "android-app-temp" ]; then
+# 恢复 android-app 目录
+if [ -d "$TEMP_DIR/android-app" ]; then
     echo "Restoring android-app directory..."
-    mv android-app-temp android-app
-    echo "Restored android-app directory"
+    mv "$TEMP_DIR/android-app" .
+    # 清理临时目录
+    rmdir "$TEMP_DIR"
+    echo "Restored android-app directory and cleaned up temporary files"
 else
-    echo "No android-app-temp directory found, skipping restore"
+    echo "No android-app directory found in temporary location, skipping restore"
 fi
 
 echo "Build process completed!"
