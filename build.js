@@ -7,21 +7,17 @@ const { execSync } = require('child_process');
 // 显示当前工作目录
 console.log('Current directory:', process.cwd());
 
-// 定义临时目录路径（在项目根目录之外）
-const tempDir = path.join(require('os').tmpdir(), `android-app-backup-${Date.now()}`);
 const androidAppPath = path.join(process.cwd(), 'android-app');
-const tempAndroidAppPath = path.join(tempDir, 'android-app');
+const androidAppTempPath = path.join(process.cwd(), 'android-app-temp');
 
 // 检查 android-app 目录是否存在
 if (fs.existsSync(androidAppPath)) {
-    console.log('Found android-app directory, moving to temporary location...');
-    // 创建临时目录
-    fs.mkdirSync(tempDir, { recursive: true });
-    // 移动 android-app 目录到临时位置
-    fs.renameSync(androidAppPath, tempAndroidAppPath);
-    console.log(`Moved android-app to ${tempDir}`);
+    console.log('Found android-app directory, renaming to temporary name...');
+    // 重命名 android-app 目录为 android-app-temp
+    fs.renameSync(androidAppPath, androidAppTempPath);
+    console.log('Renamed android-app to android-app-temp');
 } else {
-    console.log('No android-app directory found, skipping move');
+    console.log('No android-app directory found, skipping rename');
 }
 
 // 运行 Next.js 构建
@@ -32,23 +28,19 @@ try {
 } catch (error) {
     console.error('Next.js build failed:', error.message);
     // 恢复 android-app 目录
-    if (fs.existsSync(tempAndroidAppPath)) {
+    if (fs.existsSync(androidAppTempPath)) {
         console.log('Restoring android-app directory...');
-        fs.renameSync(tempAndroidAppPath, androidAppPath);
-        // 清理临时目录
-        fs.rmdirSync(tempDir, { recursive: true });
-        console.log('Restored android-app directory and cleaned up temporary files');
+        fs.renameSync(androidAppTempPath, androidAppPath);
+        console.log('Restored android-app directory');
     }
     process.exit(1);
 }
 
 // 恢复 android-app 目录
-if (fs.existsSync(tempAndroidAppPath)) {
+if (fs.existsSync(androidAppTempPath)) {
     console.log('Restoring android-app directory...');
-    fs.renameSync(tempAndroidAppPath, androidAppPath);
-    // 清理临时目录
-    fs.rmdirSync(tempDir, { recursive: true });
-    console.log('Restored android-app directory and cleaned up temporary files');
+    fs.renameSync(androidAppTempPath, androidAppPath);
+    console.log('Restored android-app directory');
 }
 
 console.log('Build process completed!');
