@@ -61,7 +61,14 @@ jobs:
         run: |
           mkdir -p artifacts
           cd android-app
-          eas build --platform android --profile production --local --output ../artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk --non-interactive
+          # Try to build with EXPO_TOKEN if available, otherwise skip
+          if [ -n "${{ secrets.EXPO_TOKEN }}" ]; then
+            eas build --platform android --profile production --local --output ../artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk --non-interactive
+          else
+            echo "⚠️ EXPO_TOKEN not set, skipping Android build"
+            # Create a placeholder file to avoid workflow failure
+            echo "Android build skipped - EXPO_TOKEN not configured" > ../artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}_skipped.txt
+          fi
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
@@ -74,9 +81,16 @@ jobs:
         shell: bash
         run: |
           ARTIFACT_NAME="${{ env.ARTIFACT_NAME }}"
-          touch "${ARTIFACT_NAME}.sha256"
-          echo "$(sha256sum artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk | awk '{print $1}') ${ARTIFACT_NAME}" >> "${ARTIFACT_NAME}.sha256"
-          cat "${ARTIFACT_NAME}.sha256"
+          APK_FILE="artifacts/DSYCLauncher_${{ inputs.version }}_android_${{ matrix.arch }}.apk"
+          
+          # Only calculate SHA256 if APK file exists
+          if [ -f "$APK_FILE" ]; then
+            touch "${ARTIFACT_NAME}.sha256"
+            echo "$(sha256sum "$APK_FILE" | awk '{print $1}') ${ARTIFACT_NAME}" >> "${ARTIFACT_NAME}.sha256"
+            cat "${ARTIFACT_NAME}.sha256"
+          else
+            echo "⚠️ APK file not found, skipping SHA256 calculation"
+          fi
 
       - name: Prepare release artifact
         shell: bash
