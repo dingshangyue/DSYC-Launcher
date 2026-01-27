@@ -11,12 +11,14 @@
 ## 功能特性
 
 * **跨平台支持**：兼容 Windows 10/11、macOS 与 Linux。
+* **多平台MOD适配**：将Forge、Fabric多数模组所需库内置于启动器中，报错情况大幅减少
 **MacOS使用时出现“已损坏，你应该将它移到废纸篓”标识时 
 在终端输入命令：sudo xattr -r -d com.apple.quarantine {该软件在你电脑上安装的路径}**
 * **高效的实例管理**：支持多个游戏目录与实例，集中管理所有实例资源（如存档、模组、资源包、光影包、截图等）与设置。
 * **便捷的资源下载**：支持从 CurseForge 与 Modrinth 等源下载游戏客户端、Mod 加载器、各类游戏资源与整合包。
 * **多账户系统支持**：内置 Microsoft 登录与第三方认证服务器支持，兼容 Yggdrasil Connect 的 OAuth 登录流程规范提案。
 * **深度链接集成**：可与外部网站与工具集联动，支持通过系统深度链接、桌面快捷方式一键启动实例等便捷功能。
+* **深度UI定制**：为整合包设计，清晰可见UI定制
 
 > 注意：部分功能可能受地区、运行平台或程序分发类型限制。
 
@@ -96,35 +98,7 @@ npm run tauri dev
 
 DSYCLauncher 用户 QQ 交流群：860851380
 
-您还可以发送邮件至 [launcher@sjmc.club](mailto:launcher@sjmc.club) 来联系我们。
+您还可以发送邮件至 [dscontact@halogzs.cn](mailto:dscontact@halogzs.cn) 来联系我们。
 
-## 社区合作伙伴
 
-该软件由 SJMCL 软件二次分发
-衷心感谢以下组织对 DSYCLauncher 项目开发与社区的支持。
-
-[
-  <picture>
-    <source srcset="figs/partners/sjmc-dark.png" media="(prefers-color-scheme: dark)">
-    <source srcset="figs/partners/sjmc.png" media="(prefers-color-scheme: light)">
-    <img src="figs/partners/sjmc.png" alt="DSYC" style="height: 65px;">
-  </picture>
-](https://mc.sjtu.cn)
-&nbsp;&nbsp;
-[<img src="figs/partners/sues-mc.png" alt="SUES-MC" style="height: 65px;"/>](https://www.suesmc.ltd/)
-
-[
-  <picture>
-    <source srcset="figs/partners/mua-dark.png" media="(prefers-color-scheme: dark)">
-    <source srcset="figs/partners/mua.png" media="(prefers-color-scheme: light)">
-    <img src="figs/partners/mua.png" alt="MUA" style="height: 45px;">
-  </picture>
-](https://www.mualliance.cn)
-&nbsp;&nbsp;&nbsp;&nbsp;
-[
-  <picture>
-    <source srcset="figs/partners/gnwork-dark.png" media="(prefers-color-scheme: dark)">
-    <source srcset="figs/partners/gnwork.png" media="(prefers-color-scheme: light)">
-    <img src="figs/partners/gnwork.png" alt="GNWORK" style="height: 45px;">
-  </picture>
-](https://space.bilibili.com/403097853)
+该项目由 https://github.com/UNIkeEN/SJMCL 二改
