@@ -1,0 +1,14 @@
+﻿2026-01-27T08:49:01.1352406Z ##[group]Run actions/setup-node@v4
+2026-01-27T08:49:01.1353237Z with:
+2026-01-27T08:49:01.1353855Z   node-version: lts/*
+2026-01-27T08:49:01.1354503Z   always-auth: false
+2026-01-27T08:49:01.1355140Z   check-latest: false
+2026-01-27T08:49:01.1355980Z   token: ***
+2026-01-27T08:49:01.1356591Z ##[endgroup]
+2026-01-27T08:49:01.3101554Z Attempt to resolve LTS alias from manifest...
+2026-01-27T08:49:02.4229277Z Found in cache @ /opt/hostedtoolcache/node/24.13.0/x64
+2026-01-27T08:49:02.4234967Z ##[group]Environment details
+2026-01-27T08:49:04.6213684Z node: v24.13.0
+2026-01-27T08:49:04.6214303Z npm: 11.6.2
+2026-01-27T08:49:04.6214683Z yarn: 1.22.22
+2026-01-27T08:49:04.6215833Z ##[endgroup]

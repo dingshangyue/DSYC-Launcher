@@ -1,0 +1,71 @@
+﻿2026-01-27T08:49:30.4438887Z ##[group]Run actions-rs/toolchain@v1
+2026-01-27T08:49:30.4439226Z with:
+2026-01-27T08:49:30.4439400Z   profile: minimal
+2026-01-27T08:49:30.4439587Z   toolchain: stable
+2026-01-27T08:49:30.4439764Z   override: true
+2026-01-27T08:49:30.4439954Z   components: rustfmt
+2026-01-27T08:49:30.4440146Z   default: false
+2026-01-27T08:49:30.4440341Z ##[endgroup]
+2026-01-27T08:49:30.5438542Z [command]/home/runner/.cargo/bin/rustup show
+2026-01-27T08:49:30.6387112Z Default host: x86_64-unknown-linux-gnu
+2026-01-27T08:49:30.6388153Z rustup home:  /home/runner/.rustup
+2026-01-27T08:49:30.6388499Z 
+2026-01-27T08:49:30.7099976Z installed toolchains
+2026-01-27T08:49:30.7100750Z --------------------
+2026-01-27T08:49:30.7102872Z stable-x86_64-unknown-linux-gnu (active, default)
+2026-01-27T08:49:30.7103442Z 
+2026-01-27T08:49:30.7103808Z active toolchain
+2026-01-27T08:49:30.7104159Z ----------------
+2026-01-27T08:49:30.7107691Z name: stable-x86_64-unknown-linux-gnu
+2026-01-27T08:49:30.7108673Z active because: it's the default toolchain
+2026-01-27T08:49:30.7109316Z installed targets:
+2026-01-27T08:49:30.7109773Z   x86_64-unknown-linux-gnu
+2026-01-27T08:49:30.7161275Z [command]/home/runner/.cargo/bin/rustup -V
+2026-01-27T08:49:30.7219012Z rustup 1.28.2 (e4f3ad6f8 2025-04-28)
+2026-01-27T08:49:30.7268558Z info: This is the version for the rustup toolchain manager, not the rustc compiler.
+2026-01-27T08:49:30.8937018Z info: The currently active `rustc` version is `rustc 1.92.0 (ded5c06cf 2025-12-08)`
+2026-01-27T08:49:30.8973255Z Installed rustup 1.28.2 support profiles
+2026-01-27T08:49:30.8977585Z [command]/home/runner/.cargo/bin/rustup -V
+2026-01-27T08:49:30.9033059Z rustup 1.28.2 (e4f3ad6f8 2025-04-28)
+2026-01-27T08:49:30.9034716Z info: This is the version for the rustup toolchain manager, not the rustc compiler.
+2026-01-27T08:49:30.9522559Z info: The currently active `rustc` version is `rustc 1.92.0 (ded5c06cf 2025-12-08)`
+2026-01-27T08:49:30.9545260Z Installed rustup 1.28.2 support components
+2026-01-27T08:49:30.9550090Z [command]/home/runner/.cargo/bin/rustup set profile minimal
+2026-01-27T08:49:30.9756832Z info: profile set to 'minimal'
+2026-01-27T08:49:30.9775159Z [command]/home/runner/.cargo/bin/rustup toolchain install stable --component rustfmt
+2026-01-27T08:49:31.0663943Z info: syncing channel updates for 'stable-x86_64-unknown-linux-gnu'
+2026-01-27T08:49:31.1771674Z info: latest update on 2026-01-22, rust version 1.93.0 (254b59607 2026-01-19)
+2026-01-27T08:49:31.2209538Z info: downloading component 'rustfmt'
+2026-01-27T08:49:31.2410397Z info: downloading component 'clippy'
+2026-01-27T08:49:31.2701954Z info: downloading component 'cargo'
+2026-01-27T08:49:31.3182979Z info: downloading component 'rust-std'
+2026-01-27T08:49:31.4176725Z info: downloading component 'rustc'
+2026-01-27T08:49:31.5982534Z info: removing previous version of component 'clippy'
+2026-01-27T08:49:31.6008714Z info: removing previous version of component 'rustfmt'
+2026-01-27T08:49:31.6022680Z info: removing previous version of component 'cargo'
+2026-01-27T08:49:31.6128037Z info: removing previous version of component 'rust-std'
+2026-01-27T08:49:31.6160415Z info: removing previous version of component 'rustc'
+2026-01-27T08:49:31.6253125Z info: installing component 'rustfmt'
+2026-01-27T08:49:31.8601867Z info: installing component 'clippy'
+2026-01-27T08:49:32.2368417Z info: installing component 'cargo'
+2026-01-27T08:49:32.9482245Z info: installing component 'rust-std'
+2026-01-27T08:49:34.8586355Z info: installing component 'rustc'
+2026-01-27T08:49:39.5813314Z 
+2026-01-27T08:49:39.5904521Z   stable-x86_64-unknown-linux-gnu updated - rustc 1.93.0 (254b59607 2026-01-19) (from rustc 1.92.0 (ded5c06cf 2025-12-08))
+2026-01-27T08:49:39.5905198Z 
+2026-01-27T08:49:39.5932713Z [command]/home/runner/.cargo/bin/rustup override set stable
+2026-01-27T08:49:39.5998735Z info: override toolchain for '/home/runner/work/DSYC-Launcher/DSYC-Launcher' set to 'stable-x86_64-unknown-linux-gnu'
+2026-01-27T08:49:39.6016496Z ##[group]Gathering installed versions
+2026-01-27T08:49:39.6026672Z [command]/home/runner/.cargo/bin/rustc -V
+2026-01-27T08:49:39.6465135Z rustc 1.93.0 (254b59607 2026-01-19)
+2026-01-27T08:49:39.6500233Z ##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+2026-01-27T08:49:39.6511196Z ##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+2026-01-27T08:49:39.6512821Z [command]/home/runner/.cargo/bin/cargo -V
+2026-01-27T08:49:39.6906609Z cargo 1.93.0 (083ac5135 2025-12-15)
+2026-01-27T08:49:39.6919467Z ##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+2026-01-27T08:49:39.6929886Z [command]/home/runner/.cargo/bin/rustup -V
+2026-01-27T08:49:39.6985503Z rustup 1.28.2 (e4f3ad6f8 2025-04-28)
+2026-01-27T08:49:39.6986439Z info: This is the version for the rustup toolchain manager, not the rustc compiler.
+2026-01-27T08:49:39.7377006Z info: The currently active `rustc` version is `rustc 1.93.0 (254b59607 2026-01-19)`
+2026-01-27T08:49:39.7402787Z ##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+2026-01-27T08:49:39.7404940Z ##[endgroup]

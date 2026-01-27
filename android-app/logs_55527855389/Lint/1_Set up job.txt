@@ -1,0 +1,32 @@
+﻿2026-01-27T08:48:58.0636277Z Current runner version: '2.331.0'
+2026-01-27T08:48:58.0663401Z ##[group]Runner Image Provisioner
+2026-01-27T08:48:58.0664303Z Hosted Compute Agent
+2026-01-27T08:48:58.0665007Z Version: 20260115.477
+2026-01-27T08:48:58.0665602Z Commit: 4b342d620503cbe250a3154040964899ea7c9b00
+2026-01-27T08:48:58.0666265Z Build Date: 2026-01-15T22:32:41Z
+2026-01-27T08:48:58.0667022Z Worker ID: {3c0d40d4-ca92-4dc6-8581-28bfe9f595dd}
+2026-01-27T08:48:58.0667684Z Azure Region: westus
+2026-01-27T08:48:58.0668438Z ##[endgroup]
+2026-01-27T08:48:58.0669946Z ##[group]Operating System
+2026-01-27T08:48:58.0670591Z Ubuntu
+2026-01-27T08:48:58.0671030Z 24.04.3
+2026-01-27T08:48:58.0671585Z LTS
+2026-01-27T08:48:58.0672120Z ##[endgroup]
+2026-01-27T08:48:58.0672613Z ##[group]Runner Image
+2026-01-27T08:48:58.0673259Z Image: ubuntu-24.04
+2026-01-27T08:48:58.0673797Z Version: 20260119.4.1
+2026-01-27T08:48:58.0674789Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260119.4/images/ubuntu/Ubuntu2404-Readme.md
+2026-01-27T08:48:58.0676540Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260119.4
+2026-01-27T08:48:58.0677466Z ##[endgroup]
+2026-01-27T08:48:58.0678752Z ##[group]GITHUB_TOKEN Permissions
+2026-01-27T08:48:58.0680909Z Contents: read
+2026-01-27T08:48:58.0681469Z Metadata: read
+2026-01-27T08:48:58.0682077Z ##[endgroup]
+2026-01-27T08:48:58.0684284Z Secret source: Actions
+2026-01-27T08:48:58.0684974Z Prepare workflow directory
+2026-01-27T08:48:58.1022724Z Prepare all required actions
+2026-01-27T08:48:58.1070026Z Getting action download info
+2026-01-27T08:48:58.6163327Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-01-27T08:48:58.7360567Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-01-27T08:48:58.8327080Z Download action repository 'actions-rs/toolchain@v1' (SHA:16499b5e05bf2e26879000db0c1d13f7e13fa3af)
+2026-01-27T08:48:59.4245306Z Complete job name: Lint

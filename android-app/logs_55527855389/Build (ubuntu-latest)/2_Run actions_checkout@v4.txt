@@ -1,0 +1,72 @@
+﻿2026-01-27T08:48:58.8445993Z ##[group]Run actions/checkout@v4
+2026-01-27T08:48:58.8446926Z with:
+2026-01-27T08:48:58.8447382Z   repository: dingshangyue/DSYC-Launcher
+2026-01-27T08:48:58.8448144Z   token: ***
+2026-01-27T08:48:58.8448548Z   ssh-strict: true
+2026-01-27T08:48:58.8448968Z   ssh-user: git
+2026-01-27T08:48:58.8449391Z   persist-credentials: true
+2026-01-27T08:48:58.8449884Z   clean: true
+2026-01-27T08:48:58.8450305Z   sparse-checkout-cone-mode: true
+2026-01-27T08:48:58.8451033Z   fetch-depth: 1
+2026-01-27T08:48:58.8451474Z   fetch-tags: false
+2026-01-27T08:48:58.8451893Z   show-progress: true
+2026-01-27T08:48:58.8452316Z   lfs: false
+2026-01-27T08:48:58.8452703Z   submodules: false
+2026-01-27T08:48:58.8453161Z   set-safe-directory: true
+2026-01-27T08:48:58.8453971Z ##[endgroup]
+2026-01-27T08:48:58.9559156Z Syncing repository: dingshangyue/DSYC-Launcher
+2026-01-27T08:48:58.9563091Z ##[group]Getting Git version info
+2026-01-27T08:48:58.9564598Z Working directory is '/home/runner/work/DSYC-Launcher/DSYC-Launcher'
+2026-01-27T08:48:58.9566859Z [command]/usr/bin/git version
+2026-01-27T08:48:58.9620526Z git version 2.52.0
+2026-01-27T08:48:58.9649850Z ##[endgroup]
+2026-01-27T08:48:58.9674162Z Temporarily overriding HOME='/home/runner/work/_temp/f2856eb9-812d-4b44-bf12-903c144eb8bf' before making global git config changes
+2026-01-27T08:48:58.9676919Z Adding repository directory to the temporary git global config as a safe directory
+2026-01-27T08:48:58.9681472Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/DSYC-Launcher/DSYC-Launcher
+2026-01-27T08:48:58.9723863Z Deleting the contents of '/home/runner/work/DSYC-Launcher/DSYC-Launcher'
+2026-01-27T08:48:58.9727840Z ##[group]Initializing the repository
+2026-01-27T08:48:58.9732966Z [command]/usr/bin/git init /home/runner/work/DSYC-Launcher/DSYC-Launcher
+2026-01-27T08:48:58.9845564Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-01-27T08:48:58.9847758Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-01-27T08:48:58.9849286Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-01-27T08:48:58.9850370Z hint: call:
+2026-01-27T08:48:58.9851326Z hint:
+2026-01-27T08:48:58.9852703Z hint: 	git config --global init.defaultBranch <name>
+2026-01-27T08:48:58.9853944Z hint:
+2026-01-27T08:48:58.9855071Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-01-27T08:48:58.9857023Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-01-27T08:48:58.9858468Z hint:
+2026-01-27T08:48:58.9859199Z hint: 	git branch -m <name>
+2026-01-27T08:48:58.9860025Z hint:
+2026-01-27T08:48:58.9861358Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-01-27T08:48:58.9863596Z Initialized empty Git repository in /home/runner/work/DSYC-Launcher/DSYC-Launcher/.git/
+2026-01-27T08:48:58.9867207Z [command]/usr/bin/git remote add origin https://github.com/dingshangyue/DSYC-Launcher
+2026-01-27T08:48:58.9901722Z ##[endgroup]
+2026-01-27T08:48:58.9903131Z ##[group]Disabling automatic garbage collection
+2026-01-27T08:48:58.9907538Z [command]/usr/bin/git config --local gc.auto 0
+2026-01-27T08:48:58.9937294Z ##[endgroup]
+2026-01-27T08:48:58.9938655Z ##[group]Setting up auth
+2026-01-27T08:48:58.9945341Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-01-27T08:48:58.9977662Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-01-27T08:48:59.0331588Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-01-27T08:48:59.0362093Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-01-27T08:48:59.0584293Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-01-27T08:48:59.0620067Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-01-27T08:48:59.0863798Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-01-27T08:48:59.0901747Z ##[endgroup]
+2026-01-27T08:48:59.0902776Z ##[group]Fetching the repository
+2026-01-27T08:48:59.0911207Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +16d9cf4eb64a8cae1d62f101ecc41d5f0a2b34e8:refs/remotes/origin/main
+2026-01-27T08:48:59.7654958Z From https://github.com/dingshangyue/DSYC-Launcher
+2026-01-27T08:48:59.7657054Z  * [new ref]         16d9cf4eb64a8cae1d62f101ecc41d5f0a2b34e8 -> origin/main
+2026-01-27T08:48:59.7692657Z ##[endgroup]
+2026-01-27T08:48:59.7694645Z ##[group]Determining the checkout info
+2026-01-27T08:48:59.7696833Z ##[endgroup]
+2026-01-27T08:48:59.7700099Z [command]/usr/bin/git sparse-checkout disable
+2026-01-27T08:48:59.7742638Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-01-27T08:48:59.7773842Z ##[group]Checking out the ref
+2026-01-27T08:48:59.7778025Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-01-27T08:48:59.9631994Z Switched to a new branch 'main'
+2026-01-27T08:48:59.9635844Z branch 'main' set up to track 'origin/main'.
+2026-01-27T08:48:59.9654176Z ##[endgroup]
+2026-01-27T08:48:59.9698302Z [command]/usr/bin/git log -1 --format=%H
+2026-01-27T08:48:59.9724363Z 16d9cf4eb64a8cae1d62f101ecc41d5f0a2b34e8

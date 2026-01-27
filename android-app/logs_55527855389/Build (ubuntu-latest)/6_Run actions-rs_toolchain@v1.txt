@@ -1,0 +1,57 @@
+﻿2026-01-27T08:49:52.2888720Z ##[group]Run actions-rs/toolchain@v1
+2026-01-27T08:49:52.2889020Z with:
+2026-01-27T08:49:52.2889208Z   toolchain: stable
+2026-01-27T08:49:52.2889404Z   override: true
+2026-01-27T08:49:52.2889615Z   default: false
+2026-01-27T08:49:52.2889799Z ##[endgroup]
+2026-01-27T08:49:52.3943906Z [command]/home/runner/.cargo/bin/rustup show
+2026-01-27T08:49:52.4674483Z Default host: x86_64-unknown-linux-gnu
+2026-01-27T08:49:52.4675161Z rustup home:  /home/runner/.rustup
+2026-01-27T08:49:52.4675497Z 
+2026-01-27T08:49:52.5450551Z installed toolchains
+2026-01-27T08:49:52.5451614Z --------------------
+2026-01-27T08:49:52.5462562Z stable-x86_64-unknown-linux-gnu (active, default)
+2026-01-27T08:49:52.5462979Z 
+2026-01-27T08:49:52.5463140Z active toolchain
+2026-01-27T08:49:52.5463374Z ----------------
+2026-01-27T08:49:52.5463686Z name: stable-x86_64-unknown-linux-gnu
+2026-01-27T08:49:52.5464037Z active because: it's the default toolchain
+2026-01-27T08:49:52.5464336Z installed targets:
+2026-01-27T08:49:52.5464587Z   x86_64-unknown-linux-gnu
+2026-01-27T08:49:52.5508532Z [command]/home/runner/.cargo/bin/rustup toolchain install stable
+2026-01-27T08:49:52.7807189Z info: syncing channel updates for 'stable-x86_64-unknown-linux-gnu'
+2026-01-27T08:49:52.9399172Z info: latest update on 2026-01-22, rust version 1.93.0 (254b59607 2026-01-19)
+2026-01-27T08:49:52.9818759Z info: downloading component 'clippy'
+2026-01-27T08:49:53.0177096Z info: downloading component 'rustfmt'
+2026-01-27T08:49:53.0382522Z info: downloading component 'cargo'
+2026-01-27T08:49:53.1154426Z info: downloading component 'rust-std'
+2026-01-27T08:49:53.2589858Z info: downloading component 'rustc'
+2026-01-27T08:49:53.5916571Z info: removing previous version of component 'clippy'
+2026-01-27T08:49:53.5931486Z info: removing previous version of component 'rustfmt'
+2026-01-27T08:49:53.5942074Z info: removing previous version of component 'cargo'
+2026-01-27T08:49:53.6043948Z info: removing previous version of component 'rust-std'
+2026-01-27T08:49:53.6076745Z info: removing previous version of component 'rustc'
+2026-01-27T08:49:53.6132458Z info: installing component 'clippy'
+2026-01-27T08:49:53.9911930Z info: installing component 'rustfmt'
+2026-01-27T08:49:54.2243819Z info: installing component 'cargo'
+2026-01-27T08:49:54.9541140Z info: installing component 'rust-std'
+2026-01-27T08:49:56.8929173Z info: installing component 'rustc'
+2026-01-27T08:50:01.7255369Z 
+2026-01-27T08:50:01.7341784Z   stable-x86_64-unknown-linux-gnu updated - rustc 1.93.0 (254b59607 2026-01-19) (from rustc 1.92.0 (ded5c06cf 2025-12-08))
+2026-01-27T08:50:01.7342353Z 
+2026-01-27T08:50:01.7379208Z [command]/home/runner/.cargo/bin/rustup override set stable
+2026-01-27T08:50:01.7445496Z info: override toolchain for '/home/runner/work/DSYC-Launcher/DSYC-Launcher' set to 'stable-x86_64-unknown-linux-gnu'
+2026-01-27T08:50:01.7464586Z ##[group]Gathering installed versions
+2026-01-27T08:50:01.7476078Z [command]/home/runner/.cargo/bin/rustc -V
+2026-01-27T08:50:01.7924254Z rustc 1.93.0 (254b59607 2026-01-19)
+2026-01-27T08:50:01.7965400Z ##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+2026-01-27T08:50:01.7979539Z ##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+2026-01-27T08:50:01.7982489Z [command]/home/runner/.cargo/bin/cargo -V
+2026-01-27T08:50:01.8375019Z cargo 1.93.0 (083ac5135 2025-12-15)
+2026-01-27T08:50:01.8390425Z ##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+2026-01-27T08:50:01.8398255Z [command]/home/runner/.cargo/bin/rustup -V
+2026-01-27T08:50:01.8453872Z rustup 1.28.2 (e4f3ad6f8 2025-04-28)
+2026-01-27T08:50:01.8454504Z info: This is the version for the rustup toolchain manager, not the rustc compiler.
+2026-01-27T08:50:01.8845954Z info: The currently active `rustc` version is `rustc 1.93.0 (254b59607 2026-01-19)`
+2026-01-27T08:50:01.8871859Z ##[warning]The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+2026-01-27T08:50:01.8875229Z ##[endgroup]

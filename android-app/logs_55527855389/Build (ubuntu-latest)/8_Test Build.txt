@@ -1,0 +1,43 @@
+﻿2026-01-27T08:50:10.7533995Z ##[group]Run npx tauri build 
+2026-01-27T08:50:10.7534326Z [36;1mnpx tauri build [0m
+2026-01-27T08:50:10.7566141Z shell: /usr/bin/bash -e {0}
+2026-01-27T08:50:10.7566389Z env:
+2026-01-27T08:50:10.7566578Z   CACHE_ON_FAILURE: false
+2026-01-27T08:50:10.7566807Z   CARGO_INCREMENTAL: 0
+2026-01-27T08:50:10.7567020Z   SJMCL_CURSEFORGE_API_KEY: 
+2026-01-27T08:50:10.7567241Z ##[endgroup]
+2026-01-27T08:50:12.1060060Z         Info Looking up installed tauri packages to check mismatched versions...
+2026-01-27T08:50:12.8879229Z      Running beforeBuildCommand `npm run build`
+2026-01-27T08:50:13.2050068Z 
+2026-01-27T08:50:13.2050663Z > dsyclauncher@0.9.8 build
+2026-01-27T08:50:13.2051264Z > next build
+2026-01-27T08:50:13.2051416Z 
+2026-01-27T08:50:13.9412118Z  ⚠ Invalid next.config.ts options detected: 
+2026-01-27T08:50:13.9414318Z  ⚠     Unrecognized key(s) in object: 'excludeFile' at "experimental"
+2026-01-27T08:50:13.9415606Z  ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+2026-01-27T08:50:13.9449933Z ⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+2026-01-27T08:50:13.9576911Z Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2026-01-27T08:50:13.9578348Z This information is used to shape Next.js' roadmap and prioritize features.
+2026-01-27T08:50:13.9580045Z You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+2026-01-27T08:50:13.9581162Z https://nextjs.org/telemetry
+2026-01-27T08:50:13.9581361Z 
+2026-01-27T08:50:14.0373176Z    ▲ Next.js 15.5.9
+2026-01-27T08:50:14.0373758Z    - Experiments (use with caution):
+2026-01-27T08:50:14.0374294Z      · excludeFile
+2026-01-27T08:50:14.0374493Z 
+2026-01-27T08:50:14.0688657Z    Linting and checking validity of types ...
+2026-01-27T08:50:26.0452657Z Failed to compile.
+2026-01-27T08:50:26.0452995Z 
+2026-01-27T08:50:26.0453458Z ./android-app/App.tsx:2:27
+2026-01-27T08:50:26.0454266Z Type error: Cannot find module 'expo-status-bar' or its corresponding type declarations.
+2026-01-27T08:50:26.0454831Z 
+2026-01-27T08:50:26.0456114Z [0m [90m 1 |[39m [36mimport[39m [33mReact[39m [36mfrom[39m [32m'react'[39m[33m;[39m
+2026-01-27T08:50:26.0457717Z [31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { [33mStatusBar[39m } [36mfrom[39m [32m'expo-status-bar'[39m[33m;[39m
+2026-01-27T08:50:26.0458835Z  [90m   |[39m                           [31m[1m^[22m[39m
+2026-01-27T08:50:26.0459858Z  [90m 3 |[39m [36mimport[39m { [33mProvider[39m [36mas[39m [33mPaperProvider[39m } [36mfrom[39m [32m'react-native-paper'[39m[33m;[39m
+2026-01-27T08:50:26.0461124Z  [90m 4 |[39m [36mimport[39m { [33mSafeAreaProvider[39m } [36mfrom[39m [32m'react-native-safe-area-context'[39m[33m;[39m
+2026-01-27T08:50:26.0462016Z  [90m 5 |[39m [36mimport[39m [33mRootLayout[39m [36mfrom[39m [32m'./app/_layout'[39m[33m;[39m[0m
+2026-01-27T08:50:26.1192032Z Next.js build worker exited with code: 1 and signal: null
+2026-01-27T08:50:26.1418855Z beforeBuildCommand `npm run build` failed with exit code 1
+2026-01-27T08:50:26.1419756Z        Error beforeBuildCommand `npm run build` failed with exit code 1
+2026-01-27T08:50:26.1598707Z ##[error]Process completed with exit code 1.

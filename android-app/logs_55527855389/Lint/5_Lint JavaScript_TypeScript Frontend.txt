@@ -1,0 +1,4 @@
+﻿2026-01-27T08:49:23.2755893Z ##[group]Run npx eslint 'src/**/*.{js,jsx,ts,tsx}' --no-fix --max-warnings=0
+2026-01-27T08:49:23.2829227Z [36;1mnpx eslint 'src/**/*.{js,jsx,ts,tsx}' --no-fix --max-warnings=0[0m
+2026-01-27T08:49:23.2863214Z shell: /usr/bin/bash -e {0}
+2026-01-27T08:49:23.2863467Z ##[endgroup]

@@ -1,0 +1,2679 @@
+﻿2026-01-27T08:49:39.7482672Z ##[group]Run find src-tauri/src -name '*.rs' | xargs rustfmt --check
+2026-01-27T08:49:39.7483152Z [36;1mfind src-tauri/src -name '*.rs' | xargs rustfmt --check[0m
+2026-01-27T08:49:39.7515677Z shell: /usr/bin/bash -e {0}
+2026-01-27T08:49:39.7515923Z ##[endgroup]
+2026-01-27T08:49:39.8558153Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/commands.rs:53:
+2026-01-27T08:49:39.8558996Z  }
+2026-01-27T08:49:39.8559191Z  
+2026-01-27T08:49:39.8559564Z  #[tauri::command]
+2026-01-27T08:49:39.8560355Z -pub async fn add_player_offline(app: AppHandle, username: String, uuid: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.8561115Z +pub async fn add_player_offline(
+2026-01-27T08:49:39.8561419Z +  app: AppHandle,
+2026-01-27T08:49:39.8561658Z +  username: String,
+2026-01-27T08:49:39.8561876Z +  uuid: String,
+2026-01-27T08:49:39.8562149Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.8562590Z    let new_player = offline::login(&app, username, uuid).await?;
+2026-01-27T08:49:39.8562964Z  
+2026-01-27T08:49:39.8563324Z    let account_binding = app.state::<Mutex<AccountInfo>>();
+2026-01-27T08:49:39.8575187Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/authlib_injector/constants.rs:1:
+2026-01-27T08:49:39.8576017Z  pub static AUTHLIB_INJECTOR_JAR_NAME: &str = "authlib-injector.jar";
+2026-01-27T08:49:39.8576515Z -pub static PRESET_AUTH_SERVERS: [&str; 1] = [
+2026-01-27T08:49:39.8576918Z -  "https://littleskin.cn/api/yggdrasil",
+2026-01-27T08:49:39.8577207Z -];
+2026-01-27T08:49:39.8577663Z +pub static PRESET_AUTH_SERVERS: [&str; 1] = ["https://littleskin.cn/api/yggdrasil"];
+2026-01-27T08:49:39.8578348Z  pub static SCOPE: &str =
+2026-01-27T08:49:39.8578816Z    "openid offline_access Yggdrasil.PlayerProfiles.Select Yggdrasil.Server.Join";
+2026-01-27T08:49:39.8579257Z  
+2026-01-27T08:49:39.8579891Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/authlib_injector/constants.rs:8:
+2026-01-27T08:49:39.8580580Z -pub static CLIENT_IDS: [(&str, &str); 1] = [
+2026-01-27T08:49:39.8580906Z -  ("littleskin.cn", "1014"),
+2026-01-27T08:49:39.8581148Z -];
+2026-01-27T08:49:39.8581526Z +pub static CLIENT_IDS: [(&str, &str); 1] = [("littleskin.cn", "1014")];
+2026-01-27T08:49:39.8581902Z  
+2026-01-27T08:49:39.8636979Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/import/hmcl.rs:64:
+2026-01-27T08:49:39.8637751Z    ThirdParty(HmclThirdPartyAccount),
+2026-01-27T08:49:39.8638323Z  }
+2026-01-27T08:49:39.8638512Z  
+2026-01-27T08:49:39.8639183Z -async fn offline_to_player(app: &AppHandle, acc: &HmclOfflineAccount) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:39.8639857Z +async fn offline_to_player(
+2026-01-27T08:49:39.8640156Z +  app: &AppHandle,
+2026-01-27T08:49:39.8640434Z +  acc: &HmclOfflineAccount,
+2026-01-27T08:49:39.8640816Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:39.8641495Z    let uuid = uuid::Uuid::parse_str(&acc.uuid).map_err(|_| AccountError::ParseError)?;
+2026-01-27T08:49:39.8642106Z    let textures = load_preset_skin(app, PresetRole::Steve)?;
+2026-01-27T08:49:39.8642464Z    Ok(
+2026-01-27T08:49:39.8661240Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/microsoft/oauth.rs:75:
+2026-01-27T08:49:39.8662492Z    Ok(response["Token"].as_str().unwrap_or("").to_string())
+2026-01-27T08:49:39.8662853Z  }
+2026-01-27T08:49:39.8663032Z  
+2026-01-27T08:49:39.8663626Z -async fn fetch_xsts_token(app: &AppHandle, xbl_token: String) -> DSYCLauncherResult<(String, String)> {
+2026-01-27T08:49:39.8664212Z +async fn fetch_xsts_token(
+2026-01-27T08:49:39.8664491Z +  app: &AppHandle,
+2026-01-27T08:49:39.8664732Z +  xbl_token: String,
+2026-01-27T08:49:39.8665064Z +) -> DSYCLauncherResult<(String, String)> {
+2026-01-27T08:49:39.8665487Z    let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:39.8665791Z  
+2026-01-27T08:49:39.8665989Z    let response = client
+2026-01-27T08:49:39.8667101Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/microsoft/oauth.rs:206:
+2026-01-27T08:49:39.8668192Z    )
+2026-01-27T08:49:39.8668396Z  }
+2026-01-27T08:49:39.8668567Z  
+2026-01-27T08:49:39.8669181Z -pub async fn login(app: &AppHandle, auth_info: DeviceAuthResponseInfo) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:39.8669783Z +pub async fn login(
+2026-01-27T08:49:39.8670077Z +  app: &AppHandle,
+2026-01-27T08:49:39.8670494Z +  auth_info: DeviceAuthResponseInfo,
+2026-01-27T08:49:39.8670904Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:39.8671302Z    let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:39.8671701Z    let sender = client.post(OAUTH_TOKEN_ENDPOINT).form(&[
+2026-01-27T08:49:39.8672061Z      ("client_id", CLIENT_ID),
+2026-01-27T08:49:39.8675250Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/offline/mod.rs:11:
+2026-01-27T08:49:39.8676129Z  use tauri::AppHandle;
+2026-01-27T08:49:39.8676446Z  use uuid::Uuid;
+2026-01-27T08:49:39.8676632Z  
+2026-01-27T08:49:39.8677177Z -pub fn load_preset_skin(app: &AppHandle, preset_role: PresetRole) -> DSYCLauncherResult<Vec<Texture>> {
+2026-01-27T08:49:39.8677726Z +pub fn load_preset_skin(
+2026-01-27T08:49:39.8678152Z +  app: &AppHandle,
+2026-01-27T08:49:39.8678389Z +  preset_role: PresetRole,
+2026-01-27T08:49:39.8678694Z +) -> DSYCLauncherResult<Vec<Texture>> {
+2026-01-27T08:49:39.8679287Z    let texture_path = get_app_resource_filepath(app, &format!("assets/skins/{}.png", preset_role))
+2026-01-27T08:49:39.8679851Z      .map_err(|_| AccountError::TextureError)?;
+2026-01-27T08:49:39.8680140Z  
+2026-01-27T08:49:39.8680692Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/offline/mod.rs:29:
+2026-01-27T08:49:39.8681214Z    }])
+2026-01-27T08:49:39.8681384Z  }
+2026-01-27T08:49:39.8681545Z  
+2026-01-27T08:49:39.8682078Z -pub async fn login(app: &AppHandle, username: String, raw_uuid: String) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:39.8682566Z +pub async fn login(
+2026-01-27T08:49:39.8682765Z +  app: &AppHandle,
+2026-01-27T08:49:39.8682965Z +  username: String,
+2026-01-27T08:49:39.8683156Z +  raw_uuid: String,
+2026-01-27T08:49:39.8683390Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:39.8683748Z    let name_with_prefix = format!("OfflinePlayer:{}", username);
+2026-01-27T08:49:39.8684144Z    let uuid = if let Ok(id) = Uuid::parse_str(&raw_uuid) {
+2026-01-27T08:49:39.8684426Z      id
+2026-01-27T08:49:39.8861715Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/commands.rs:194:
+2026-01-27T08:49:39.8862470Z  }
+2026-01-27T08:49:39.8862689Z  
+2026-01-27T08:49:39.8862966Z  #[tauri::command]
+2026-01-27T08:49:39.8863781Z -pub async fn reset_instance_game_config(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.8864633Z +pub async fn reset_instance_game_config(
+2026-01-27T08:49:39.8865039Z +  app: AppHandle,
+2026-01-27T08:49:39.8865362Z +  instance_id: String,
+2026-01-27T08:49:39.8865732Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.8866064Z    let instance = {
+2026-01-27T08:49:39.8866544Z      let binding = app.state::<Mutex<HashMap<String, Instance>>>();
+2026-01-27T08:49:39.8867105Z      let mut state = binding.lock().unwrap();
+2026-01-27T08:49:39.8868157Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/commands.rs:844:
+2026-01-27T08:49:39.8868808Z  }
+2026-01-27T08:49:39.8869023Z  
+2026-01-27T08:49:39.8869249Z  #[tauri::command]
+2026-01-27T08:49:39.8870044Z -pub fn create_launch_desktop_shortcut(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.8870855Z +pub fn create_launch_desktop_shortcut(
+2026-01-27T08:49:39.8871252Z +  app: AppHandle,
+2026-01-27T08:49:39.8871549Z +  instance_id: String,
+2026-01-27T08:49:39.8871901Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.8872329Z    let binding = app.state::<Mutex<HashMap<String, Instance>>>();
+2026-01-27T08:49:39.8873050Z    let state = binding
+2026-01-27T08:49:39.8873275Z      .lock()
+2026-01-27T08:49:39.8873837Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/commands.rs:1065:
+2026-01-27T08:49:39.8874504Z  }
+2026-01-27T08:49:39.8874679Z  
+2026-01-27T08:49:39.8874901Z  #[tauri::command]
+2026-01-27T08:49:39.8875523Z -pub async fn finish_mod_loader_install(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.8876175Z +pub async fn finish_mod_loader_install(
+2026-01-27T08:49:39.8876491Z +  app: AppHandle,
+2026-01-27T08:49:39.8876733Z +  instance_id: String,
+2026-01-27T08:49:39.8877025Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.8877289Z    let instance = {
+2026-01-27T08:49:39.8877659Z      let binding = app.state::<Mutex<HashMap<String, Instance>>>();
+2026-01-27T08:49:39.8878210Z      let state = binding.lock()?;
+2026-01-27T08:49:39.8903327Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/client_json.rs:410:
+2026-01-27T08:49:39.8904368Z    (game_version, loader_version, loader_type, None)
+2026-01-27T08:49:39.8904716Z  }
+2026-01-27T08:49:39.8904898Z  
+2026-01-27T08:49:39.8905515Z -fn rules_is_allowed(rules: &Vec<InstructionRule>, feature: &FeaturesInfo) -> DSYCLauncherResult<bool> {
+2026-01-27T08:49:39.8906143Z +fn rules_is_allowed(
+2026-01-27T08:49:39.8906447Z +  rules: &Vec<InstructionRule>,
+2026-01-27T08:49:39.8906755Z +  feature: &FeaturesInfo,
+2026-01-27T08:49:39.8907065Z +) -> DSYCLauncherResult<bool> {
+2026-01-27T08:49:39.8907371Z    let mut weak_allowed = true;
+2026-01-27T08:49:39.8907642Z    for rule in rules {
+2026-01-27T08:49:39.8908189Z      let (allow, strong) = rule.is_allowed(feature)?;
+2026-01-27T08:49:39.8908978Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/client_json.rs:466:
+2026-01-27T08:49:39.8909567Z    app: &AppHandle,
+2026-01-27T08:49:39.8910060Z  ) -> DSYCLauncherResult<HashMap<String, HashMap<String, Option<LibrariesValue>>>> {
+2026-01-27T08:49:39.8910758Z    let path = get_app_resource_filepath(app, "assets/game/natives.json")?;
+2026-01-27T08:49:39.8911178Z -  let txt =
+2026-01-27T08:49:39.8911790Z -    fs::read_to_string(&path).map_err(|e| DSYCLauncherError(format!("read natives.json failed: {e}")))?;
+2026-01-27T08:49:39.8912360Z +  let txt = fs::read_to_string(&path)
+2026-01-27T08:49:39.8912796Z +    .map_err(|e| DSYCLauncherError(format!("read natives.json failed: {e}")))?;
+2026-01-27T08:49:39.8913392Z    let map: HashMap<String, HashMap<String, Option<LibrariesValue>>> = serde_json::from_str(&txt)
+2026-01-27T08:49:39.8913975Z      .map_err(|e| DSYCLauncherError(format!("parse natives.json failed: {e}")))?;
+2026-01-27T08:49:39.8914332Z    Ok(map)
+2026-01-27T08:49:39.8940101Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/loader/fabric.rs:43:
+2026-01-27T08:49:39.8941040Z  
+2026-01-27T08:49:39.8941315Z    let int_path = meta["intermediary"]["maven"]
+2026-01-27T08:49:39.8941639Z      .as_str()
+2026-01-27T08:49:39.8942125Z -    .ok_or(DSYCLauncherError("meta missing intermediary maven".to_string()))?;
+2026-01-27T08:49:39.8942654Z +    .ok_or(DSYCLauncherError(
+2026-01-27T08:49:39.8943062Z +      "meta missing intermediary maven".to_string(),
+2026-01-27T08:49:39.8943389Z +    ))?;
+2026-01-27T08:49:39.8943573Z  
+2026-01-27T08:49:39.8943889Z    let main_class = meta["launcherMeta"]["mainClass"]["client"]
+2026-01-27T08:49:39.8944272Z      .as_str()
+2026-01-27T08:49:39.8944909Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/loader/fabric.rs:136:
+2026-01-27T08:49:39.8945520Z        .and_then(|s| s.to_str())
+2026-01-27T08:49:39.8945803Z        .unwrap_or_default()
+2026-01-27T08:49:39.8946060Z        .to_string();
+2026-01-27T08:49:39.8946668Z -    fs::remove_file(&p).map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
+2026-01-27T08:49:39.8947234Z +    fs::remove_file(&p)
+2026-01-27T08:49:39.8947748Z +      .map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
+2026-01-27T08:49:39.8948739Z    }
+2026-01-27T08:49:39.8948920Z  
+2026-01-27T08:49:39.8949096Z    Ok(())
+2026-01-27T08:49:39.9090284Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/misc.rs:90:
+2026-01-27T08:49:39.9091439Z    get_instance_subdir_paths(app, instance, &[directory_type]).and_then(|mut paths| paths.pop())
+2026-01-27T08:49:39.9092105Z  }
+2026-01-27T08:49:39.9092324Z  
+2026-01-27T08:49:39.9093079Z -pub fn unify_instance_name(src_version_path: &PathBuf, tgt_name: &String) -> DSYCLauncherResult<PathBuf> {
+2026-01-27T08:49:39.9093853Z +pub fn unify_instance_name(
+2026-01-27T08:49:39.9094251Z +  src_version_path: &PathBuf,
+2026-01-27T08:49:39.9094595Z +  tgt_name: &String,
+2026-01-27T08:49:39.9094966Z +) -> DSYCLauncherResult<PathBuf> {
+2026-01-27T08:49:39.9095479Z    if !sanitize_filename::is_sanitized(tgt_name) {
+2026-01-27T08:49:39.9096030Z      return Err(InstanceError::InvalidNameError.into());
+2026-01-27T08:49:39.9096454Z    }
+2026-01-27T08:49:39.9162453Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/modpack/curseforge.rs:150:
+2026-01-27T08:49:39.9163209Z        let project_id = file.project_id;
+2026-01-27T08:49:39.9163510Z  
+2026-01-27T08:49:39.9163698Z        async move {
+2026-01-27T08:49:39.9164201Z -        let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:39.9164831Z -          .map_err(|_| InstanceError::MissingApiKey)?;
+2026-01-27T08:49:39.9165239Z +        let curseforge_api_key =
+2026-01-27T08:49:39.9165862Z +          env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| InstanceError::MissingApiKey)?;
+2026-01-27T08:49:39.9166536Z  
+2026-01-27T08:49:39.9166848Z          let class_id = {
+2026-01-27T08:49:39.9167155Z            let project_resp = client
+2026-01-27T08:49:39.9249462Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/forge.rs:73:
+2026-01-27T08:49:39.9250338Z            valid_logo_file: None,
+2026-01-27T08:49:39.9250649Z          })
+2026-01-27T08:49:39.9250857Z        } else {
+2026-01-27T08:49:39.9251338Z -        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+2026-01-27T08:49:39.9251893Z +        Err(DSYCLauncherError(
+2026-01-27T08:49:39.9252348Z +          "no mods.toml or MANIFEST.MF found".to_string(),
+2026-01-27T08:49:39.9252706Z +        ))
+2026-01-27T08:49:39.9252882Z        }
+2026-01-27T08:49:39.9253051Z      }
+2026-01-27T08:49:39.9253221Z    };
+2026-01-27T08:49:39.9253968Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/forge.rs:142:
+2026-01-27T08:49:39.9254684Z            valid_logo_file: None,
+2026-01-27T08:49:39.9254924Z          })
+2026-01-27T08:49:39.9255109Z        } else {
+2026-01-27T08:49:39.9255536Z -        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+2026-01-27T08:49:39.9255998Z +        Err(DSYCLauncherError(
+2026-01-27T08:49:39.9256364Z +          "no mods.toml or MANIFEST.MF found".to_string(),
+2026-01-27T08:49:39.9256678Z +        ))
+2026-01-27T08:49:39.9256850Z        }
+2026-01-27T08:49:39.9257013Z      }
+2026-01-27T08:49:39.9257187Z    };
+2026-01-27T08:49:39.9258058Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:33:
+2026-01-27T08:49:39.9259088Z      Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:39.9259553Z    };
+2026-01-27T08:49:39.9259796Z    if meta.is_empty() {
+2026-01-27T08:49:39.9260282Z -    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+2026-01-27T08:49:39.9260789Z +    return Err(DSYCLauncherError(
+2026-01-27T08:49:39.9261176Z +      "len of LegacyForgeModMetadata is 0".to_string(),
+2026-01-27T08:49:39.9261489Z +    ));
+2026-01-27T08:49:39.9261659Z    }
+2026-01-27T08:49:39.9261836Z    Ok(meta.remove(0))
+2026-01-27T08:49:39.9262043Z  }
+2026-01-27T08:49:39.9262626Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:40:
+2026-01-27T08:49:39.9263495Z  
+2026-01-27T08:49:39.9263973Z -pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LegacyForgeModMetadata> {
+2026-01-27T08:49:39.9264621Z +pub async fn get_mod_metadata_from_dir(
+2026-01-27T08:49:39.9264887Z +  dir_path: &Path,
+2026-01-27T08:49:39.9265171Z +) -> DSYCLauncherResult<LegacyForgeModMetadata> {
+2026-01-27T08:49:39.9265549Z    let legacy_forge_file_path = dir_path.join("mcmod.info");
+2026-01-27T08:49:39.9265915Z    let mut meta: Vec<LegacyForgeModMetadata> =
+2026-01-27T08:49:39.9266317Z      match tokio::fs::read_to_string(legacy_forge_file_path).await {
+2026-01-27T08:49:39.9266995Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:49:
+2026-01-27T08:49:39.9268433Z        Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:39.9268749Z      };
+2026-01-27T08:49:39.9268924Z    if meta.is_empty() {
+2026-01-27T08:49:39.9269365Z -    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+2026-01-27T08:49:39.9269823Z +    return Err(DSYCLauncherError(
+2026-01-27T08:49:39.9270166Z +      "len of LegacyForgeModMetadata is 0".to_string(),
+2026-01-27T08:49:39.9270447Z +    ));
+2026-01-27T08:49:39.9270595Z    }
+2026-01-27T08:49:39.9270756Z    Ok(meta.remove(0))
+2026-01-27T08:49:39.9270933Z  }
+2026-01-27T08:49:39.9271442Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/liteloader.rs:36:
+2026-01-27T08:49:39.9271916Z    Ok(meta)
+2026-01-27T08:49:39.9272067Z  }
+2026-01-27T08:49:39.9272208Z  
+2026-01-27T08:49:39.9272680Z -pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LiteloaderModMetadata> {
+2026-01-27T08:49:39.9273191Z +pub async fn get_mod_metadata_from_dir(
+2026-01-27T08:49:39.9273453Z +  dir_path: &Path,
+2026-01-27T08:49:39.9273725Z +) -> DSYCLauncherResult<LiteloaderModMetadata> {
+2026-01-27T08:49:39.9274102Z    let liteloader_file_path = dir_path.join("litemod.json");
+2026-01-27T08:49:39.9274507Z    let meta: LiteloaderModMetadata = serde_json::from_str(
+2026-01-27T08:49:39.9274874Z      tokio::fs::read_to_string(liteloader_file_path)
+2026-01-27T08:49:39.9275476Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/resourcepack.rs:6:
+2026-01-27T08:49:39.9275977Z  use std::path::{Path, PathBuf};
+2026-01-27T08:49:39.9276208Z  use zip::ZipArchive;
+2026-01-27T08:49:39.9276388Z  
+2026-01-27T08:49:39.9276852Z -pub fn load_resourcepack_from_zip(path: &PathBuf) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:39.9277354Z +pub fn load_resourcepack_from_zip(
+2026-01-27T08:49:39.9277605Z +  path: &PathBuf,
+2026-01-27T08:49:39.9278170Z +) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:39.9278590Z    let file = match fs::File::open(path) {
+2026-01-27T08:49:39.9278845Z      Ok(val) => val,
+2026-01-27T08:49:39.9279110Z      Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:39.9279718Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/resourcepack.rs:54:
+2026-01-27T08:49:39.9280216Z    Ok((description, icon_src))
+2026-01-27T08:49:39.9280427Z  }
+2026-01-27T08:49:39.9280569Z  
+2026-01-27T08:49:39.9281037Z -pub async fn load_resourcepack_from_dir(path: &Path) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:39.9281560Z +pub async fn load_resourcepack_from_dir(
+2026-01-27T08:49:39.9281812Z +  path: &Path,
+2026-01-27T08:49:39.9282097Z +) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:39.9282423Z    let mut description = String::new();
+2026-01-27T08:49:39.9282646Z  
+2026-01-27T08:49:39.9282982Z    if let Ok(mut contents) = tokio::fs::read_to_string(path.join("pack.mcmeta")).await {
+2026-01-27T08:49:39.9394157Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:63:
+2026-01-27T08:49:39.9395226Z  
+2026-01-27T08:49:39.9395575Z  impl LaunchArguments {
+2026-01-27T08:49:39.9396138Z    pub fn into_hashmap(self) -> DSYCLauncherResult<HashMap<String, String>> {
+2026-01-27T08:49:39.9397402Z -    let value =
+2026-01-27T08:49:39.9398806Z -      serde_json::to_value(self).map_err(|e| DSYCLauncherError(format!("Serialization error: {}", e)))?;
+2026-01-27T08:49:39.9400189Z +    let value = serde_json::to_value(self)
+2026-01-27T08:49:39.9401156Z +      .map_err(|e| DSYCLauncherError(format!("Serialization error: {}", e)))?;
+2026-01-27T08:49:39.9401710Z      let obj = value
+2026-01-27T08:49:39.9402147Z        .as_object()
+2026-01-27T08:49:39.9403043Z        .ok_or_else(|| DSYCLauncherError("Failed to convert LaunchParams to HashMap".to_string()))?;
+2026-01-27T08:49:39.9404468Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:338:
+2026-01-27T08:49:39.9405290Z      }
+2026-01-27T08:49:39.9405545Z  
+2026-01-27T08:49:39.9405896Z      // Get library paths based on platform
+2026-01-27T08:49:39.9406369Z -      let mut lib_paths = Vec::new();
+2026-01-27T08:49:39.9406608Z -      
+2026-01-27T08:49:39.9406796Z -      // Add VC libs path
+2026-01-27T08:49:39.9407055Z -      #[cfg(target_os = "windows")]
+2026-01-27T08:49:39.9407327Z -      {
+2026-01-27T08:49:39.9407505Z -        use std::env;
+2026-01-27T08:49:39.9407739Z -        use std::path::PathBuf;
+2026-01-27T08:49:39.9408283Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:39.9408653Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:39.9408973Z -            #[cfg(target_arch = "x86")]
+2026-01-27T08:49:39.9409467Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("windows").join("x86");
+2026-01-27T08:49:39.9409922Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:39.9410396Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("windows").join("x64");
+2026-01-27T08:49:39.9411283Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("windows").join(if cfg!(target_arch = "x86") { "x86" } else { "x64" });
+2026-01-27T08:49:39.9412032Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9412516Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9412847Z -          }
+2026-01-27T08:49:39.9413065Z +    let mut lib_paths = Vec::new();
+2026-01-27T08:49:39.9413290Z +
+2026-01-27T08:49:39.9413463Z +    // Add VC libs path
+2026-01-27T08:49:39.9413702Z +    #[cfg(target_os = "windows")]
+2026-01-27T08:49:39.9413920Z +    {
+2026-01-27T08:49:39.9414088Z +      use std::env;
+2026-01-27T08:49:39.9414311Z +      use std::path::PathBuf;
+2026-01-27T08:49:39.9414608Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:39.9414947Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:39.9415260Z +          #[cfg(target_arch = "x86")]
+2026-01-27T08:49:39.9415537Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:39.9415778Z +            .join("assets")
+2026-01-27T08:49:39.9416000Z +            .join("vc-libs")
+2026-01-27T08:49:39.9416222Z +            .join("windows")
+2026-01-27T08:49:39.9416439Z +            .join("x86");
+2026-01-27T08:49:39.9416694Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:39.9417007Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:39.9417245Z +            .join("assets")
+2026-01-27T08:49:39.9417463Z +            .join("vc-libs")
+2026-01-27T08:49:39.9417700Z +            .join("windows")
+2026-01-27T08:49:39.9418171Z +            .join("x64");
+2026-01-27T08:49:39.9418487Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:39.9418752Z +            .join("assets")
+2026-01-27T08:49:39.9418974Z +            .join("libs")
+2026-01-27T08:49:39.9419179Z +            .join("natives")
+2026-01-27T08:49:39.9419395Z +            .join("windows")
+2026-01-27T08:49:39.9419663Z +            .join(if cfg!(target_arch = "x86") {
+2026-01-27T08:49:39.9419921Z +              "x86"
+2026-01-27T08:49:39.9420109Z +            } else {
+2026-01-27T08:49:39.9420290Z +              "x64"
+2026-01-27T08:49:39.9420652Z +            });
+2026-01-27T08:49:39.9420978Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9421580Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9421900Z          }
+2026-01-27T08:49:39.9422053Z        }
+2026-01-27T08:49:39.9422262Z -      #[cfg(target_os = "macos")]
+2026-01-27T08:49:39.9422481Z -      {
+2026-01-27T08:49:39.9422653Z -        use std::env;
+2026-01-27T08:49:39.9422902Z -        use std::path::PathBuf;
+2026-01-27T08:49:39.9423203Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:39.9423563Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:39.9423823Z +    }
+2026-01-27T08:49:39.9424016Z +    #[cfg(target_os = "macos")]
+2026-01-27T08:49:39.9424218Z +    {
+2026-01-27T08:49:39.9424379Z +      use std::env;
+2026-01-27T08:49:39.9424604Z +      use std::path::PathBuf;
+2026-01-27T08:49:39.9424898Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:39.9425234Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:39.9425580Z +          if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:39.9425909Z              if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:39.9426260Z -              if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:39.9426876Z -                let vc_libs_dir = app_dir.join("Contents").join("Resources").join("assets").join("vc-libs").join("macos");
+2026-01-27T08:49:39.9427761Z -                let common_libs_dir = app_dir.join("Contents").join("Resources").join("assets").join("libs").join("natives").join("macos");
+2026-01-27T08:49:39.9428689Z -                lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9429188Z -                lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9429513Z -              }
+2026-01-27T08:49:39.9429743Z +              let vc_libs_dir = app_dir
+2026-01-27T08:49:39.9430024Z +                .join("Contents")
+2026-01-27T08:49:39.9430292Z +                .join("Resources")
+2026-01-27T08:49:39.9430553Z +                .join("assets")
+2026-01-27T08:49:39.9430809Z +                .join("vc-libs")
+2026-01-27T08:49:39.9431055Z +                .join("macos");
+2026-01-27T08:49:39.9431325Z +              let common_libs_dir = app_dir
+2026-01-27T08:49:39.9431602Z +                .join("Contents")
+2026-01-27T08:49:39.9431861Z +                .join("Resources")
+2026-01-27T08:49:39.9432115Z +                .join("assets")
+2026-01-27T08:49:39.9432351Z +                .join("libs")
+2026-01-27T08:49:39.9432593Z +                .join("natives")
+2026-01-27T08:49:39.9432831Z +                .join("macos");
+2026-01-27T08:49:39.9433189Z +              lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9433672Z +              lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9433993Z              }
+2026-01-27T08:49:39.9434161Z            }
+2026-01-27T08:49:39.9434324Z          }
+2026-01-27T08:49:39.9434832Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:376:
+2026-01-27T08:49:39.9435312Z        }
+2026-01-27T08:49:39.9435508Z -      #[cfg(target_os = "linux")]
+2026-01-27T08:49:39.9435724Z -      {
+2026-01-27T08:49:39.9435900Z -        use std::env;
+2026-01-27T08:49:39.9436128Z -        use std::path::PathBuf;
+2026-01-27T08:49:39.9436431Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:39.9436785Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:39.9437234Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("linux");
+2026-01-27T08:49:39.9437648Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:39.9438490Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("linux").join("x64");
+2026-01-27T08:49:39.9439005Z -            #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:39.9439566Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("linux").join("arm64");
+2026-01-27T08:49:39.9440526Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9441003Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9441325Z -          }
+2026-01-27T08:49:39.9441478Z +    }
+2026-01-27T08:49:39.9441679Z +    #[cfg(target_os = "linux")]
+2026-01-27T08:49:39.9441879Z +    {
+2026-01-27T08:49:39.9442052Z +      use std::env;
+2026-01-27T08:49:39.9442282Z +      use std::path::PathBuf;
+2026-01-27T08:49:39.9442575Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:39.9442924Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:39.9443374Z +          let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("linux");
+2026-01-27T08:49:39.9443778Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:39.9444068Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:39.9444328Z +            .join("assets")
+2026-01-27T08:49:39.9444556Z +            .join("libs")
+2026-01-27T08:49:39.9444995Z +            .join("natives")
+2026-01-27T08:49:39.9445413Z +            .join("linux")
+2026-01-27T08:49:39.9445796Z +            .join("x64");
+2026-01-27T08:49:39.9446237Z +          #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:39.9446640Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:39.9446896Z +            .join("assets")
+2026-01-27T08:49:39.9447104Z +            .join("libs")
+2026-01-27T08:49:39.9447314Z +            .join("natives")
+2026-01-27T08:49:39.9447523Z +            .join("linux")
+2026-01-27T08:49:39.9447734Z +            .join("arm64");
+2026-01-27T08:49:39.9448362Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9448849Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9449174Z          }
+2026-01-27T08:49:39.9449328Z        }
+2026-01-27T08:49:39.9449529Z -      #[cfg(target_os = "android")]
+2026-01-27T08:49:39.9449757Z -      {
+2026-01-27T08:49:39.9449940Z -        use std::env;
+2026-01-27T08:49:39.9450184Z -        use std::path::PathBuf;
+2026-01-27T08:49:39.9450493Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:39.9450844Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:39.9451202Z -            // Android app structure: app/lib/[arch]/
+2026-01-27T08:49:39.9451527Z -            #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:39.9451821Z -            let arch_dir = "arm64-v8a";
+2026-01-27T08:49:39.9452106Z -            #[cfg(target_arch = "arm")]
+2026-01-27T08:49:39.9452418Z -            let arch_dir = "armeabi-v7a";
+2026-01-27T08:49:39.9452706Z -            #[cfg(target_arch = "x86")]
+2026-01-27T08:49:39.9452979Z -            let arch_dir = "x86";
+2026-01-27T08:49:39.9453249Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:39.9453533Z -            let arch_dir = "x86_64";
+2026-01-27T08:49:39.9453750Z -            
+2026-01-27T08:49:39.9454218Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("android").join(arch_dir);
+2026-01-27T08:49:39.9454958Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("android").join(arch_dir);
+2026-01-27T08:49:39.9455564Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9456044Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9456368Z -          }
+2026-01-27T08:49:39.9456524Z +    }
+2026-01-27T08:49:39.9456729Z +    #[cfg(target_os = "android")]
+2026-01-27T08:49:39.9456944Z +    {
+2026-01-27T08:49:39.9457109Z +      use std::env;
+2026-01-27T08:49:39.9457339Z +      use std::path::PathBuf;
+2026-01-27T08:49:39.9457630Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:39.9458119Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:39.9458467Z +          // Android app structure: app/lib/[arch]/
+2026-01-27T08:49:39.9458957Z +          #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:39.9459250Z +          let arch_dir = "arm64-v8a";
+2026-01-27T08:49:39.9459639Z +          #[cfg(target_arch = "arm")]
+2026-01-27T08:49:39.9459921Z +          let arch_dir = "armeabi-v7a";
+2026-01-27T08:49:39.9460202Z +          #[cfg(target_arch = "x86")]
+2026-01-27T08:49:39.9460463Z +          let arch_dir = "x86";
+2026-01-27T08:49:39.9460732Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:39.9461007Z +          let arch_dir = "x86_64";
+2026-01-27T08:49:39.9461220Z +
+2026-01-27T08:49:39.9461422Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:39.9461660Z +            .join("assets")
+2026-01-27T08:49:39.9461888Z +            .join("vc-libs")
+2026-01-27T08:49:39.9462112Z +            .join("android")
+2026-01-27T08:49:39.9462326Z +            .join(arch_dir);
+2026-01-27T08:49:39.9462587Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:39.9462832Z +            .join("assets")
+2026-01-27T08:49:39.9481810Z +            .join("libs")
+2026-01-27T08:49:39.9482161Z +            .join("natives")
+2026-01-27T08:49:39.9482415Z +            .join("android")
+2026-01-27T08:49:39.9482672Z +            .join(arch_dir);
+2026-01-27T08:49:39.9483044Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9483538Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:39.9483866Z          }
+2026-01-27T08:49:39.9484021Z        }
+2026-01-27T08:49:39.9484175Z -      
+2026-01-27T08:49:39.9484449Z -      // Combine natives directory and all library paths
+2026-01-27T08:49:39.9484914Z -      let mut java_library_path = "${natives_directory}".to_string();
+2026-01-27T08:49:39.9485230Z -      
+2026-01-27T08:49:39.9485441Z -      #[cfg(target_os = "windows")]
+2026-01-27T08:49:39.9485703Z -      let separator = ";";
+2026-01-27T08:49:39.9485976Z -      #[cfg(not(target_os = "windows"))]
+2026-01-27T08:49:39.9486234Z -      let separator = ":";
+2026-01-27T08:49:39.9486437Z -      
+2026-01-27T08:49:39.9486638Z -      for lib_path in lib_paths {
+2026-01-27T08:49:39.9486909Z -        if !lib_path.is_empty() {
+2026-01-27T08:49:39.9487326Z -          java_library_path.push_str(&format!("{}{}", separator, lib_path));
+2026-01-27T08:49:39.9487663Z -        }
+2026-01-27T08:49:39.9487820Z +    }
+2026-01-27T08:49:39.9488121Z +
+2026-01-27T08:49:39.9488566Z +    // Combine natives directory and all library paths
+2026-01-27T08:49:39.9489015Z +    let mut java_library_path = "${natives_directory}".to_string();
+2026-01-27T08:49:39.9489327Z +
+2026-01-27T08:49:39.9489531Z +    #[cfg(target_os = "windows")]
+2026-01-27T08:49:39.9489779Z +    let separator = ";";
+2026-01-27T08:49:39.9490034Z +    #[cfg(not(target_os = "windows"))]
+2026-01-27T08:49:39.9490293Z +    let separator = ":";
+2026-01-27T08:49:39.9490480Z +
+2026-01-27T08:49:39.9490678Z +    for lib_path in lib_paths {
+2026-01-27T08:49:39.9490934Z +      if !lib_path.is_empty() {
+2026-01-27T08:49:39.9491513Z +        java_library_path.push_str(&format!("{}{}", separator, lib_path));
+2026-01-27T08:49:39.9491869Z        }
+2026-01-27T08:49:39.9492019Z -      
+2026-01-27T08:49:39.9492239Z -      client_jvm_args.extend(vec![
+2026-01-27T08:49:39.9492617Z -        format!("-Djava.library.path={}", java_library_path),
+2026-01-27T08:49:39.9493064Z -        "-Dminecraft.launcher.brand=${launcher_name}".to_string(),
+2026-01-27T08:49:39.9493551Z -        "-Dminecraft.launcher.version=${launcher_version}".to_string(),
+2026-01-27T08:49:39.9493878Z -      ]);
+2026-01-27T08:49:39.9494030Z +    }
+2026-01-27T08:49:39.9494179Z +
+2026-01-27T08:49:39.9494374Z +    client_jvm_args.extend(vec![
+2026-01-27T08:49:39.9494720Z +      format!("-Djava.library.path={}", java_library_path),
+2026-01-27T08:49:39.9495156Z +      "-Dminecraft.launcher.brand=${launcher_name}".to_string(),
+2026-01-27T08:49:39.9495622Z +      "-Dminecraft.launcher.version=${launcher_version}".to_string(),
+2026-01-27T08:49:39.9495943Z +    ]);
+2026-01-27T08:49:39.9496200Z      cmd.extend(replace_arguments(client_jvm_args, &map));
+2026-01-27T08:49:39.9496718Z    }
+2026-01-27T08:49:39.9496867Z  
+2026-01-27T08:49:39.9497505Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/file_validator.rs:207:
+2026-01-27T08:49:39.9498104Z    })
+2026-01-27T08:49:39.9498259Z  }
+2026-01-27T08:49:39.9498402Z  
+2026-01-27T08:49:39.9498867Z -pub fn convert_library_name_to_path(name: &str, native: Option<String>) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:39.9499372Z +pub fn convert_library_name_to_path(
+2026-01-27T08:49:39.9499616Z +  name: &str,
+2026-01-27T08:49:39.9499822Z +  native: Option<String>,
+2026-01-27T08:49:39.9500078Z +) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:39.9500318Z    let LibraryParts {
+2026-01-27T08:49:39.9500509Z      path,
+2026-01-27T08:49:39.9500682Z      pack_name,
+2026-01-27T08:49:39.9542851Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launcher_config/commands.rs:33:
+2026-01-27T08:49:39.9543503Z  }
+2026-01-27T08:49:39.9543709Z  
+2026-01-27T08:49:39.9543955Z  #[tauri::command]
+2026-01-27T08:49:39.9544632Z -pub fn update_launcher_config(app: AppHandle, key_path: String, value: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.9545319Z +pub fn update_launcher_config(
+2026-01-27T08:49:39.9545621Z +  app: AppHandle,
+2026-01-27T08:49:39.9545879Z +  key_path: String,
+2026-01-27T08:49:39.9546129Z +  value: String,
+2026-01-27T08:49:39.9546408Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.9546823Z    let config_binding = app.state::<Mutex<LauncherConfig>>();
+2026-01-27T08:49:39.9547286Z    let mut config_state = config_binding.lock()?;
+2026-01-27T08:49:39.9547715Z    let key_path = camel_to_snake_case(key_path.as_str());
+2026-01-27T08:49:39.9548673Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launcher_config/commands.rs:369:
+2026-01-27T08:49:39.9549225Z  }
+2026-01-27T08:49:39.9549411Z  
+2026-01-27T08:49:39.9549610Z  #[tauri::command]
+2026-01-27T08:49:39.9550269Z -pub async fn download_launcher_update(app: AppHandle, version: VersionMetaInfo) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.9550960Z +pub async fn download_launcher_update(
+2026-01-27T08:49:39.9551300Z +  app: AppHandle,
+2026-01-27T08:49:39.9551558Z +  version: VersionMetaInfo,
+2026-01-27T08:49:39.9551889Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.9552325Z    if version.version.is_empty() || version.version == "up2date" {
+2026-01-27T08:49:39.9552737Z      Ok(())
+2026-01-27T08:49:39.9552938Z    } else {
+2026-01-27T08:49:39.9698969Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/curseforge/misc.rs:21:
+2026-01-27T08:49:39.9699800Z    T: serde::de::DeserializeOwned,
+2026-01-27T08:49:39.9700123Z    P: serde::Serialize,
+2026-01-27T08:49:39.9700367Z  {
+2026-01-27T08:49:39.9700803Z -  let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:39.9701360Z -    .map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:39.9701728Z +  let curseforge_api_key =
+2026-01-27T08:49:39.9702343Z +    env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:39.9702851Z  
+2026-01-27T08:49:39.9703178Z    let request_builder = match request_type {
+2026-01-27T08:49:39.9703877Z      OtherResourceRequestType::GetWithParams(params) => client.get(url).query(params),
+2026-01-27T08:49:39.9704925Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/curseforge/misc.rs:524:
+2026-01-27T08:49:39.9705601Z    resource_id: &str,
+2026-01-27T08:49:39.9705925Z  ) -> DSYCLauncherResult<Option<String>> {
+2026-01-27T08:49:39.9706262Z    let result = async {
+2026-01-27T08:49:39.9706774Z -    let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:39.9707372Z -      .map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:39.9707769Z +    let curseforge_api_key =
+2026-01-27T08:49:39.9708586Z +      env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:39.9709456Z  
+2026-01-27T08:49:39.9709974Z      let url = get_curseforge_api(OtherResourceApiEndpoint::TranslateDesc, Some(resource_id))?;
+2026-01-27T08:49:39.9710760Z      let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:39.9811531Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/misc.rs:26:
+2026-01-27T08:49:39.9812408Z  }
+2026-01-27T08:49:39.9812594Z  
+2026-01-27T08:49:39.9812879Z  // https://bmclapidoc.bangbang93.com/
+2026-01-27T08:49:39.9813605Z -pub fn get_download_api(source: SourceType, resource_type: ResourceType) -> DSYCLauncherResult<Url> {
+2026-01-27T08:49:39.9814209Z +pub fn get_download_api(
+2026-01-27T08:49:39.9814483Z +  source: SourceType,
+2026-01-27T08:49:39.9814779Z +  resource_type: ResourceType,
+2026-01-27T08:49:39.9815105Z +) -> DSYCLauncherResult<Url> {
+2026-01-27T08:49:39.9815381Z    match source {
+2026-01-27T08:49:39.9815720Z      SourceType::Official => match resource_type {
+2026-01-27T08:49:39.9816481Z        ResourceType::VersionManifest => Ok(Url::parse("https://launchermeta.mojang.com/mc/game/version_manifest.json")?),
+2026-01-27T08:49:39.9901789Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/tasks/commands.rs:2:
+2026-01-27T08:49:39.9902474Z  use crate::tasks::download::DownloadTask;
+2026-01-27T08:49:39.9902857Z  use crate::tasks::events::GEventStatus;
+2026-01-27T08:49:39.9903224Z  use crate::tasks::monitor::TaskMonitor;
+2026-01-27T08:49:39.9903820Z -use crate::tasks::{PTaskGroupDesc, PTaskParam, DSYCLauncherFutureDesc, THandle};
+2026-01-27T08:49:39.9904596Z +use crate::tasks::{DSYCLauncherFutureDesc, PTaskGroupDesc, PTaskParam, THandle};
+2026-01-27T08:49:39.9905127Z  use crate::utils::fs::extract_filename;
+2026-01-27T08:49:39.9905430Z  use std::pin::Pin;
+2026-01-27T08:49:39.9905666Z  use std::time::Duration;
+2026-01-27T08:49:39.9906247Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/tasks/commands.rs:76:
+2026-01-27T08:49:39.9906749Z  }
+2026-01-27T08:49:39.9906925Z  
+2026-01-27T08:49:39.9907118Z  #[tauri::command]
+2026-01-27T08:49:39.9907746Z -pub fn set_transient_task_state(app: AppHandle, task_id: u32, state: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.9908591Z +pub fn set_transient_task_state(
+2026-01-27T08:49:39.9908882Z +  app: AppHandle,
+2026-01-27T08:49:39.9909099Z +  task_id: u32,
+2026-01-27T08:49:39.9909332Z +  state: String,
+2026-01-27T08:49:39.9909598Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.9909971Z    let monitor = app.state::<Pin<Box<TaskMonitor>>>();
+2026-01-27T08:49:39.9910430Z    monitor.set_transient_task(app.clone(), task_id, state);
+2026-01-27T08:49:39.9910790Z    Ok(())
+2026-01-27T08:49:39.9911311Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/tasks/commands.rs:131:
+2026-01-27T08:49:39.9911806Z  }
+2026-01-27T08:49:39.9911979Z  
+2026-01-27T08:49:39.9912165Z  #[tauri::command]
+2026-01-27T08:49:39.9912801Z -pub async fn resume_progressive_task_group(app: AppHandle, task_group: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.9913483Z +pub async fn resume_progressive_task_group(
+2026-01-27T08:49:39.9913817Z +  app: AppHandle,
+2026-01-27T08:49:39.9914058Z +  task_group: String,
+2026-01-27T08:49:39.9914333Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:39.9914635Z    let monitor = app.state::<Pin<Box<TaskMonitor>>>();
+2026-01-27T08:49:39.9915027Z    monitor.resume_progressive_task_group(task_group).await;
+2026-01-27T08:49:39.9915329Z    Ok(())
+2026-01-27T08:49:40.0030725Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/utils/fs.rs:152:
+2026-01-27T08:49:40.0031351Z  /// ```rust
+2026-01-27T08:49:40.0031834Z  /// let mod_paths = get_files_with_regex(&mods_dir, &valid_extensions).unwrap_or_default();
+2026-01-27T08:49:40.0032320Z  /// ```
+2026-01-27T08:49:40.0032952Z -pub fn get_files_with_regex<P: AsRef<Path>>(path: P, pattern: &Regex) -> DSYCLauncherResult<Vec<PathBuf>> {
+2026-01-27T08:49:40.0033682Z +pub fn get_files_with_regex<P: AsRef<Path>>(
+2026-01-27T08:49:40.0034076Z +  path: P,
+2026-01-27T08:49:40.0034296Z +  pattern: &Regex,
+2026-01-27T08:49:40.0034939Z +) -> DSYCLauncherResult<Vec<PathBuf>> {
+2026-01-27T08:49:40.0035365Z    let dir_entries = fs::read_dir(&path).map_err(|e| {
+2026-01-27T08:49:40.0035895Z      let error_message = match e.kind() {
+2026-01-27T08:49:40.0036332Z        io::ErrorKind::NotFound => "Path does not exist".to_string(),
+2026-01-27T08:49:40.0037003Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/utils/fs.rs:441:
+2026-01-27T08:49:40.0037461Z    }
+2026-01-27T08:49:40.0037641Z  }
+2026-01-27T08:49:40.0037817Z  
+2026-01-27T08:49:40.0038603Z -pub fn create_zip_from_dirs(paths: Vec<PathBuf>, zip_file_path: PathBuf) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.0039208Z +pub fn create_zip_from_dirs(
+2026-01-27T08:49:40.0039499Z +  paths: Vec<PathBuf>,
+2026-01-27T08:49:40.0039764Z +  zip_file_path: PathBuf,
+2026-01-27T08:49:40.0040084Z +) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.0040462Z    let zip_file = std::fs::File::create(&zip_file_path)
+2026-01-27T08:49:40.0041033Z      .map_err(|e| DSYCLauncherError(format!("Failed to create zip file: {}", e)))?;
+2026-01-27T08:49:40.0041550Z    let mut zip = ZipWriter::new(zip_file);
+2026-01-27T08:49:40.0088701Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/utils/web.rs:44:
+2026-01-27T08:49:40.0089679Z        // According to the User-Agent requirements of mozilla and BMCLAPI, the User-Agent is set to start with ${NAME}/${VERSION}
+2026-01-27T08:49:40.0090420Z        // https://github.com/MCLF-CN/docs/issues/2
+2026-01-27T08:49:40.0091005Z        // https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Headers/User-Agent
+2026-01-27T08:49:40.0091891Z -      if let Ok(header_value) = format!("DSYCLauncher/{}", &config.basic_info.launcher_version).parse() {
+2026-01-27T08:49:40.0092503Z +      if let Ok(header_value) =
+2026-01-27T08:49:40.0093016Z +        format!("DSYCLauncher/{}", &config.basic_info.launcher_version).parse()
+2026-01-27T08:49:40.0093447Z +      {
+2026-01-27T08:49:40.0093740Z          let mut headers = HeaderMap::new();
+2026-01-27T08:49:40.0094153Z          headers.insert("User-Agent", header_value);
+2026-01-27T08:49:40.0094500Z          builder = builder.default_headers(headers);
+2026-01-27T08:49:40.0152664Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/loader/fabric.rs:43:
+2026-01-27T08:49:40.0153559Z  
+2026-01-27T08:49:40.0153917Z    let int_path = meta["intermediary"]["maven"]
+2026-01-27T08:49:40.0154263Z      .as_str()
+2026-01-27T08:49:40.0154722Z -    .ok_or(DSYCLauncherError("meta missing intermediary maven".to_string()))?;
+2026-01-27T08:49:40.0155232Z +    .ok_or(DSYCLauncherError(
+2026-01-27T08:49:40.0155610Z +      "meta missing intermediary maven".to_string(),
+2026-01-27T08:49:40.0155933Z +    ))?;
+2026-01-27T08:49:40.0156114Z  
+2026-01-27T08:49:40.0156417Z    let main_class = meta["launcherMeta"]["mainClass"]["client"]
+2026-01-27T08:49:40.0156782Z      .as_str()
+2026-01-27T08:49:40.0157414Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/loader/fabric.rs:136:
+2026-01-27T08:49:40.0158305Z        .and_then(|s| s.to_str())
+2026-01-27T08:49:40.0158595Z        .unwrap_or_default()
+2026-01-27T08:49:40.0158840Z        .to_string();
+2026-01-27T08:49:40.0159458Z -    fs::remove_file(&p).map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
+2026-01-27T08:49:40.0160013Z +    fs::remove_file(&p)
+2026-01-27T08:49:40.0160516Z +      .map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
+2026-01-27T08:49:40.0160966Z    }
+2026-01-27T08:49:40.0161137Z  
+2026-01-27T08:49:40.0161313Z    Ok(())
+2026-01-27T08:49:40.0205623Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/loader/fabric.rs:43:
+2026-01-27T08:49:40.0206236Z  
+2026-01-27T08:49:40.0206513Z    let int_path = meta["intermediary"]["maven"]
+2026-01-27T08:49:40.0206842Z      .as_str()
+2026-01-27T08:49:40.0207321Z -    .ok_or(DSYCLauncherError("meta missing intermediary maven".to_string()))?;
+2026-01-27T08:49:40.0208465Z +    .ok_or(DSYCLauncherError(
+2026-01-27T08:49:40.0208880Z +      "meta missing intermediary maven".to_string(),
+2026-01-27T08:49:40.0209398Z +    ))?;
+2026-01-27T08:49:40.0209583Z  
+2026-01-27T08:49:40.0209901Z    let main_class = meta["launcherMeta"]["mainClass"]["client"]
+2026-01-27T08:49:40.0210284Z      .as_str()
+2026-01-27T08:49:40.0210928Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/loader/fabric.rs:136:
+2026-01-27T08:49:40.0211556Z        .and_then(|s| s.to_str())
+2026-01-27T08:49:40.0211839Z        .unwrap_or_default()
+2026-01-27T08:49:40.0212088Z        .to_string();
+2026-01-27T08:49:40.0212704Z -    fs::remove_file(&p).map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
+2026-01-27T08:49:40.0213270Z +    fs::remove_file(&p)
+2026-01-27T08:49:40.0213779Z +      .map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
+2026-01-27T08:49:40.0214234Z    }
+2026-01-27T08:49:40.0214404Z  
+2026-01-27T08:49:40.0214562Z    Ok(())
+2026-01-27T08:49:40.0505350Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/misc.rs:90:
+2026-01-27T08:49:40.0506789Z    get_instance_subdir_paths(app, instance, &[directory_type]).and_then(|mut paths| paths.pop())
+2026-01-27T08:49:40.0507554Z  }
+2026-01-27T08:49:40.0507815Z  
+2026-01-27T08:49:40.0508927Z -pub fn unify_instance_name(src_version_path: &PathBuf, tgt_name: &String) -> DSYCLauncherResult<PathBuf> {
+2026-01-27T08:49:40.0509847Z +pub fn unify_instance_name(
+2026-01-27T08:49:40.0510342Z +  src_version_path: &PathBuf,
+2026-01-27T08:49:40.0510759Z +  tgt_name: &String,
+2026-01-27T08:49:40.0511209Z +) -> DSYCLauncherResult<PathBuf> {
+2026-01-27T08:49:40.0511805Z    if !sanitize_filename::is_sanitized(tgt_name) {
+2026-01-27T08:49:40.0512470Z      return Err(InstanceError::InvalidNameError.into());
+2026-01-27T08:49:40.0512979Z    }
+2026-01-27T08:49:40.0517684Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/resourcepack.rs:6:
+2026-01-27T08:49:40.0518829Z  use std::path::{Path, PathBuf};
+2026-01-27T08:49:40.0519269Z  use zip::ZipArchive;
+2026-01-27T08:49:40.0519608Z  
+2026-01-27T08:49:40.0520458Z -pub fn load_resourcepack_from_zip(path: &PathBuf) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.0521393Z +pub fn load_resourcepack_from_zip(
+2026-01-27T08:49:40.0521836Z +  path: &PathBuf,
+2026-01-27T08:49:40.0522387Z +) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.0523001Z    let file = match fs::File::open(path) {
+2026-01-27T08:49:40.0523434Z      Ok(val) => val,
+2026-01-27T08:49:40.0523862Z      Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:40.0525003Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/resourcepack.rs:54:
+2026-01-27T08:49:40.0525888Z    Ok((description, icon_src))
+2026-01-27T08:49:40.0526247Z  }
+2026-01-27T08:49:40.0526483Z  
+2026-01-27T08:49:40.0527340Z -pub async fn load_resourcepack_from_dir(path: &Path) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.0528553Z +pub async fn load_resourcepack_from_dir(
+2026-01-27T08:49:40.0529008Z +  path: &Path,
+2026-01-27T08:49:40.0529523Z +) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.0530125Z    let mut description = String::new();
+2026-01-27T08:49:40.0530536Z  
+2026-01-27T08:49:40.0531156Z    if let Ok(mut contents) = tokio::fs::read_to_string(path.join("pack.mcmeta")).await {
+2026-01-27T08:49:40.0643627Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/client_json.rs:410:
+2026-01-27T08:49:40.0644817Z    (game_version, loader_version, loader_type, None)
+2026-01-27T08:49:40.0645323Z  }
+2026-01-27T08:49:40.0645576Z  
+2026-01-27T08:49:40.0646457Z -fn rules_is_allowed(rules: &Vec<InstructionRule>, feature: &FeaturesInfo) -> DSYCLauncherResult<bool> {
+2026-01-27T08:49:40.0647316Z +fn rules_is_allowed(
+2026-01-27T08:49:40.0647748Z +  rules: &Vec<InstructionRule>,
+2026-01-27T08:49:40.0648991Z +  feature: &FeaturesInfo,
+2026-01-27T08:49:40.0649473Z +) -> DSYCLauncherResult<bool> {
+2026-01-27T08:49:40.0650199Z    let mut weak_allowed = true;
+2026-01-27T08:49:40.0650605Z    for rule in rules {
+2026-01-27T08:49:40.0651081Z      let (allow, strong) = rule.is_allowed(feature)?;
+2026-01-27T08:49:40.0652205Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/client_json.rs:466:
+2026-01-27T08:49:40.0653057Z    app: &AppHandle,
+2026-01-27T08:49:40.0653748Z  ) -> DSYCLauncherResult<HashMap<String, HashMap<String, Option<LibrariesValue>>>> {
+2026-01-27T08:49:40.0654747Z    let path = get_app_resource_filepath(app, "assets/game/natives.json")?;
+2026-01-27T08:49:40.0655363Z -  let txt =
+2026-01-27T08:49:40.0656273Z -    fs::read_to_string(&path).map_err(|e| DSYCLauncherError(format!("read natives.json failed: {e}")))?;
+2026-01-27T08:49:40.0657167Z +  let txt = fs::read_to_string(&path)
+2026-01-27T08:49:40.0658236Z +    .map_err(|e| DSYCLauncherError(format!("read natives.json failed: {e}")))?;
+2026-01-27T08:49:40.0659347Z    let map: HashMap<String, HashMap<String, Option<LibrariesValue>>> = serde_json::from_str(&txt)
+2026-01-27T08:49:40.0660429Z      .map_err(|e| DSYCLauncherError(format!("parse natives.json failed: {e}")))?;
+2026-01-27T08:49:40.0661103Z    Ok(map)
+2026-01-27T08:49:40.0686927Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/loader/fabric.rs:43:
+2026-01-27T08:49:40.0687809Z  
+2026-01-27T08:49:40.0688395Z    let int_path = meta["intermediary"]["maven"]
+2026-01-27T08:49:40.0688866Z      .as_str()
+2026-01-27T08:49:40.0689547Z -    .ok_or(DSYCLauncherError("meta missing intermediary maven".to_string()))?;
+2026-01-27T08:49:40.0690298Z +    .ok_or(DSYCLauncherError(
+2026-01-27T08:49:40.0690890Z +      "meta missing intermediary maven".to_string(),
+2026-01-27T08:49:40.0691370Z +    ))?;
+2026-01-27T08:49:40.0691631Z  
+2026-01-27T08:49:40.0692095Z    let main_class = meta["launcherMeta"]["mainClass"]["client"]
+2026-01-27T08:49:40.0692642Z      .as_str()
+2026-01-27T08:49:40.0693567Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/loader/fabric.rs:136:
+2026-01-27T08:49:40.0694490Z        .and_then(|s| s.to_str())
+2026-01-27T08:49:40.0694896Z        .unwrap_or_default()
+2026-01-27T08:49:40.0695283Z        .to_string();
+2026-01-27T08:49:40.0696149Z -    fs::remove_file(&p).map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
+2026-01-27T08:49:40.0696977Z +    fs::remove_file(&p)
+2026-01-27T08:49:40.0697711Z +      .map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
+2026-01-27T08:49:40.0698649Z    }
+2026-01-27T08:49:40.0698918Z  
+2026-01-27T08:49:40.0699179Z    Ok(())
+2026-01-27T08:49:40.0843013Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/misc.rs:90:
+2026-01-27T08:49:40.0844563Z    get_instance_subdir_paths(app, instance, &[directory_type]).and_then(|mut paths| paths.pop())
+2026-01-27T08:49:40.0845371Z  }
+2026-01-27T08:49:40.0845635Z  
+2026-01-27T08:49:40.0846556Z -pub fn unify_instance_name(src_version_path: &PathBuf, tgt_name: &String) -> DSYCLauncherResult<PathBuf> {
+2026-01-27T08:49:40.0847486Z +pub fn unify_instance_name(
+2026-01-27T08:49:40.0848165Z +  src_version_path: &PathBuf,
+2026-01-27T08:49:40.0848607Z +  tgt_name: &String,
+2026-01-27T08:49:40.0849177Z +) -> DSYCLauncherResult<PathBuf> {
+2026-01-27T08:49:40.0849787Z    if !sanitize_filename::is_sanitized(tgt_name) {
+2026-01-27T08:49:40.0850436Z      return Err(InstanceError::InvalidNameError.into());
+2026-01-27T08:49:40.0850930Z    }
+2026-01-27T08:49:40.0921686Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/modpack/curseforge.rs:150:
+2026-01-27T08:49:40.0922743Z        let project_id = file.project_id;
+2026-01-27T08:49:40.0923188Z  
+2026-01-27T08:49:40.0923471Z        async move {
+2026-01-27T08:49:40.0924185Z -        let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.0925500Z -          .map_err(|_| InstanceError::MissingApiKey)?;
+2026-01-27T08:49:40.0926100Z +        let curseforge_api_key =
+2026-01-27T08:49:40.0927257Z +          env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| InstanceError::MissingApiKey)?;
+2026-01-27T08:49:40.0928257Z  
+2026-01-27T08:49:40.0928549Z          let class_id = {
+2026-01-27T08:49:40.0928982Z            let project_resp = client
+2026-01-27T08:49:40.1006319Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/forge.rs:73:
+2026-01-27T08:49:40.1007358Z            valid_logo_file: None,
+2026-01-27T08:49:40.1007761Z          })
+2026-01-27T08:49:40.1008260Z        } else {
+2026-01-27T08:49:40.1008958Z -        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+2026-01-27T08:49:40.1009723Z +        Err(DSYCLauncherError(
+2026-01-27T08:49:40.1010329Z +          "no mods.toml or MANIFEST.MF found".to_string(),
+2026-01-27T08:49:40.1010810Z +        ))
+2026-01-27T08:49:40.1011117Z        }
+2026-01-27T08:49:40.1011361Z      }
+2026-01-27T08:49:40.1011625Z    };
+2026-01-27T08:49:40.1012498Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/forge.rs:142:
+2026-01-27T08:49:40.1013395Z            valid_logo_file: None,
+2026-01-27T08:49:40.1013792Z          })
+2026-01-27T08:49:40.1014067Z        } else {
+2026-01-27T08:49:40.1014773Z -        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+2026-01-27T08:49:40.1015511Z +        Err(DSYCLauncherError(
+2026-01-27T08:49:40.1016095Z +          "no mods.toml or MANIFEST.MF found".to_string(),
+2026-01-27T08:49:40.1016583Z +        ))
+2026-01-27T08:49:40.1016848Z        }
+2026-01-27T08:49:40.1017099Z      }
+2026-01-27T08:49:40.1017355Z    };
+2026-01-27T08:49:40.1018468Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:33:
+2026-01-27T08:49:40.1019550Z      Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:40.1020065Z    };
+2026-01-27T08:49:40.1020355Z    if meta.is_empty() {
+2026-01-27T08:49:40.1021159Z -    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+2026-01-27T08:49:40.1021963Z +    return Err(DSYCLauncherError(
+2026-01-27T08:49:40.1022575Z +      "len of LegacyForgeModMetadata is 0".to_string(),
+2026-01-27T08:49:40.1023059Z +    ));
+2026-01-27T08:49:40.1023331Z    }
+2026-01-27T08:49:40.1023618Z    Ok(meta.remove(0))
+2026-01-27T08:49:40.1023941Z  }
+2026-01-27T08:49:40.1024850Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:40:
+2026-01-27T08:49:40.1025694Z  
+2026-01-27T08:49:40.1026547Z -pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LegacyForgeModMetadata> {
+2026-01-27T08:49:40.1027482Z +pub async fn get_mod_metadata_from_dir(
+2026-01-27T08:49:40.1028167Z +  dir_path: &Path,
+2026-01-27T08:49:40.1028692Z +) -> DSYCLauncherResult<LegacyForgeModMetadata> {
+2026-01-27T08:49:40.1029388Z    let legacy_forge_file_path = dir_path.join("mcmod.info");
+2026-01-27T08:49:40.1030058Z    let mut meta: Vec<LegacyForgeModMetadata> =
+2026-01-27T08:49:40.1030780Z      match tokio::fs::read_to_string(legacy_forge_file_path).await {
+2026-01-27T08:49:40.1031985Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:49:
+2026-01-27T08:49:40.1032981Z        Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:40.1033472Z      };
+2026-01-27T08:49:40.1033767Z    if meta.is_empty() {
+2026-01-27T08:49:40.1034548Z -    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+2026-01-27T08:49:40.1035360Z +    return Err(DSYCLauncherError(
+2026-01-27T08:49:40.1035974Z +      "len of LegacyForgeModMetadata is 0".to_string(),
+2026-01-27T08:49:40.1036460Z +    ));
+2026-01-27T08:49:40.1036724Z    }
+2026-01-27T08:49:40.1037000Z    Ok(meta.remove(0))
+2026-01-27T08:49:40.1037328Z  }
+2026-01-27T08:49:40.1038532Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/liteloader.rs:36:
+2026-01-27T08:49:40.1039816Z    Ok(meta)
+2026-01-27T08:49:40.1040334Z  }
+2026-01-27T08:49:40.1040593Z  
+2026-01-27T08:49:40.1041447Z -pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LiteloaderModMetadata> {
+2026-01-27T08:49:40.1042364Z +pub async fn get_mod_metadata_from_dir(
+2026-01-27T08:49:40.1042827Z +  dir_path: &Path,
+2026-01-27T08:49:40.1043339Z +) -> DSYCLauncherResult<LiteloaderModMetadata> {
+2026-01-27T08:49:40.1044028Z    let liteloader_file_path = dir_path.join("litemod.json");
+2026-01-27T08:49:40.1044735Z    let meta: LiteloaderModMetadata = serde_json::from_str(
+2026-01-27T08:49:40.1045382Z      tokio::fs::read_to_string(liteloader_file_path)
+2026-01-27T08:49:40.1046462Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/resourcepack.rs:6:
+2026-01-27T08:49:40.1047386Z  use std::path::{Path, PathBuf};
+2026-01-27T08:49:40.1048026Z  use zip::ZipArchive;
+2026-01-27T08:49:40.1048385Z  
+2026-01-27T08:49:40.1049250Z -pub fn load_resourcepack_from_zip(path: &PathBuf) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.1050200Z +pub fn load_resourcepack_from_zip(
+2026-01-27T08:49:40.1050643Z +  path: &PathBuf,
+2026-01-27T08:49:40.1051169Z +) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.1051763Z    let file = match fs::File::open(path) {
+2026-01-27T08:49:40.1052156Z      Ok(val) => val,
+2026-01-27T08:49:40.1052611Z      Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:40.1053651Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/resourcepack.rs:54:
+2026-01-27T08:49:40.1054442Z    Ok((description, icon_src))
+2026-01-27T08:49:40.1054794Z  }
+2026-01-27T08:49:40.1055022Z  
+2026-01-27T08:49:40.1055865Z -pub async fn load_resourcepack_from_dir(path: &Path) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.1056796Z +pub async fn load_resourcepack_from_dir(
+2026-01-27T08:49:40.1057211Z +  path: &Path,
+2026-01-27T08:49:40.1057796Z +) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.1058624Z    let mut description = String::new();
+2026-01-27T08:49:40.1059024Z  
+2026-01-27T08:49:40.1059630Z    if let Ok(mut contents) = tokio::fs::read_to_string(path.join("pack.mcmeta")).await {
+2026-01-27T08:49:40.1158888Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/modpack/curseforge.rs:150:
+2026-01-27T08:49:40.1160018Z        let project_id = file.project_id;
+2026-01-27T08:49:40.1160470Z  
+2026-01-27T08:49:40.1160745Z        async move {
+2026-01-27T08:49:40.1161467Z -        let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.1162293Z -          .map_err(|_| InstanceError::MissingApiKey)?;
+2026-01-27T08:49:40.1162872Z +        let curseforge_api_key =
+2026-01-27T08:49:40.1163768Z +          env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| InstanceError::MissingApiKey)?;
+2026-01-27T08:49:40.1164589Z  
+2026-01-27T08:49:40.1164882Z          let class_id = {
+2026-01-27T08:49:40.1165316Z            let project_resp = client
+2026-01-27T08:49:40.1288631Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/modpack/curseforge.rs:150:
+2026-01-27T08:49:40.1289696Z        let project_id = file.project_id;
+2026-01-27T08:49:40.1290104Z  
+2026-01-27T08:49:40.1290364Z        async move {
+2026-01-27T08:49:40.1291067Z -        let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.1291859Z -          .map_err(|_| InstanceError::MissingApiKey)?;
+2026-01-27T08:49:40.1292402Z +        let curseforge_api_key =
+2026-01-27T08:49:40.1293295Z +          env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| InstanceError::MissingApiKey)?;
+2026-01-27T08:49:40.1294007Z  
+2026-01-27T08:49:40.1294284Z          let class_id = {
+2026-01-27T08:49:40.1294698Z            let project_resp = client
+2026-01-27T08:49:40.1363595Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/client_json.rs:410:
+2026-01-27T08:49:40.1365106Z    (game_version, loader_version, loader_type, None)
+2026-01-27T08:49:40.1365845Z  }
+2026-01-27T08:49:40.1366095Z  
+2026-01-27T08:49:40.1366960Z -fn rules_is_allowed(rules: &Vec<InstructionRule>, feature: &FeaturesInfo) -> DSYCLauncherResult<bool> {
+2026-01-27T08:49:40.1367837Z +fn rules_is_allowed(
+2026-01-27T08:49:40.1368523Z +  rules: &Vec<InstructionRule>,
+2026-01-27T08:49:40.1368981Z +  feature: &FeaturesInfo,
+2026-01-27T08:49:40.1369441Z +) -> DSYCLauncherResult<bool> {
+2026-01-27T08:49:40.1369898Z    let mut weak_allowed = true;
+2026-01-27T08:49:40.1370273Z    for rule in rules {
+2026-01-27T08:49:40.1370732Z      let (allow, strong) = rule.is_allowed(feature)?;
+2026-01-27T08:49:40.1371820Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/client_json.rs:466:
+2026-01-27T08:49:40.1372669Z    app: &AppHandle,
+2026-01-27T08:49:40.1373356Z  ) -> DSYCLauncherResult<HashMap<String, HashMap<String, Option<LibrariesValue>>>> {
+2026-01-27T08:49:40.1374331Z    let path = get_app_resource_filepath(app, "assets/game/natives.json")?;
+2026-01-27T08:49:40.1374940Z -  let txt =
+2026-01-27T08:49:40.1375856Z -    fs::read_to_string(&path).map_err(|e| DSYCLauncherError(format!("read natives.json failed: {e}")))?;
+2026-01-27T08:49:40.1376811Z +  let txt = fs::read_to_string(&path)
+2026-01-27T08:49:40.1377634Z +    .map_err(|e| DSYCLauncherError(format!("read natives.json failed: {e}")))?;
+2026-01-27T08:49:40.1378918Z    let map: HashMap<String, HashMap<String, Option<LibrariesValue>>> = serde_json::from_str(&txt)
+2026-01-27T08:49:40.1379979Z      .map_err(|e| DSYCLauncherError(format!("parse natives.json failed: {e}")))?;
+2026-01-27T08:49:40.1380624Z    Ok(map)
+2026-01-27T08:49:40.1381564Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/liteloader.rs:36:
+2026-01-27T08:49:40.1382366Z    Ok(meta)
+2026-01-27T08:49:40.1382637Z  }
+2026-01-27T08:49:40.1382901Z  
+2026-01-27T08:49:40.1383733Z -pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LiteloaderModMetadata> {
+2026-01-27T08:49:40.1384657Z +pub async fn get_mod_metadata_from_dir(
+2026-01-27T08:49:40.1385105Z +  dir_path: &Path,
+2026-01-27T08:49:40.1385591Z +) -> DSYCLauncherResult<LiteloaderModMetadata> {
+2026-01-27T08:49:40.1386265Z    let liteloader_file_path = dir_path.join("litemod.json");
+2026-01-27T08:49:40.1387016Z    let meta: LiteloaderModMetadata = serde_json::from_str(
+2026-01-27T08:49:40.1387692Z      tokio::fs::read_to_string(liteloader_file_path)
+2026-01-27T08:49:40.1488521Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/forge.rs:73:
+2026-01-27T08:49:40.1489567Z            valid_logo_file: None,
+2026-01-27T08:49:40.1489960Z          })
+2026-01-27T08:49:40.1490244Z        } else {
+2026-01-27T08:49:40.1490928Z -        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+2026-01-27T08:49:40.1491717Z +        Err(DSYCLauncherError(
+2026-01-27T08:49:40.1492313Z +          "no mods.toml or MANIFEST.MF found".to_string(),
+2026-01-27T08:49:40.1492812Z +        ))
+2026-01-27T08:49:40.1493074Z        }
+2026-01-27T08:49:40.1493339Z      }
+2026-01-27T08:49:40.1493583Z    };
+2026-01-27T08:49:40.1494465Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/forge.rs:142:
+2026-01-27T08:49:40.1495354Z            valid_logo_file: None,
+2026-01-27T08:49:40.1495750Z          })
+2026-01-27T08:49:40.1496039Z        } else {
+2026-01-27T08:49:40.1496727Z -        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+2026-01-27T08:49:40.1497457Z +        Err(DSYCLauncherError(
+2026-01-27T08:49:40.1498244Z +          "no mods.toml or MANIFEST.MF found".to_string(),
+2026-01-27T08:49:40.1498736Z +        ))
+2026-01-27T08:49:40.1498999Z        }
+2026-01-27T08:49:40.1499255Z      }
+2026-01-27T08:49:40.1499530Z    };
+2026-01-27T08:49:40.1500488Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:33:
+2026-01-27T08:49:40.1502081Z      Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:40.1502816Z    };
+2026-01-27T08:49:40.1503101Z    if meta.is_empty() {
+2026-01-27T08:49:40.1503878Z -    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+2026-01-27T08:49:40.1504669Z +    return Err(DSYCLauncherError(
+2026-01-27T08:49:40.1505278Z +      "len of LegacyForgeModMetadata is 0".to_string(),
+2026-01-27T08:49:40.1505732Z +    ));
+2026-01-27T08:49:40.1505979Z    }
+2026-01-27T08:49:40.1506221Z    Ok(meta.remove(0))
+2026-01-27T08:49:40.1506505Z  }
+2026-01-27T08:49:40.1507354Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:40:
+2026-01-27T08:49:40.1508418Z  
+2026-01-27T08:49:40.1509247Z -pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LegacyForgeModMetadata> {
+2026-01-27T08:49:40.1510198Z +pub async fn get_mod_metadata_from_dir(
+2026-01-27T08:49:40.1510692Z +  dir_path: &Path,
+2026-01-27T08:49:40.1511211Z +) -> DSYCLauncherResult<LegacyForgeModMetadata> {
+2026-01-27T08:49:40.1511898Z    let legacy_forge_file_path = dir_path.join("mcmod.info");
+2026-01-27T08:49:40.1512531Z    let mut meta: Vec<LegacyForgeModMetadata> =
+2026-01-27T08:49:40.1513229Z      match tokio::fs::read_to_string(legacy_forge_file_path).await {
+2026-01-27T08:49:40.1514433Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:49:
+2026-01-27T08:49:40.1515429Z        Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:40.1515891Z      };
+2026-01-27T08:49:40.1516189Z    if meta.is_empty() {
+2026-01-27T08:49:40.1516968Z -    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+2026-01-27T08:49:40.1517755Z +    return Err(DSYCLauncherError(
+2026-01-27T08:49:40.1518778Z +      "len of LegacyForgeModMetadata is 0".to_string(),
+2026-01-27T08:49:40.1519249Z +    ));
+2026-01-27T08:49:40.1519506Z    }
+2026-01-27T08:49:40.1519781Z    Ok(meta.remove(0))
+2026-01-27T08:49:40.1520106Z  }
+2026-01-27T08:49:40.1521042Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/liteloader.rs:36:
+2026-01-27T08:49:40.1521883Z    Ok(meta)
+2026-01-27T08:49:40.1522153Z  }
+2026-01-27T08:49:40.1522400Z  
+2026-01-27T08:49:40.1523262Z -pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LiteloaderModMetadata> {
+2026-01-27T08:49:40.1524206Z +pub async fn get_mod_metadata_from_dir(
+2026-01-27T08:49:40.1524677Z +  dir_path: &Path,
+2026-01-27T08:49:40.1525362Z +) -> DSYCLauncherResult<LiteloaderModMetadata> {
+2026-01-27T08:49:40.1526076Z    let liteloader_file_path = dir_path.join("litemod.json");
+2026-01-27T08:49:40.1526816Z    let meta: LiteloaderModMetadata = serde_json::from_str(
+2026-01-27T08:49:40.1527473Z      tokio::fs::read_to_string(liteloader_file_path)
+2026-01-27T08:49:40.1528793Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:33:
+2026-01-27T08:49:40.1529790Z      Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:40.1530240Z    };
+2026-01-27T08:49:40.1530528Z    if meta.is_empty() {
+2026-01-27T08:49:40.1531278Z -    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+2026-01-27T08:49:40.1532031Z +    return Err(DSYCLauncherError(
+2026-01-27T08:49:40.1532634Z +      "len of LegacyForgeModMetadata is 0".to_string(),
+2026-01-27T08:49:40.1533086Z +    ));
+2026-01-27T08:49:40.1533345Z    }
+2026-01-27T08:49:40.1533626Z    Ok(meta.remove(0))
+2026-01-27T08:49:40.1533917Z  }
+2026-01-27T08:49:40.1534795Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:40:
+2026-01-27T08:49:40.1535624Z  
+2026-01-27T08:49:40.1536405Z -pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LegacyForgeModMetadata> {
+2026-01-27T08:49:40.1537304Z +pub async fn get_mod_metadata_from_dir(
+2026-01-27T08:49:40.1538331Z +  dir_path: &Path,
+2026-01-27T08:49:40.1538860Z +) -> DSYCLauncherResult<LegacyForgeModMetadata> {
+2026-01-27T08:49:40.1539797Z    let legacy_forge_file_path = dir_path.join("mcmod.info");
+2026-01-27T08:49:40.1540452Z    let mut meta: Vec<LegacyForgeModMetadata> =
+2026-01-27T08:49:40.1541163Z      match tokio::fs::read_to_string(legacy_forge_file_path).await {
+2026-01-27T08:49:40.1542363Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:49:
+2026-01-27T08:49:40.1543324Z        Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:40.1543806Z      };
+2026-01-27T08:49:40.1544092Z    if meta.is_empty() {
+2026-01-27T08:49:40.1544811Z -    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+2026-01-27T08:49:40.1545614Z +    return Err(DSYCLauncherError(
+2026-01-27T08:49:40.1546172Z +      "len of LegacyForgeModMetadata is 0".to_string(),
+2026-01-27T08:49:40.1546648Z +    ));
+2026-01-27T08:49:40.1546920Z    }
+2026-01-27T08:49:40.1547173Z    Ok(meta.remove(0))
+2026-01-27T08:49:40.1547484Z  }
+2026-01-27T08:49:40.1553409Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/forge.rs:73:
+2026-01-27T08:49:40.1554306Z            valid_logo_file: None,
+2026-01-27T08:49:40.1554667Z          })
+2026-01-27T08:49:40.1554909Z        } else {
+2026-01-27T08:49:40.1555548Z -        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+2026-01-27T08:49:40.1556257Z +        Err(DSYCLauncherError(
+2026-01-27T08:49:40.1556835Z +          "no mods.toml or MANIFEST.MF found".to_string(),
+2026-01-27T08:49:40.1557314Z +        ))
+2026-01-27T08:49:40.1557585Z        }
+2026-01-27T08:49:40.1558088Z      }
+2026-01-27T08:49:40.1558355Z    };
+2026-01-27T08:49:40.1559198Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/forge.rs:142:
+2026-01-27T08:49:40.1560104Z            valid_logo_file: None,
+2026-01-27T08:49:40.1560500Z          })
+2026-01-27T08:49:40.1560777Z        } else {
+2026-01-27T08:49:40.1561464Z -        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+2026-01-27T08:49:40.1562233Z +        Err(DSYCLauncherError(
+2026-01-27T08:49:40.1562821Z +          "no mods.toml or MANIFEST.MF found".to_string(),
+2026-01-27T08:49:40.1563310Z +        ))
+2026-01-27T08:49:40.1563574Z        }
+2026-01-27T08:49:40.1563830Z      }
+2026-01-27T08:49:40.1564084Z    };
+2026-01-27T08:49:40.1863797Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/commands.rs:194:
+2026-01-27T08:49:40.1864605Z  }
+2026-01-27T08:49:40.1864836Z  
+2026-01-27T08:49:40.1865121Z  #[tauri::command]
+2026-01-27T08:49:40.1866034Z -pub async fn reset_instance_game_config(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.1866934Z +pub async fn reset_instance_game_config(
+2026-01-27T08:49:40.1867364Z +  app: AppHandle,
+2026-01-27T08:49:40.1867688Z +  instance_id: String,
+2026-01-27T08:49:40.1868421Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.1868796Z    let instance = {
+2026-01-27T08:49:40.1869359Z      let binding = app.state::<Mutex<HashMap<String, Instance>>>();
+2026-01-27T08:49:40.1870018Z      let mut state = binding.lock().unwrap();
+2026-01-27T08:49:40.1871004Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/commands.rs:844:
+2026-01-27T08:49:40.1871746Z  }
+2026-01-27T08:49:40.1872003Z  
+2026-01-27T08:49:40.1872277Z  #[tauri::command]
+2026-01-27T08:49:40.1873176Z -pub fn create_launch_desktop_shortcut(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.1874111Z +pub fn create_launch_desktop_shortcut(
+2026-01-27T08:49:40.1874577Z +  app: AppHandle,
+2026-01-27T08:49:40.1874933Z +  instance_id: String,
+2026-01-27T08:49:40.1875367Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.1875973Z    let binding = app.state::<Mutex<HashMap<String, Instance>>>();
+2026-01-27T08:49:40.1876542Z    let state = binding
+2026-01-27T08:49:40.1877352Z      .lock()
+2026-01-27T08:49:40.1878389Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/commands.rs:1065:
+2026-01-27T08:49:40.1879436Z  }
+2026-01-27T08:49:40.1879684Z  
+2026-01-27T08:49:40.1879967Z  #[tauri::command]
+2026-01-27T08:49:40.1880891Z -pub async fn finish_mod_loader_install(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.1881834Z +pub async fn finish_mod_loader_install(
+2026-01-27T08:49:40.1882301Z +  app: AppHandle,
+2026-01-27T08:49:40.1882645Z +  instance_id: String,
+2026-01-27T08:49:40.1883080Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.1883456Z    let instance = {
+2026-01-27T08:49:40.1883988Z      let binding = app.state::<Mutex<HashMap<String, Instance>>>();
+2026-01-27T08:49:40.1884592Z      let state = binding.lock()?;
+2026-01-27T08:49:40.1913258Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/client_json.rs:410:
+2026-01-27T08:49:40.1914249Z    (game_version, loader_version, loader_type, None)
+2026-01-27T08:49:40.1914762Z  }
+2026-01-27T08:49:40.1915026Z  
+2026-01-27T08:49:40.1915905Z -fn rules_is_allowed(rules: &Vec<InstructionRule>, feature: &FeaturesInfo) -> DSYCLauncherResult<bool> {
+2026-01-27T08:49:40.1916754Z +fn rules_is_allowed(
+2026-01-27T08:49:40.1917181Z +  rules: &Vec<InstructionRule>,
+2026-01-27T08:49:40.1917635Z +  feature: &FeaturesInfo,
+2026-01-27T08:49:40.1918362Z +) -> DSYCLauncherResult<bool> {
+2026-01-27T08:49:40.1918812Z    let mut weak_allowed = true;
+2026-01-27T08:49:40.1919204Z    for rule in rules {
+2026-01-27T08:49:40.1919679Z      let (allow, strong) = rule.is_allowed(feature)?;
+2026-01-27T08:49:40.1920776Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/client_json.rs:466:
+2026-01-27T08:49:40.1921644Z    app: &AppHandle,
+2026-01-27T08:49:40.1922328Z  ) -> DSYCLauncherResult<HashMap<String, HashMap<String, Option<LibrariesValue>>>> {
+2026-01-27T08:49:40.1923306Z    let path = get_app_resource_filepath(app, "assets/game/natives.json")?;
+2026-01-27T08:49:40.1923936Z -  let txt =
+2026-01-27T08:49:40.1924826Z -    fs::read_to_string(&path).map_err(|e| DSYCLauncherError(format!("read natives.json failed: {e}")))?;
+2026-01-27T08:49:40.1925752Z +  let txt = fs::read_to_string(&path)
+2026-01-27T08:49:40.1926563Z +    .map_err(|e| DSYCLauncherError(format!("read natives.json failed: {e}")))?;
+2026-01-27T08:49:40.1927616Z    let map: HashMap<String, HashMap<String, Option<LibrariesValue>>> = serde_json::from_str(&txt)
+2026-01-27T08:49:40.1928821Z      .map_err(|e| DSYCLauncherError(format!("parse natives.json failed: {e}")))?;
+2026-01-27T08:49:40.1929449Z    Ok(map)
+2026-01-27T08:49:40.1955692Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/loader/fabric.rs:43:
+2026-01-27T08:49:40.1956575Z  
+2026-01-27T08:49:40.1956978Z    let int_path = meta["intermediary"]["maven"]
+2026-01-27T08:49:40.1957445Z      .as_str()
+2026-01-27T08:49:40.1958406Z -    .ok_or(DSYCLauncherError("meta missing intermediary maven".to_string()))?;
+2026-01-27T08:49:40.1958943Z +    .ok_or(DSYCLauncherError(
+2026-01-27T08:49:40.1959291Z +      "meta missing intermediary maven".to_string(),
+2026-01-27T08:49:40.1959563Z +    ))?;
+2026-01-27T08:49:40.1959711Z  
+2026-01-27T08:49:40.1959973Z    let main_class = meta["launcherMeta"]["mainClass"]["client"]
+2026-01-27T08:49:40.1960282Z      .as_str()
+2026-01-27T08:49:40.1960804Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/loader/fabric.rs:136:
+2026-01-27T08:49:40.1961306Z        .and_then(|s| s.to_str())
+2026-01-27T08:49:40.1961527Z        .unwrap_or_default()
+2026-01-27T08:49:40.1961733Z        .to_string();
+2026-01-27T08:49:40.1962217Z -    fs::remove_file(&p).map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
+2026-01-27T08:49:40.1962669Z +    fs::remove_file(&p)
+2026-01-27T08:49:40.1963090Z +      .map_err(|e| DSYCLauncherError(format!("Failed to remove {}: {}", name, e)))?;
+2026-01-27T08:49:40.1963716Z    }
+2026-01-27T08:49:40.1963862Z  
+2026-01-27T08:49:40.1964006Z    Ok(())
+2026-01-27T08:49:40.2104671Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/misc.rs:90:
+2026-01-27T08:49:40.2106768Z    get_instance_subdir_paths(app, instance, &[directory_type]).and_then(|mut paths| paths.pop())
+2026-01-27T08:49:40.2107715Z  }
+2026-01-27T08:49:40.2108310Z  
+2026-01-27T08:49:40.2109098Z -pub fn unify_instance_name(src_version_path: &PathBuf, tgt_name: &String) -> DSYCLauncherResult<PathBuf> {
+2026-01-27T08:49:40.2109859Z +pub fn unify_instance_name(
+2026-01-27T08:49:40.2110263Z +  src_version_path: &PathBuf,
+2026-01-27T08:49:40.2110685Z +  tgt_name: &String,
+2026-01-27T08:49:40.2111172Z +) -> DSYCLauncherResult<PathBuf> {
+2026-01-27T08:49:40.2111681Z    if !sanitize_filename::is_sanitized(tgt_name) {
+2026-01-27T08:49:40.2112260Z      return Err(InstanceError::InvalidNameError.into());
+2026-01-27T08:49:40.2112698Z    }
+2026-01-27T08:49:40.2179519Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/modpack/curseforge.rs:150:
+2026-01-27T08:49:40.2180200Z        let project_id = file.project_id;
+2026-01-27T08:49:40.2180458Z  
+2026-01-27T08:49:40.2180619Z        async move {
+2026-01-27T08:49:40.2181017Z -        let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.2181470Z -          .map_err(|_| InstanceError::MissingApiKey)?;
+2026-01-27T08:49:40.2181792Z +        let curseforge_api_key =
+2026-01-27T08:49:40.2182278Z +          env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| InstanceError::MissingApiKey)?;
+2026-01-27T08:49:40.2182677Z  
+2026-01-27T08:49:40.2182832Z          let class_id = {
+2026-01-27T08:49:40.2183061Z            let project_resp = client
+2026-01-27T08:49:40.2259446Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/forge.rs:73:
+2026-01-27T08:49:40.2260365Z            valid_logo_file: None,
+2026-01-27T08:49:40.2260642Z          })
+2026-01-27T08:49:40.2260865Z        } else {
+2026-01-27T08:49:40.2261350Z -        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+2026-01-27T08:49:40.2261886Z +        Err(DSYCLauncherError(
+2026-01-27T08:49:40.2262301Z +          "no mods.toml or MANIFEST.MF found".to_string(),
+2026-01-27T08:49:40.2262634Z +        ))
+2026-01-27T08:49:40.2262833Z        }
+2026-01-27T08:49:40.2263019Z      }
+2026-01-27T08:49:40.2263200Z    };
+2026-01-27T08:49:40.2263906Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/forge.rs:142:
+2026-01-27T08:49:40.2264971Z            valid_logo_file: None,
+2026-01-27T08:49:40.2265430Z          })
+2026-01-27T08:49:40.2265639Z        } else {
+2026-01-27T08:49:40.2266108Z -        Err(DSYCLauncherError("no mods.toml or MANIFEST.MF found".to_string()))
+2026-01-27T08:49:40.2266614Z +        Err(DSYCLauncherError(
+2026-01-27T08:49:40.2267022Z +          "no mods.toml or MANIFEST.MF found".to_string(),
+2026-01-27T08:49:40.2267358Z +        ))
+2026-01-27T08:49:40.2267562Z        }
+2026-01-27T08:49:40.2268101Z      }
+2026-01-27T08:49:40.2268468Z    };
+2026-01-27T08:49:40.2269195Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:33:
+2026-01-27T08:49:40.2269904Z      Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:40.2270223Z    };
+2026-01-27T08:49:40.2270420Z    if meta.is_empty() {
+2026-01-27T08:49:40.2270956Z -    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+2026-01-27T08:49:40.2271508Z +    return Err(DSYCLauncherError(
+2026-01-27T08:49:40.2271919Z +      "len of LegacyForgeModMetadata is 0".to_string(),
+2026-01-27T08:49:40.2272245Z +    ));
+2026-01-27T08:49:40.2272428Z    }
+2026-01-27T08:49:40.2272614Z    Ok(meta.remove(0))
+2026-01-27T08:49:40.2272831Z  }
+2026-01-27T08:49:40.2273449Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:40:
+2026-01-27T08:49:40.2274026Z  
+2026-01-27T08:49:40.2274964Z -pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LegacyForgeModMetadata> {
+2026-01-27T08:49:40.2275726Z +pub async fn get_mod_metadata_from_dir(
+2026-01-27T08:49:40.2276037Z +  dir_path: &Path,
+2026-01-27T08:49:40.2276379Z +) -> DSYCLauncherResult<LegacyForgeModMetadata> {
+2026-01-27T08:49:40.2276835Z    let legacy_forge_file_path = dir_path.join("mcmod.info");
+2026-01-27T08:49:40.2277349Z    let mut meta: Vec<LegacyForgeModMetadata> =
+2026-01-27T08:49:40.2278259Z      match tokio::fs::read_to_string(legacy_forge_file_path).await {
+2026-01-27T08:49:40.2279430Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/legacy_forge.rs:49:
+2026-01-27T08:49:40.2280004Z        Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:40.2280275Z      };
+2026-01-27T08:49:40.2280856Z    if meta.is_empty() {
+2026-01-27T08:49:40.2281392Z -    return Err(DSYCLauncherError("len of LegacyForgeModMetadata is 0".to_string()));
+2026-01-27T08:49:40.2281907Z +    return Err(DSYCLauncherError(
+2026-01-27T08:49:40.2282420Z +      "len of LegacyForgeModMetadata is 0".to_string(),
+2026-01-27T08:49:40.2282848Z +    ));
+2026-01-27T08:49:40.2283067Z    }
+2026-01-27T08:49:40.2283386Z    Ok(meta.remove(0))
+2026-01-27T08:49:40.2283629Z  }
+2026-01-27T08:49:40.2284212Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/mods/liteloader.rs:36:
+2026-01-27T08:49:40.2284838Z    Ok(meta)
+2026-01-27T08:49:40.2285090Z  }
+2026-01-27T08:49:40.2285323Z  
+2026-01-27T08:49:40.2285885Z -pub async fn get_mod_metadata_from_dir(dir_path: &Path) -> DSYCLauncherResult<LiteloaderModMetadata> {
+2026-01-27T08:49:40.2286495Z +pub async fn get_mod_metadata_from_dir(
+2026-01-27T08:49:40.2299974Z +  dir_path: &Path,
+2026-01-27T08:49:40.2300308Z +) -> DSYCLauncherResult<LiteloaderModMetadata> {
+2026-01-27T08:49:40.2300712Z    let liteloader_file_path = dir_path.join("litemod.json");
+2026-01-27T08:49:40.2301135Z    let meta: LiteloaderModMetadata = serde_json::from_str(
+2026-01-27T08:49:40.2301519Z      tokio::fs::read_to_string(liteloader_file_path)
+2026-01-27T08:49:40.2302150Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/resourcepack.rs:6:
+2026-01-27T08:49:40.2302698Z  use std::path::{Path, PathBuf};
+2026-01-27T08:49:40.2302935Z  use zip::ZipArchive;
+2026-01-27T08:49:40.2303117Z  
+2026-01-27T08:49:40.2303589Z -pub fn load_resourcepack_from_zip(path: &PathBuf) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.2304092Z +pub fn load_resourcepack_from_zip(
+2026-01-27T08:49:40.2304344Z +  path: &PathBuf,
+2026-01-27T08:49:40.2304634Z +) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.2304969Z    let file = match fs::File::open(path) {
+2026-01-27T08:49:40.2305221Z      Ok(val) => val,
+2026-01-27T08:49:40.2305486Z      Err(e) => return Err(DSYCLauncherError::from(e)),
+2026-01-27T08:49:40.2306085Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/helpers/resourcepack.rs:54:
+2026-01-27T08:49:40.2306581Z    Ok((description, icon_src))
+2026-01-27T08:49:40.2306783Z  }
+2026-01-27T08:49:40.2306938Z  
+2026-01-27T08:49:40.2307419Z -pub async fn load_resourcepack_from_dir(path: &Path) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.2308074Z +pub async fn load_resourcepack_from_dir(
+2026-01-27T08:49:40.2308336Z +  path: &Path,
+2026-01-27T08:49:40.2308624Z +) -> DSYCLauncherResult<(String, Option<RgbaImage>)> {
+2026-01-27T08:49:40.2308952Z    let mut description = String::new();
+2026-01-27T08:49:40.2309177Z  
+2026-01-27T08:49:40.2309504Z    if let Ok(mut contents) = tokio::fs::read_to_string(path.join("pack.mcmeta")).await {
+2026-01-27T08:49:40.2455873Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/commands.rs:194:
+2026-01-27T08:49:40.2456762Z  }
+2026-01-27T08:49:40.2456955Z  
+2026-01-27T08:49:40.2457176Z  #[tauri::command]
+2026-01-27T08:49:40.2458087Z -pub async fn reset_instance_game_config(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.2459250Z +pub async fn reset_instance_game_config(
+2026-01-27T08:49:40.2459762Z +  app: AppHandle,
+2026-01-27T08:49:40.2460018Z +  instance_id: String,
+2026-01-27T08:49:40.2460336Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.2460622Z    let instance = {
+2026-01-27T08:49:40.2461023Z      let binding = app.state::<Mutex<HashMap<String, Instance>>>();
+2026-01-27T08:49:40.2461554Z      let mut state = binding.lock().unwrap();
+2026-01-27T08:49:40.2462234Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/commands.rs:844:
+2026-01-27T08:49:40.2462769Z  }
+2026-01-27T08:49:40.2462954Z  
+2026-01-27T08:49:40.2463142Z  #[tauri::command]
+2026-01-27T08:49:40.2463785Z -pub fn create_launch_desktop_shortcut(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.2464449Z +pub fn create_launch_desktop_shortcut(
+2026-01-27T08:49:40.2464772Z +  app: AppHandle,
+2026-01-27T08:49:40.2465013Z +  instance_id: String,
+2026-01-27T08:49:40.2465324Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.2465760Z    let binding = app.state::<Mutex<HashMap<String, Instance>>>();
+2026-01-27T08:49:40.2466172Z    let state = binding
+2026-01-27T08:49:40.2466398Z      .lock()
+2026-01-27T08:49:40.2466966Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/instance/commands.rs:1065:
+2026-01-27T08:49:40.2467489Z  }
+2026-01-27T08:49:40.2467665Z  
+2026-01-27T08:49:40.2467993Z  #[tauri::command]
+2026-01-27T08:49:40.2468590Z -pub async fn finish_mod_loader_install(app: AppHandle, instance_id: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.2469124Z +pub async fn finish_mod_loader_install(
+2026-01-27T08:49:40.2469376Z +  app: AppHandle,
+2026-01-27T08:49:40.2469579Z +  instance_id: String,
+2026-01-27T08:49:40.2469813Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.2470025Z    let instance = {
+2026-01-27T08:49:40.2470323Z      let binding = app.state::<Mutex<HashMap<String, Instance>>>();
+2026-01-27T08:49:40.2470683Z      let state = binding.lock()?;
+2026-01-27T08:49:40.2590372Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/utils/fs.rs:152:
+2026-01-27T08:49:40.2591184Z  /// ```rust
+2026-01-27T08:49:40.2591715Z  /// let mod_paths = get_files_with_regex(&mods_dir, &valid_extensions).unwrap_or_default();
+2026-01-27T08:49:40.2592263Z  /// ```
+2026-01-27T08:49:40.2592959Z -pub fn get_files_with_regex<P: AsRef<Path>>(path: P, pattern: &Regex) -> DSYCLauncherResult<Vec<PathBuf>> {
+2026-01-27T08:49:40.2593710Z +pub fn get_files_with_regex<P: AsRef<Path>>(
+2026-01-27T08:49:40.2594073Z +  path: P,
+2026-01-27T08:49:40.2594320Z +  pattern: &Regex,
+2026-01-27T08:49:40.2594661Z +) -> DSYCLauncherResult<Vec<PathBuf>> {
+2026-01-27T08:49:40.2595147Z    let dir_entries = fs::read_dir(&path).map_err(|e| {
+2026-01-27T08:49:40.2595597Z      let error_message = match e.kind() {
+2026-01-27T08:49:40.2596106Z        io::ErrorKind::NotFound => "Path does not exist".to_string(),
+2026-01-27T08:49:40.2596905Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/utils/fs.rs:441:
+2026-01-27T08:49:40.2597463Z    }
+2026-01-27T08:49:40.2597669Z  }
+2026-01-27T08:49:40.2598129Z  
+2026-01-27T08:49:40.2598854Z -pub fn create_zip_from_dirs(paths: Vec<PathBuf>, zip_file_path: PathBuf) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.2599409Z +pub fn create_zip_from_dirs(
+2026-01-27T08:49:40.2599678Z +  paths: Vec<PathBuf>,
+2026-01-27T08:49:40.2599917Z +  zip_file_path: PathBuf,
+2026-01-27T08:49:40.2600202Z +) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.2600556Z    let zip_file = std::fs::File::create(&zip_file_path)
+2026-01-27T08:49:40.2601076Z      .map_err(|e| DSYCLauncherError(format!("Failed to create zip file: {}", e)))?;
+2026-01-27T08:49:40.2601552Z    let mut zip = ZipWriter::new(zip_file);
+2026-01-27T08:49:40.2647070Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/utils/web.rs:44:
+2026-01-27T08:49:40.2648622Z        // According to the User-Agent requirements of mozilla and BMCLAPI, the User-Agent is set to start with ${NAME}/${VERSION}
+2026-01-27T08:49:40.2649770Z        // https://github.com/MCLF-CN/docs/issues/2
+2026-01-27T08:49:40.2650596Z        // https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Headers/User-Agent
+2026-01-27T08:49:40.2651469Z -      if let Ok(header_value) = format!("DSYCLauncher/{}", &config.basic_info.launcher_version).parse() {
+2026-01-27T08:49:40.2652068Z +      if let Ok(header_value) =
+2026-01-27T08:49:40.2652572Z +        format!("DSYCLauncher/{}", &config.basic_info.launcher_version).parse()
+2026-01-27T08:49:40.2653001Z +      {
+2026-01-27T08:49:40.2653266Z          let mut headers = HeaderMap::new();
+2026-01-27T08:49:40.2653644Z          headers.insert("User-Agent", header_value);
+2026-01-27T08:49:40.2654047Z          builder = builder.default_headers(headers);
+2026-01-27T08:49:40.2676842Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/utils/web.rs:44:
+2026-01-27T08:49:40.2677816Z        // According to the User-Agent requirements of mozilla and BMCLAPI, the User-Agent is set to start with ${NAME}/${VERSION}
+2026-01-27T08:49:40.2678696Z        // https://github.com/MCLF-CN/docs/issues/2
+2026-01-27T08:49:40.2679336Z        // https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Headers/User-Agent
+2026-01-27T08:49:40.2680221Z -      if let Ok(header_value) = format!("DSYCLauncher/{}", &config.basic_info.launcher_version).parse() {
+2026-01-27T08:49:40.2680815Z +      if let Ok(header_value) =
+2026-01-27T08:49:40.2681317Z +        format!("DSYCLauncher/{}", &config.basic_info.launcher_version).parse()
+2026-01-27T08:49:40.2681737Z +      {
+2026-01-27T08:49:40.2681998Z          let mut headers = HeaderMap::new();
+2026-01-27T08:49:40.2682377Z          headers.insert("User-Agent", header_value);
+2026-01-27T08:49:40.2682780Z          builder = builder.default_headers(headers);
+2026-01-27T08:49:40.2731823Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/utils/fs.rs:152:
+2026-01-27T08:49:40.2732668Z  /// ```rust
+2026-01-27T08:49:40.2733162Z  /// let mod_paths = get_files_with_regex(&mods_dir, &valid_extensions).unwrap_or_default();
+2026-01-27T08:49:40.2733652Z  /// ```
+2026-01-27T08:49:40.2734259Z -pub fn get_files_with_regex<P: AsRef<Path>>(path: P, pattern: &Regex) -> DSYCLauncherResult<Vec<PathBuf>> {
+2026-01-27T08:49:40.2734942Z +pub fn get_files_with_regex<P: AsRef<Path>>(
+2026-01-27T08:49:40.2735262Z +  path: P,
+2026-01-27T08:49:40.2735492Z +  pattern: &Regex,
+2026-01-27T08:49:40.2735805Z +) -> DSYCLauncherResult<Vec<PathBuf>> {
+2026-01-27T08:49:40.2736219Z    let dir_entries = fs::read_dir(&path).map_err(|e| {
+2026-01-27T08:49:40.2736616Z      let error_message = match e.kind() {
+2026-01-27T08:49:40.2737069Z        io::ErrorKind::NotFound => "Path does not exist".to_string(),
+2026-01-27T08:49:40.2737746Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/utils/fs.rs:441:
+2026-01-27T08:49:40.2738556Z    }
+2026-01-27T08:49:40.2738798Z  }
+2026-01-27T08:49:40.2739020Z  
+2026-01-27T08:49:40.2739662Z -pub fn create_zip_from_dirs(paths: Vec<PathBuf>, zip_file_path: PathBuf) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.2740309Z +pub fn create_zip_from_dirs(
+2026-01-27T08:49:40.2740619Z +  paths: Vec<PathBuf>,
+2026-01-27T08:49:40.2740908Z +  zip_file_path: PathBuf,
+2026-01-27T08:49:40.2741242Z +) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.2741652Z    let zip_file = std::fs::File::create(&zip_file_path)
+2026-01-27T08:49:40.2742253Z      .map_err(|e| DSYCLauncherError(format!("Failed to create zip file: {}", e)))?;
+2026-01-27T08:49:40.2742803Z    let mut zip = ZipWriter::new(zip_file);
+2026-01-27T08:49:40.3000866Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launcher_config/commands.rs:33:
+2026-01-27T08:49:40.3001771Z  }
+2026-01-27T08:49:40.3002035Z  
+2026-01-27T08:49:40.3002350Z  #[tauri::command]
+2026-01-27T08:49:40.3003313Z -pub fn update_launcher_config(app: AppHandle, key_path: String, value: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3004378Z +pub fn update_launcher_config(
+2026-01-27T08:49:40.3004678Z +  app: AppHandle,
+2026-01-27T08:49:40.3004908Z +  key_path: String,
+2026-01-27T08:49:40.3005298Z +  value: String,
+2026-01-27T08:49:40.3005574Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3005977Z    let config_binding = app.state::<Mutex<LauncherConfig>>();
+2026-01-27T08:49:40.3006426Z    let mut config_state = config_binding.lock()?;
+2026-01-27T08:49:40.3006856Z    let key_path = camel_to_snake_case(key_path.as_str());
+2026-01-27T08:49:40.3007589Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launcher_config/commands.rs:369:
+2026-01-27T08:49:40.3008344Z  }
+2026-01-27T08:49:40.3008514Z  
+2026-01-27T08:49:40.3008700Z  #[tauri::command]
+2026-01-27T08:49:40.3009351Z -pub async fn download_launcher_update(app: AppHandle, version: VersionMetaInfo) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3010018Z +pub async fn download_launcher_update(
+2026-01-27T08:49:40.3010301Z +  app: AppHandle,
+2026-01-27T08:49:40.3010511Z +  version: VersionMetaInfo,
+2026-01-27T08:49:40.3010789Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3011150Z    if version.version.is_empty() || version.version == "up2date" {
+2026-01-27T08:49:40.3011487Z      Ok(())
+2026-01-27T08:49:40.3011658Z    } else {
+2026-01-27T08:49:40.3142573Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launcher_config/commands.rs:33:
+2026-01-27T08:49:40.3143452Z  }
+2026-01-27T08:49:40.3143658Z  
+2026-01-27T08:49:40.3143890Z  #[tauri::command]
+2026-01-27T08:49:40.3144634Z -pub fn update_launcher_config(app: AppHandle, key_path: String, value: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3145385Z +pub fn update_launcher_config(
+2026-01-27T08:49:40.3145707Z +  app: AppHandle,
+2026-01-27T08:49:40.3145972Z +  key_path: String,
+2026-01-27T08:49:40.3146238Z +  value: String,
+2026-01-27T08:49:40.3146538Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3147000Z    let config_binding = app.state::<Mutex<LauncherConfig>>();
+2026-01-27T08:49:40.3147533Z    let mut config_state = config_binding.lock()?;
+2026-01-27T08:49:40.3148398Z    let key_path = camel_to_snake_case(key_path.as_str());
+2026-01-27T08:49:40.3149273Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launcher_config/commands.rs:369:
+2026-01-27T08:49:40.3149898Z  }
+2026-01-27T08:49:40.3150070Z  
+2026-01-27T08:49:40.3150254Z  #[tauri::command]
+2026-01-27T08:49:40.3150923Z -pub async fn download_launcher_update(app: AppHandle, version: VersionMetaInfo) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3151583Z +pub async fn download_launcher_update(
+2026-01-27T08:49:40.3151886Z +  app: AppHandle,
+2026-01-27T08:49:40.3152133Z +  version: VersionMetaInfo,
+2026-01-27T08:49:40.3152445Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3152848Z    if version.version.is_empty() || version.version == "up2date" {
+2026-01-27T08:49:40.3153229Z      Ok(())
+2026-01-27T08:49:40.3153414Z    } else {
+2026-01-27T08:49:40.3264439Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/tasks/commands.rs:2:
+2026-01-27T08:49:40.3265801Z  use crate::tasks::download::DownloadTask;
+2026-01-27T08:49:40.3266572Z  use crate::tasks::events::GEventStatus;
+2026-01-27T08:49:40.3267309Z  use crate::tasks::monitor::TaskMonitor;
+2026-01-27T08:49:40.3268708Z -use crate::tasks::{PTaskGroupDesc, PTaskParam, DSYCLauncherFutureDesc, THandle};
+2026-01-27T08:49:40.3269941Z +use crate::tasks::{DSYCLauncherFutureDesc, PTaskGroupDesc, PTaskParam, THandle};
+2026-01-27T08:49:40.3270854Z  use crate::utils::fs::extract_filename;
+2026-01-27T08:49:40.3271457Z  use std::pin::Pin;
+2026-01-27T08:49:40.3271808Z  use std::time::Duration;
+2026-01-27T08:49:40.3272520Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/tasks/commands.rs:76:
+2026-01-27T08:49:40.3273202Z  }
+2026-01-27T08:49:40.3273448Z  
+2026-01-27T08:49:40.3273718Z  #[tauri::command]
+2026-01-27T08:49:40.3274488Z -pub fn set_transient_task_state(app: AppHandle, task_id: u32, state: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3275727Z +pub fn set_transient_task_state(
+2026-01-27T08:49:40.3276136Z +  app: AppHandle,
+2026-01-27T08:49:40.3276467Z +  task_id: u32,
+2026-01-27T08:49:40.3277016Z +  state: String,
+2026-01-27T08:49:40.3277423Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3278187Z    let monitor = app.state::<Pin<Box<TaskMonitor>>>();
+2026-01-27T08:49:40.3278710Z    monitor.set_transient_task(app.clone(), task_id, state);
+2026-01-27T08:49:40.3279061Z    Ok(())
+2026-01-27T08:49:40.3279575Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/tasks/commands.rs:131:
+2026-01-27T08:49:40.3280076Z  }
+2026-01-27T08:49:40.3280247Z  
+2026-01-27T08:49:40.3280428Z  #[tauri::command]
+2026-01-27T08:49:40.3281045Z -pub async fn resume_progressive_task_group(app: AppHandle, task_group: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3281586Z +pub async fn resume_progressive_task_group(
+2026-01-27T08:49:40.3281861Z +  app: AppHandle,
+2026-01-27T08:49:40.3282056Z +  task_group: String,
+2026-01-27T08:49:40.3282284Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3282596Z    let monitor = app.state::<Pin<Box<TaskMonitor>>>();
+2026-01-27T08:49:40.3282986Z    monitor.resume_progressive_task_group(task_group).await;
+2026-01-27T08:49:40.3283275Z    Ok(())
+2026-01-27T08:49:40.3422639Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/tasks/commands.rs:2:
+2026-01-27T08:49:40.3423781Z  use crate::tasks::download::DownloadTask;
+2026-01-27T08:49:40.3424411Z  use crate::tasks::events::GEventStatus;
+2026-01-27T08:49:40.3425023Z  use crate::tasks::monitor::TaskMonitor;
+2026-01-27T08:49:40.3426041Z -use crate::tasks::{PTaskGroupDesc, PTaskParam, DSYCLauncherFutureDesc, THandle};
+2026-01-27T08:49:40.3426834Z +use crate::tasks::{DSYCLauncherFutureDesc, PTaskGroupDesc, PTaskParam, THandle};
+2026-01-27T08:49:40.3427371Z  use crate::utils::fs::extract_filename;
+2026-01-27T08:49:40.3427683Z  use std::pin::Pin;
+2026-01-27T08:49:40.3428245Z  use std::time::Duration;
+2026-01-27T08:49:40.3428873Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/tasks/commands.rs:76:
+2026-01-27T08:49:40.3429418Z  }
+2026-01-27T08:49:40.3429598Z  
+2026-01-27T08:49:40.3429802Z  #[tauri::command]
+2026-01-27T08:49:40.3430486Z -pub fn set_transient_task_state(app: AppHandle, task_id: u32, state: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3431061Z +pub fn set_transient_task_state(
+2026-01-27T08:49:40.3431329Z +  app: AppHandle,
+2026-01-27T08:49:40.3431526Z +  task_id: u32,
+2026-01-27T08:49:40.3431734Z +  state: String,
+2026-01-27T08:49:40.3431987Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3432331Z    let monitor = app.state::<Pin<Box<TaskMonitor>>>();
+2026-01-27T08:49:40.3432761Z    monitor.set_transient_task(app.clone(), task_id, state);
+2026-01-27T08:49:40.3433086Z    Ok(())
+2026-01-27T08:49:40.3433571Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/tasks/commands.rs:131:
+2026-01-27T08:49:40.3434026Z  }
+2026-01-27T08:49:40.3434186Z  
+2026-01-27T08:49:40.3434357Z  #[tauri::command]
+2026-01-27T08:49:40.3434951Z -pub async fn resume_progressive_task_group(app: AppHandle, task_group: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3435593Z +pub async fn resume_progressive_task_group(
+2026-01-27T08:49:40.3435900Z +  app: AppHandle,
+2026-01-27T08:49:40.3436113Z +  task_group: String,
+2026-01-27T08:49:40.3436376Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.3436706Z    let monitor = app.state::<Pin<Box<TaskMonitor>>>();
+2026-01-27T08:49:40.3437129Z    monitor.resume_progressive_task_group(task_group).await;
+2026-01-27T08:49:40.3437463Z    Ok(())
+2026-01-27T08:49:40.3527840Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/curseforge/misc.rs:21:
+2026-01-27T08:49:40.3529188Z    T: serde::de::DeserializeOwned,
+2026-01-27T08:49:40.3529688Z    P: serde::Serialize,
+2026-01-27T08:49:40.3530063Z  {
+2026-01-27T08:49:40.3530672Z -  let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.3531516Z -    .map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3532568Z +  let curseforge_api_key =
+2026-01-27T08:49:40.3533492Z +    env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3534571Z  
+2026-01-27T08:49:40.3535007Z    let request_builder = match request_type {
+2026-01-27T08:49:40.3535906Z      OtherResourceRequestType::GetWithParams(params) => client.get(url).query(params),
+2026-01-27T08:49:40.3537347Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/curseforge/misc.rs:524:
+2026-01-27T08:49:40.3538494Z    resource_id: &str,
+2026-01-27T08:49:40.3538949Z  ) -> DSYCLauncherResult<Option<String>> {
+2026-01-27T08:49:40.3539444Z    let result = async {
+2026-01-27T08:49:40.3540152Z -    let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.3540971Z -      .map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3541523Z +    let curseforge_api_key =
+2026-01-27T08:49:40.3542413Z +      env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3543171Z  
+2026-01-27T08:49:40.3543910Z      let url = get_curseforge_api(OtherResourceApiEndpoint::TranslateDesc, Some(resource_id))?;
+2026-01-27T08:49:40.3544796Z      let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.3572864Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/curseforge/misc.rs:21:
+2026-01-27T08:49:40.3573852Z    T: serde::de::DeserializeOwned,
+2026-01-27T08:49:40.3574302Z    P: serde::Serialize,
+2026-01-27T08:49:40.3574653Z  {
+2026-01-27T08:49:40.3575247Z -  let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.3576030Z -    .map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3576545Z +  let curseforge_api_key =
+2026-01-27T08:49:40.3577378Z +    env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3578310Z  
+2026-01-27T08:49:40.3578678Z    let request_builder = match request_type {
+2026-01-27T08:49:40.3579537Z      OtherResourceRequestType::GetWithParams(params) => client.get(url).query(params),
+2026-01-27T08:49:40.3580926Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/curseforge/misc.rs:524:
+2026-01-27T08:49:40.3581788Z    resource_id: &str,
+2026-01-27T08:49:40.3582217Z  ) -> DSYCLauncherResult<Option<String>> {
+2026-01-27T08:49:40.3582679Z    let result = async {
+2026-01-27T08:49:40.3583358Z -    let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.3584158Z -      .map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3584699Z +    let curseforge_api_key =
+2026-01-27T08:49:40.3585619Z +      env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3586321Z  
+2026-01-27T08:49:40.3587002Z      let url = get_curseforge_api(OtherResourceApiEndpoint::TranslateDesc, Some(resource_id))?;
+2026-01-27T08:49:40.3588133Z      let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.3623030Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/misc.rs:26:
+2026-01-27T08:49:40.3623917Z  }
+2026-01-27T08:49:40.3624183Z  
+2026-01-27T08:49:40.3624569Z  // https://bmclapidoc.bangbang93.com/
+2026-01-27T08:49:40.3625648Z -pub fn get_download_api(source: SourceType, resource_type: ResourceType) -> DSYCLauncherResult<Url> {
+2026-01-27T08:49:40.3626559Z +pub fn get_download_api(
+2026-01-27T08:49:40.3626978Z +  source: SourceType,
+2026-01-27T08:49:40.3627432Z +  resource_type: ResourceType,
+2026-01-27T08:49:40.3628209Z +) -> DSYCLauncherResult<Url> {
+2026-01-27T08:49:40.3628644Z    match source {
+2026-01-27T08:49:40.3629117Z      SourceType::Official => match resource_type {
+2026-01-27T08:49:40.3630257Z        ResourceType::VersionManifest => Ok(Url::parse("https://launchermeta.mojang.com/mc/game/version_manifest.json")?),
+2026-01-27T08:49:40.3910782Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/curseforge/misc.rs:21:
+2026-01-27T08:49:40.3912245Z    T: serde::de::DeserializeOwned,
+2026-01-27T08:49:40.3912814Z    P: serde::Serialize,
+2026-01-27T08:49:40.3913102Z  {
+2026-01-27T08:49:40.3913633Z -  let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.3914307Z -    .map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3914767Z +  let curseforge_api_key =
+2026-01-27T08:49:40.3915496Z +    env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3916128Z  
+2026-01-27T08:49:40.3916449Z    let request_builder = match request_type {
+2026-01-27T08:49:40.3917165Z      OtherResourceRequestType::GetWithParams(params) => client.get(url).query(params),
+2026-01-27T08:49:40.3918765Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/curseforge/misc.rs:524:
+2026-01-27T08:49:40.3919514Z    resource_id: &str,
+2026-01-27T08:49:40.3919872Z  ) -> DSYCLauncherResult<Option<String>> {
+2026-01-27T08:49:40.3920278Z    let result = async {
+2026-01-27T08:49:40.3920854Z -    let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.3921463Z -      .map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3921828Z +    let curseforge_api_key =
+2026-01-27T08:49:40.3922420Z +      env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.3922917Z  
+2026-01-27T08:49:40.3923399Z      let url = get_curseforge_api(OtherResourceApiEndpoint::TranslateDesc, Some(resource_id))?;
+2026-01-27T08:49:40.3923998Z      let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.4022776Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/misc.rs:26:
+2026-01-27T08:49:40.4023418Z  }
+2026-01-27T08:49:40.4023591Z  
+2026-01-27T08:49:40.4023843Z  // https://bmclapidoc.bangbang93.com/
+2026-01-27T08:49:40.4024564Z -pub fn get_download_api(source: SourceType, resource_type: ResourceType) -> DSYCLauncherResult<Url> {
+2026-01-27T08:49:40.4025179Z +pub fn get_download_api(
+2026-01-27T08:49:40.4025449Z +  source: SourceType,
+2026-01-27T08:49:40.4025767Z +  resource_type: ResourceType,
+2026-01-27T08:49:40.4026095Z +) -> DSYCLauncherResult<Url> {
+2026-01-27T08:49:40.4026359Z    match source {
+2026-01-27T08:49:40.4026664Z      SourceType::Official => match resource_type {
+2026-01-27T08:49:40.4027418Z        ResourceType::VersionManifest => Ok(Url::parse("https://launchermeta.mojang.com/mc/game/version_manifest.json")?),
+2026-01-27T08:49:40.4200355Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/curseforge/misc.rs:21:
+2026-01-27T08:49:40.4201765Z    T: serde::de::DeserializeOwned,
+2026-01-27T08:49:40.4202331Z    P: serde::Serialize,
+2026-01-27T08:49:40.4202762Z  {
+2026-01-27T08:49:40.4203560Z -  let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.4204579Z -    .map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.4205149Z +  let curseforge_api_key =
+2026-01-27T08:49:40.4205882Z +    env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.4206513Z  
+2026-01-27T08:49:40.4206833Z    let request_builder = match request_type {
+2026-01-27T08:49:40.4207576Z      OtherResourceRequestType::GetWithParams(params) => client.get(url).query(params),
+2026-01-27T08:49:40.4209171Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/curseforge/misc.rs:524:
+2026-01-27T08:49:40.4209921Z    resource_id: &str,
+2026-01-27T08:49:40.4210289Z  ) -> DSYCLauncherResult<Option<String>> {
+2026-01-27T08:49:40.4210676Z    let result = async {
+2026-01-27T08:49:40.4211254Z -    let curseforge_api_key = env::var("DSYCLauncher_CURSEFORGE_API_KEY")
+2026-01-27T08:49:40.4211925Z -      .map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.4212283Z +    let curseforge_api_key =
+2026-01-27T08:49:40.4212803Z +      env::var("DSYCLauncher_CURSEFORGE_API_KEY").map_err(|_| ResourceError::MissingApiKey)?;
+2026-01-27T08:49:40.4213650Z  
+2026-01-27T08:49:40.4214077Z      let url = get_curseforge_api(OtherResourceApiEndpoint::TranslateDesc, Some(resource_id))?;
+2026-01-27T08:49:40.4214747Z      let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.4314253Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/resource/helpers/misc.rs:26:
+2026-01-27T08:49:40.4315320Z  }
+2026-01-27T08:49:40.4315654Z  
+2026-01-27T08:49:40.4316117Z  // https://bmclapidoc.bangbang93.com/
+2026-01-27T08:49:40.4317473Z -pub fn get_download_api(source: SourceType, resource_type: ResourceType) -> DSYCLauncherResult<Url> {
+2026-01-27T08:49:40.4318594Z +pub fn get_download_api(
+2026-01-27T08:49:40.4318939Z +  source: SourceType,
+2026-01-27T08:49:40.4319300Z +  resource_type: ResourceType,
+2026-01-27T08:49:40.4319696Z +) -> DSYCLauncherResult<Url> {
+2026-01-27T08:49:40.4320026Z    match source {
+2026-01-27T08:49:40.4320413Z      SourceType::Official => match resource_type {
+2026-01-27T08:49:40.4321369Z        ResourceType::VersionManifest => Ok(Url::parse("https://launchermeta.mojang.com/mc/game/version_manifest.json")?),
+2026-01-27T08:49:40.4440025Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/offline/mod.rs:11:
+2026-01-27T08:49:40.4441207Z  use tauri::AppHandle;
+2026-01-27T08:49:40.4441648Z  use uuid::Uuid;
+2026-01-27T08:49:40.4442034Z  
+2026-01-27T08:49:40.4443161Z -pub fn load_preset_skin(app: &AppHandle, preset_role: PresetRole) -> DSYCLauncherResult<Vec<Texture>> {
+2026-01-27T08:49:40.4443949Z +pub fn load_preset_skin(
+2026-01-27T08:49:40.4444286Z +  app: &AppHandle,
+2026-01-27T08:49:40.4444595Z +  preset_role: PresetRole,
+2026-01-27T08:49:40.4445014Z +) -> DSYCLauncherResult<Vec<Texture>> {
+2026-01-27T08:49:40.4445771Z    let texture_path = get_app_resource_filepath(app, &format!("assets/skins/{}.png", preset_role))
+2026-01-27T08:49:40.4446524Z      .map_err(|_| AccountError::TextureError)?;
+2026-01-27T08:49:40.4446908Z  
+2026-01-27T08:49:40.4447662Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/offline/mod.rs:29:
+2026-01-27T08:49:40.4448680Z    }])
+2026-01-27T08:49:40.4448907Z  }
+2026-01-27T08:49:40.4449115Z  
+2026-01-27T08:49:40.4449864Z -pub async fn login(app: &AppHandle, username: String, raw_uuid: String) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4450602Z +pub async fn login(
+2026-01-27T08:49:40.4450900Z +  app: &AppHandle,
+2026-01-27T08:49:40.4451192Z +  username: String,
+2026-01-27T08:49:40.4451472Z +  raw_uuid: String,
+2026-01-27T08:49:40.4451835Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4452383Z    let name_with_prefix = format!("OfflinePlayer:{}", username);
+2026-01-27T08:49:40.4452865Z    let uuid = if let Ok(id) = Uuid::parse_str(&raw_uuid) {
+2026-01-27T08:49:40.4453200Z      id
+2026-01-27T08:49:40.4518124Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/microsoft/oauth.rs:75:
+2026-01-27T08:49:40.4519437Z    Ok(response["Token"].as_str().unwrap_or("").to_string())
+2026-01-27T08:49:40.4520074Z  }
+2026-01-27T08:49:40.4520381Z  
+2026-01-27T08:49:40.4521259Z -async fn fetch_xsts_token(app: &AppHandle, xbl_token: String) -> DSYCLauncherResult<(String, String)> {
+2026-01-27T08:49:40.4521902Z +async fn fetch_xsts_token(
+2026-01-27T08:49:40.4522240Z +  app: &AppHandle,
+2026-01-27T08:49:40.4522536Z +  xbl_token: String,
+2026-01-27T08:49:40.4522882Z +) -> DSYCLauncherResult<(String, String)> {
+2026-01-27T08:49:40.4523321Z    let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.4523653Z  
+2026-01-27T08:49:40.4523854Z    let response = client
+2026-01-27T08:49:40.4524588Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/microsoft/oauth.rs:206:
+2026-01-27T08:49:40.4525218Z    )
+2026-01-27T08:49:40.4525406Z  }
+2026-01-27T08:49:40.4525593Z  
+2026-01-27T08:49:40.4526247Z -pub async fn login(app: &AppHandle, auth_info: DeviceAuthResponseInfo) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4527286Z +pub async fn login(
+2026-01-27T08:49:40.4527567Z +  app: &AppHandle,
+2026-01-27T08:49:40.4528154Z +  auth_info: DeviceAuthResponseInfo,
+2026-01-27T08:49:40.4528806Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4529221Z    let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.4529684Z    let sender = client.post(OAUTH_TOKEN_ENDPOINT).form(&[
+2026-01-27T08:49:40.4530101Z      ("client_id", CLIENT_ID),
+2026-01-27T08:49:40.4544151Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/microsoft/oauth.rs:75:
+2026-01-27T08:49:40.4545142Z    Ok(response["Token"].as_str().unwrap_or("").to_string())
+2026-01-27T08:49:40.4545622Z  }
+2026-01-27T08:49:40.4545857Z  
+2026-01-27T08:49:40.4546678Z -async fn fetch_xsts_token(app: &AppHandle, xbl_token: String) -> DSYCLauncherResult<(String, String)> {
+2026-01-27T08:49:40.4547195Z +async fn fetch_xsts_token(
+2026-01-27T08:49:40.4547416Z +  app: &AppHandle,
+2026-01-27T08:49:40.4547614Z +  xbl_token: String,
+2026-01-27T08:49:40.4548128Z +) -> DSYCLauncherResult<(String, String)> {
+2026-01-27T08:49:40.4548520Z    let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.4548787Z  
+2026-01-27T08:49:40.4548944Z    let response = client
+2026-01-27T08:49:40.4549492Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/microsoft/oauth.rs:206:
+2026-01-27T08:49:40.4550000Z    )
+2026-01-27T08:49:40.4550141Z  }
+2026-01-27T08:49:40.4550283Z  
+2026-01-27T08:49:40.4550768Z -pub async fn login(app: &AppHandle, auth_info: DeviceAuthResponseInfo) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4551253Z +pub async fn login(
+2026-01-27T08:49:40.4551463Z +  app: &AppHandle,
+2026-01-27T08:49:40.4551699Z +  auth_info: DeviceAuthResponseInfo,
+2026-01-27T08:49:40.4552006Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4552316Z    let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.4552664Z    let sender = client.post(OAUTH_TOKEN_ENDPOINT).form(&[
+2026-01-27T08:49:40.4552984Z      ("client_id", CLIENT_ID),
+2026-01-27T08:49:40.4599439Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/authlib_injector/constants.rs:1:
+2026-01-27T08:49:40.4600916Z  pub static AUTHLIB_INJECTOR_JAR_NAME: &str = "authlib-injector.jar";
+2026-01-27T08:49:40.4601838Z -pub static PRESET_AUTH_SERVERS: [&str; 1] = [
+2026-01-27T08:49:40.4602527Z -  "https://littleskin.cn/api/yggdrasil",
+2026-01-27T08:49:40.4602802Z -];
+2026-01-27T08:49:40.4603228Z +pub static PRESET_AUTH_SERVERS: [&str; 1] = ["https://littleskin.cn/api/yggdrasil"];
+2026-01-27T08:49:40.4603656Z  pub static SCOPE: &str =
+2026-01-27T08:49:40.4604086Z    "openid offline_access Yggdrasil.PlayerProfiles.Select Yggdrasil.Server.Join";
+2026-01-27T08:49:40.4604494Z  
+2026-01-27T08:49:40.4605072Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/authlib_injector/constants.rs:8:
+2026-01-27T08:49:40.4605703Z -pub static CLIENT_IDS: [(&str, &str); 1] = [
+2026-01-27T08:49:40.4606007Z -  ("littleskin.cn", "1014"),
+2026-01-27T08:49:40.4606226Z -];
+2026-01-27T08:49:40.4606569Z +pub static CLIENT_IDS: [(&str, &str); 1] = [("littleskin.cn", "1014")];
+2026-01-27T08:49:40.4606915Z  
+2026-01-27T08:49:40.4659697Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/import/hmcl.rs:64:
+2026-01-27T08:49:40.4660607Z    ThirdParty(HmclThirdPartyAccount),
+2026-01-27T08:49:40.4661024Z  }
+2026-01-27T08:49:40.4661276Z  
+2026-01-27T08:49:40.4662122Z -async fn offline_to_player(app: &AppHandle, acc: &HmclOfflineAccount) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4662724Z +async fn offline_to_player(
+2026-01-27T08:49:40.4662963Z +  app: &AppHandle,
+2026-01-27T08:49:40.4663172Z +  acc: &HmclOfflineAccount,
+2026-01-27T08:49:40.4663458Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4663925Z    let uuid = uuid::Uuid::parse_str(&acc.uuid).map_err(|_| AccountError::ParseError)?;
+2026-01-27T08:49:40.4664428Z    let textures = load_preset_skin(app, PresetRole::Steve)?;
+2026-01-27T08:49:40.4665125Z    Ok(
+2026-01-27T08:49:40.4683441Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/microsoft/oauth.rs:75:
+2026-01-27T08:49:40.4684968Z    Ok(response["Token"].as_str().unwrap_or("").to_string())
+2026-01-27T08:49:40.4685572Z  }
+2026-01-27T08:49:40.4685864Z  
+2026-01-27T08:49:40.4686831Z -async fn fetch_xsts_token(app: &AppHandle, xbl_token: String) -> DSYCLauncherResult<(String, String)> {
+2026-01-27T08:49:40.4687449Z +async fn fetch_xsts_token(
+2026-01-27T08:49:40.4687727Z +  app: &AppHandle,
+2026-01-27T08:49:40.4688304Z +  xbl_token: String,
+2026-01-27T08:49:40.4688637Z +) -> DSYCLauncherResult<(String, String)> {
+2026-01-27T08:49:40.4689051Z    let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.4689361Z  
+2026-01-27T08:49:40.4689564Z    let response = client
+2026-01-27T08:49:40.4690253Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/microsoft/oauth.rs:206:
+2026-01-27T08:49:40.4690849Z    )
+2026-01-27T08:49:40.4691023Z  }
+2026-01-27T08:49:40.4691196Z  
+2026-01-27T08:49:40.4691810Z -pub async fn login(app: &AppHandle, auth_info: DeviceAuthResponseInfo) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4692460Z +pub async fn login(
+2026-01-27T08:49:40.4692724Z +  app: &AppHandle,
+2026-01-27T08:49:40.4692981Z +  auth_info: DeviceAuthResponseInfo,
+2026-01-27T08:49:40.4693307Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4693627Z    let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.4693998Z    let sender = client.post(OAUTH_TOKEN_ENDPOINT).form(&[
+2026-01-27T08:49:40.4694332Z      ("client_id", CLIENT_ID),
+2026-01-27T08:49:40.4696827Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/offline/mod.rs:11:
+2026-01-27T08:49:40.4697653Z  use tauri::AppHandle;
+2026-01-27T08:49:40.4698169Z  use uuid::Uuid;
+2026-01-27T08:49:40.4698454Z  
+2026-01-27T08:49:40.4699289Z -pub fn load_preset_skin(app: &AppHandle, preset_role: PresetRole) -> DSYCLauncherResult<Vec<Texture>> {
+2026-01-27T08:49:40.4699875Z +pub fn load_preset_skin(
+2026-01-27T08:49:40.4700108Z +  app: &AppHandle,
+2026-01-27T08:49:40.4700332Z +  preset_role: PresetRole,
+2026-01-27T08:49:40.4700616Z +) -> DSYCLauncherResult<Vec<Texture>> {
+2026-01-27T08:49:40.4701133Z    let texture_path = get_app_resource_filepath(app, &format!("assets/skins/{}.png", preset_role))
+2026-01-27T08:49:40.4701668Z      .map_err(|_| AccountError::TextureError)?;
+2026-01-27T08:49:40.4701928Z  
+2026-01-27T08:49:40.4702431Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/offline/mod.rs:29:
+2026-01-27T08:49:40.4702919Z    }])
+2026-01-27T08:49:40.4703070Z  }
+2026-01-27T08:49:40.4703218Z  
+2026-01-27T08:49:40.4703699Z -pub async fn login(app: &AppHandle, username: String, raw_uuid: String) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4704178Z +pub async fn login(
+2026-01-27T08:49:40.4704386Z +  app: &AppHandle,
+2026-01-27T08:49:40.4704571Z +  username: String,
+2026-01-27T08:49:40.4704764Z +  raw_uuid: String,
+2026-01-27T08:49:40.4705007Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4705384Z    let name_with_prefix = format!("OfflinePlayer:{}", username);
+2026-01-27T08:49:40.4705784Z    let uuid = if let Ok(id) = Uuid::parse_str(&raw_uuid) {
+2026-01-27T08:49:40.4706062Z      id
+2026-01-27T08:49:40.4736872Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/import/hmcl.rs:64:
+2026-01-27T08:49:40.4737681Z    ThirdParty(HmclThirdPartyAccount),
+2026-01-27T08:49:40.4738292Z  }
+2026-01-27T08:49:40.4738485Z  
+2026-01-27T08:49:40.4739121Z -async fn offline_to_player(app: &AppHandle, acc: &HmclOfflineAccount) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4739745Z +async fn offline_to_player(
+2026-01-27T08:49:40.4740036Z +  app: &AppHandle,
+2026-01-27T08:49:40.4740297Z +  acc: &HmclOfflineAccount,
+2026-01-27T08:49:40.4740649Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4741191Z    let uuid = uuid::Uuid::parse_str(&acc.uuid).map_err(|_| AccountError::ParseError)?;
+2026-01-27T08:49:40.4742108Z    let textures = load_preset_skin(app, PresetRole::Steve)?;
+2026-01-27T08:49:40.4742625Z    Ok(
+2026-01-27T08:49:40.4757300Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/import/hmcl.rs:64:
+2026-01-27T08:49:40.4758266Z    ThirdParty(HmclThirdPartyAccount),
+2026-01-27T08:49:40.4758520Z  }
+2026-01-27T08:49:40.4758658Z  
+2026-01-27T08:49:40.4759152Z -async fn offline_to_player(app: &AppHandle, acc: &HmclOfflineAccount) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4759648Z +async fn offline_to_player(
+2026-01-27T08:49:40.4759877Z +  app: &AppHandle,
+2026-01-27T08:49:40.4760091Z +  acc: &HmclOfflineAccount,
+2026-01-27T08:49:40.4760359Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.4760794Z    let uuid = uuid::Uuid::parse_str(&acc.uuid).map_err(|_| AccountError::ParseError)?;
+2026-01-27T08:49:40.4761277Z    let textures = load_preset_skin(app, PresetRole::Steve)?;
+2026-01-27T08:49:40.4761573Z    Ok(
+2026-01-27T08:49:40.4824097Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/authlib_injector/constants.rs:1:
+2026-01-27T08:49:40.4825194Z  pub static AUTHLIB_INJECTOR_JAR_NAME: &str = "authlib-injector.jar";
+2026-01-27T08:49:40.4825727Z -pub static PRESET_AUTH_SERVERS: [&str; 1] = [
+2026-01-27T08:49:40.4826160Z -  "https://littleskin.cn/api/yggdrasil",
+2026-01-27T08:49:40.4826469Z -];
+2026-01-27T08:49:40.4826948Z +pub static PRESET_AUTH_SERVERS: [&str; 1] = ["https://littleskin.cn/api/yggdrasil"];
+2026-01-27T08:49:40.4827442Z  pub static SCOPE: &str =
+2026-01-27T08:49:40.4828294Z    "openid offline_access Yggdrasil.PlayerProfiles.Select Yggdrasil.Server.Join";
+2026-01-27T08:49:40.4828791Z  
+2026-01-27T08:49:40.4829464Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/authlib_injector/constants.rs:8:
+2026-01-27T08:49:40.4830188Z -pub static CLIENT_IDS: [(&str, &str); 1] = [
+2026-01-27T08:49:40.4830548Z -  ("littleskin.cn", "1014"),
+2026-01-27T08:49:40.4830818Z -];
+2026-01-27T08:49:40.4831211Z +pub static CLIENT_IDS: [(&str, &str); 1] = [("littleskin.cn", "1014")];
+2026-01-27T08:49:40.4831610Z  
+2026-01-27T08:49:40.4911052Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/authlib_injector/constants.rs:1:
+2026-01-27T08:49:40.4913134Z  pub static AUTHLIB_INJECTOR_JAR_NAME: &str = "authlib-injector.jar";
+2026-01-27T08:49:40.4914008Z -pub static PRESET_AUTH_SERVERS: [&str; 1] = [
+2026-01-27T08:49:40.4914469Z -  "https://littleskin.cn/api/yggdrasil",
+2026-01-27T08:49:40.4914806Z -];
+2026-01-27T08:49:40.4915329Z +pub static PRESET_AUTH_SERVERS: [&str; 1] = ["https://littleskin.cn/api/yggdrasil"];
+2026-01-27T08:49:40.4915860Z  pub static SCOPE: &str =
+2026-01-27T08:49:40.4916391Z    "openid offline_access Yggdrasil.PlayerProfiles.Select Yggdrasil.Server.Join";
+2026-01-27T08:49:40.4916901Z  
+2026-01-27T08:49:40.4917626Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/authlib_injector/constants.rs:8:
+2026-01-27T08:49:40.4918686Z -pub static CLIENT_IDS: [(&str, &str); 1] = [
+2026-01-27T08:49:40.4919070Z -  ("littleskin.cn", "1014"),
+2026-01-27T08:49:40.4919342Z -];
+2026-01-27T08:49:40.4919771Z +pub static CLIENT_IDS: [(&str, &str); 1] = [("littleskin.cn", "1014")];
+2026-01-27T08:49:40.4920195Z  
+2026-01-27T08:49:40.5024115Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/commands.rs:53:
+2026-01-27T08:49:40.5024913Z  }
+2026-01-27T08:49:40.5025110Z  
+2026-01-27T08:49:40.5025338Z  #[tauri::command]
+2026-01-27T08:49:40.5026027Z -pub async fn add_player_offline(app: AppHandle, username: String, uuid: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.5026702Z +pub async fn add_player_offline(
+2026-01-27T08:49:40.5027009Z +  app: AppHandle,
+2026-01-27T08:49:40.5027247Z +  username: String,
+2026-01-27T08:49:40.5027476Z +  uuid: String,
+2026-01-27T08:49:40.5027753Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.5028560Z    let new_player = offline::login(&app, username, uuid).await?;
+2026-01-27T08:49:40.5029427Z  
+2026-01-27T08:49:40.5029747Z    let account_binding = app.state::<Mutex<AccountInfo>>();
+2026-01-27T08:49:40.5041207Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/authlib_injector/constants.rs:1:
+2026-01-27T08:49:40.5042230Z  pub static AUTHLIB_INJECTOR_JAR_NAME: &str = "authlib-injector.jar";
+2026-01-27T08:49:40.5042809Z -pub static PRESET_AUTH_SERVERS: [&str; 1] = [
+2026-01-27T08:49:40.5043267Z -  "https://littleskin.cn/api/yggdrasil",
+2026-01-27T08:49:40.5043593Z -];
+2026-01-27T08:49:40.5044119Z +pub static PRESET_AUTH_SERVERS: [&str; 1] = ["https://littleskin.cn/api/yggdrasil"];
+2026-01-27T08:49:40.5044657Z  pub static SCOPE: &str =
+2026-01-27T08:49:40.5045193Z    "openid offline_access Yggdrasil.PlayerProfiles.Select Yggdrasil.Server.Join";
+2026-01-27T08:49:40.5045710Z  
+2026-01-27T08:49:40.5046461Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/authlib_injector/constants.rs:8:
+2026-01-27T08:49:40.5047274Z -pub static CLIENT_IDS: [(&str, &str); 1] = [
+2026-01-27T08:49:40.5047667Z -  ("littleskin.cn", "1014"),
+2026-01-27T08:49:40.5048210Z -];
+2026-01-27T08:49:40.5048658Z +pub static CLIENT_IDS: [(&str, &str); 1] = [("littleskin.cn", "1014")];
+2026-01-27T08:49:40.5049095Z  
+2026-01-27T08:49:40.5101462Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/import/hmcl.rs:64:
+2026-01-27T08:49:40.5102279Z    ThirdParty(HmclThirdPartyAccount),
+2026-01-27T08:49:40.5102594Z  }
+2026-01-27T08:49:40.5102767Z  
+2026-01-27T08:49:40.5103375Z -async fn offline_to_player(app: &AppHandle, acc: &HmclOfflineAccount) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.5103981Z +async fn offline_to_player(
+2026-01-27T08:49:40.5104268Z +  app: &AppHandle,
+2026-01-27T08:49:40.5104532Z +  acc: &HmclOfflineAccount,
+2026-01-27T08:49:40.5104866Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.5105427Z    let uuid = uuid::Uuid::parse_str(&acc.uuid).map_err(|_| AccountError::ParseError)?;
+2026-01-27T08:49:40.5106048Z    let textures = load_preset_skin(app, PresetRole::Steve)?;
+2026-01-27T08:49:40.5106414Z    Ok(
+2026-01-27T08:49:40.5125292Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/microsoft/oauth.rs:75:
+2026-01-27T08:49:40.5126127Z    Ok(response["Token"].as_str().unwrap_or("").to_string())
+2026-01-27T08:49:40.5126450Z  }
+2026-01-27T08:49:40.5126612Z  
+2026-01-27T08:49:40.5127142Z -async fn fetch_xsts_token(app: &AppHandle, xbl_token: String) -> DSYCLauncherResult<(String, String)> {
+2026-01-27T08:49:40.5127685Z +async fn fetch_xsts_token(
+2026-01-27T08:49:40.5128198Z +  app: &AppHandle,
+2026-01-27T08:49:40.5128442Z +  xbl_token: String,
+2026-01-27T08:49:40.5128743Z +) -> DSYCLauncherResult<(String, String)> {
+2026-01-27T08:49:40.5129110Z    let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.5129395Z  
+2026-01-27T08:49:40.5129574Z    let response = client
+2026-01-27T08:49:40.5130222Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/microsoft/oauth.rs:206:
+2026-01-27T08:49:40.5130778Z    )
+2026-01-27T08:49:40.5130944Z  }
+2026-01-27T08:49:40.5131099Z  
+2026-01-27T08:49:40.5131672Z -pub async fn login(app: &AppHandle, auth_info: DeviceAuthResponseInfo) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.5132234Z +pub async fn login(
+2026-01-27T08:49:40.5132463Z +  app: &AppHandle,
+2026-01-27T08:49:40.5132745Z +  auth_info: DeviceAuthResponseInfo,
+2026-01-27T08:49:40.5133104Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.5133484Z    let client = app.state::<reqwest::Client>();
+2026-01-27T08:49:40.5133924Z    let sender = client.post(OAUTH_TOKEN_ENDPOINT).form(&[
+2026-01-27T08:49:40.5134312Z      ("client_id", CLIENT_ID),
+2026-01-27T08:49:40.5139159Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/offline/mod.rs:11:
+2026-01-27T08:49:40.5139954Z  use tauri::AppHandle;
+2026-01-27T08:49:40.5140187Z  use uuid::Uuid;
+2026-01-27T08:49:40.5140752Z  
+2026-01-27T08:49:40.5141340Z -pub fn load_preset_skin(app: &AppHandle, preset_role: PresetRole) -> DSYCLauncherResult<Vec<Texture>> {
+2026-01-27T08:49:40.5142078Z +pub fn load_preset_skin(
+2026-01-27T08:49:40.5142343Z +  app: &AppHandle,
+2026-01-27T08:49:40.5142590Z +  preset_role: PresetRole,
+2026-01-27T08:49:40.5142923Z +) -> DSYCLauncherResult<Vec<Texture>> {
+2026-01-27T08:49:40.5143524Z    let texture_path = get_app_resource_filepath(app, &format!("assets/skins/{}.png", preset_role))
+2026-01-27T08:49:40.5144122Z      .map_err(|_| AccountError::TextureError)?;
+2026-01-27T08:49:40.5144391Z  
+2026-01-27T08:49:40.5144900Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/helpers/offline/mod.rs:29:
+2026-01-27T08:49:40.5145390Z    }])
+2026-01-27T08:49:40.5145551Z  }
+2026-01-27T08:49:40.5145699Z  
+2026-01-27T08:49:40.5146230Z -pub async fn login(app: &AppHandle, username: String, raw_uuid: String) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.5146754Z +pub async fn login(
+2026-01-27T08:49:40.5146968Z +  app: &AppHandle,
+2026-01-27T08:49:40.5147172Z +  username: String,
+2026-01-27T08:49:40.5147380Z +  raw_uuid: String,
+2026-01-27T08:49:40.5147641Z +) -> DSYCLauncherResult<PlayerInfo> {
+2026-01-27T08:49:40.5148169Z    let name_with_prefix = format!("OfflinePlayer:{}", username);
+2026-01-27T08:49:40.5148602Z    let uuid = if let Ok(id) = Uuid::parse_str(&raw_uuid) {
+2026-01-27T08:49:40.5148903Z      id
+2026-01-27T08:49:40.5258418Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/account/commands.rs:53:
+2026-01-27T08:49:40.5259217Z  }
+2026-01-27T08:49:40.5259406Z  
+2026-01-27T08:49:40.5259609Z  #[tauri::command]
+2026-01-27T08:49:40.5260296Z -pub async fn add_player_offline(app: AppHandle, username: String, uuid: String) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.5260960Z +pub async fn add_player_offline(
+2026-01-27T08:49:40.5261271Z +  app: AppHandle,
+2026-01-27T08:49:40.5261522Z +  username: String,
+2026-01-27T08:49:40.5261771Z +  uuid: String,
+2026-01-27T08:49:40.5262049Z +) -> DSYCLauncherResult<()> {
+2026-01-27T08:49:40.5262473Z    let new_player = offline::login(&app, username, uuid).await?;
+2026-01-27T08:49:40.5262854Z  
+2026-01-27T08:49:40.5263169Z    let account_binding = app.state::<Mutex<AccountInfo>>();
+2026-01-27T08:49:40.5329921Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:63:
+2026-01-27T08:49:40.5331010Z  
+2026-01-27T08:49:40.5331368Z  impl LaunchArguments {
+2026-01-27T08:49:40.5332159Z    pub fn into_hashmap(self) -> DSYCLauncherResult<HashMap<String, String>> {
+2026-01-27T08:49:40.5332935Z -    let value =
+2026-01-27T08:49:40.5334075Z -      serde_json::to_value(self).map_err(|e| DSYCLauncherError(format!("Serialization error: {}", e)))?;
+2026-01-27T08:49:40.5335115Z +    let value = serde_json::to_value(self)
+2026-01-27T08:49:40.5335702Z +      .map_err(|e| DSYCLauncherError(format!("Serialization error: {}", e)))?;
+2026-01-27T08:49:40.5336174Z      let obj = value
+2026-01-27T08:49:40.5336433Z        .as_object()
+2026-01-27T08:49:40.5336985Z        .ok_or_else(|| DSYCLauncherError("Failed to convert LaunchParams to HashMap".to_string()))?;
+2026-01-27T08:49:40.5338274Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:338:
+2026-01-27T08:49:40.5338925Z      }
+2026-01-27T08:49:40.5339124Z  
+2026-01-27T08:49:40.5339435Z      // Get library paths based on platform
+2026-01-27T08:49:40.5339845Z -      let mut lib_paths = Vec::new();
+2026-01-27T08:49:40.5340150Z -      
+2026-01-27T08:49:40.5340388Z -      // Add VC libs path
+2026-01-27T08:49:40.5340721Z -      #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5341021Z -      {
+2026-01-27T08:49:40.5341244Z -        use std::env;
+2026-01-27T08:49:40.5341556Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5341964Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5342438Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5343243Z -            #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5343902Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("windows").join("x86");
+2026-01-27T08:49:40.5344596Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5345133Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("windows").join("x64");
+2026-01-27T08:49:40.5346020Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("windows").join(if cfg!(target_arch = "x86") { "x86" } else { "x64" });
+2026-01-27T08:49:40.5346755Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5347236Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5347558Z -          }
+2026-01-27T08:49:40.5347784Z +    let mut lib_paths = Vec::new();
+2026-01-27T08:49:40.5348280Z +
+2026-01-27T08:49:40.5348463Z +    // Add VC libs path
+2026-01-27T08:49:40.5348717Z +    #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5348939Z +    {
+2026-01-27T08:49:40.5349118Z +      use std::env;
+2026-01-27T08:49:40.5349361Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5349655Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5350000Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5350442Z +          #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5351037Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5351424Z +            .join("assets")
+2026-01-27T08:49:40.5351748Z +            .join("vc-libs")
+2026-01-27T08:49:40.5352128Z +            .join("windows")
+2026-01-27T08:49:40.5352427Z +            .join("x86");
+2026-01-27T08:49:40.5365012Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5365529Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5365823Z +            .join("assets")
+2026-01-27T08:49:40.5366067Z +            .join("vc-libs")
+2026-01-27T08:49:40.5366305Z +            .join("windows")
+2026-01-27T08:49:40.5366545Z +            .join("x64");
+2026-01-27T08:49:40.5366810Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5367078Z +            .join("assets")
+2026-01-27T08:49:40.5367304Z +            .join("libs")
+2026-01-27T08:49:40.5367519Z +            .join("natives")
+2026-01-27T08:49:40.5367749Z +            .join("windows")
+2026-01-27T08:49:40.5368185Z +            .join(if cfg!(target_arch = "x86") {
+2026-01-27T08:49:40.5368451Z +              "x86"
+2026-01-27T08:49:40.5368648Z +            } else {
+2026-01-27T08:49:40.5368834Z +              "x64"
+2026-01-27T08:49:40.5369007Z +            });
+2026-01-27T08:49:40.5369334Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5369808Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5370132Z          }
+2026-01-27T08:49:40.5370291Z        }
+2026-01-27T08:49:40.5370494Z -      #[cfg(target_os = "macos")]
+2026-01-27T08:49:40.5370716Z -      {
+2026-01-27T08:49:40.5370903Z -        use std::env;
+2026-01-27T08:49:40.5371143Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5371457Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5371817Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5372078Z +    }
+2026-01-27T08:49:40.5372274Z +    #[cfg(target_os = "macos")]
+2026-01-27T08:49:40.5372482Z +    {
+2026-01-27T08:49:40.5372651Z +      use std::env;
+2026-01-27T08:49:40.5372875Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5373176Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5373519Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5373863Z +          if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:40.5374209Z              if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:40.5374577Z -              if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:40.5375209Z -                let vc_libs_dir = app_dir.join("Contents").join("Resources").join("assets").join("vc-libs").join("macos");
+2026-01-27T08:49:40.5376354Z -                let common_libs_dir = app_dir.join("Contents").join("Resources").join("assets").join("libs").join("natives").join("macos");
+2026-01-27T08:49:40.5377163Z -                lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5377659Z -                lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5378152Z -              }
+2026-01-27T08:49:40.5378390Z +              let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5378673Z +                .join("Contents")
+2026-01-27T08:49:40.5378934Z +                .join("Resources")
+2026-01-27T08:49:40.5379197Z +                .join("assets")
+2026-01-27T08:49:40.5379444Z +                .join("vc-libs")
+2026-01-27T08:49:40.5379687Z +                .join("macos");
+2026-01-27T08:49:40.5379957Z +              let common_libs_dir = app_dir
+2026-01-27T08:49:40.5380235Z +                .join("Contents")
+2026-01-27T08:49:40.5380493Z +                .join("Resources")
+2026-01-27T08:49:40.5380745Z +                .join("assets")
+2026-01-27T08:49:40.5380990Z +                .join("libs")
+2026-01-27T08:49:40.5381232Z +                .join("natives")
+2026-01-27T08:49:40.5381485Z +                .join("macos");
+2026-01-27T08:49:40.5381837Z +              lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5382320Z +              lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5382650Z              }
+2026-01-27T08:49:40.5382814Z            }
+2026-01-27T08:49:40.5382975Z          }
+2026-01-27T08:49:40.5383476Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:376:
+2026-01-27T08:49:40.5383948Z        }
+2026-01-27T08:49:40.5384147Z -      #[cfg(target_os = "linux")]
+2026-01-27T08:49:40.5384370Z -      {
+2026-01-27T08:49:40.5384690Z -        use std::env;
+2026-01-27T08:49:40.5385103Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5385642Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5386212Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5386695Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("linux");
+2026-01-27T08:49:40.5387111Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5387662Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("linux").join("x64");
+2026-01-27T08:49:40.5388454Z -            #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5389023Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("linux").join("arm64");
+2026-01-27T08:49:40.5389617Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5390095Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5390416Z -          }
+2026-01-27T08:49:40.5390571Z +    }
+2026-01-27T08:49:40.5390772Z +    #[cfg(target_os = "linux")]
+2026-01-27T08:49:40.5390988Z +    {
+2026-01-27T08:49:40.5391155Z +      use std::env;
+2026-01-27T08:49:40.5391390Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5391681Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5392029Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5392477Z +          let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("linux");
+2026-01-27T08:49:40.5392868Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5393162Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5393416Z +            .join("assets")
+2026-01-27T08:49:40.5393632Z +            .join("libs")
+2026-01-27T08:49:40.5393851Z +            .join("natives")
+2026-01-27T08:49:40.5394074Z +            .join("linux")
+2026-01-27T08:49:40.5394289Z +            .join("x64");
+2026-01-27T08:49:40.5394542Z +          #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5394830Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5395289Z +            .join("assets")
+2026-01-27T08:49:40.5395505Z +            .join("libs")
+2026-01-27T08:49:40.5395839Z +            .join("natives")
+2026-01-27T08:49:40.5396064Z +            .join("linux")
+2026-01-27T08:49:40.5396275Z +            .join("arm64");
+2026-01-27T08:49:40.5396632Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5397106Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5397423Z          }
+2026-01-27T08:49:40.5397581Z        }
+2026-01-27T08:49:40.5397792Z -      #[cfg(target_os = "android")]
+2026-01-27T08:49:40.5398145Z -      {
+2026-01-27T08:49:40.5398327Z -        use std::env;
+2026-01-27T08:49:40.5398559Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5398867Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5399221Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5399573Z -            // Android app structure: app/lib/[arch]/
+2026-01-27T08:49:40.5399909Z -            #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5400206Z -            let arch_dir = "arm64-v8a";
+2026-01-27T08:49:40.5400490Z -            #[cfg(target_arch = "arm")]
+2026-01-27T08:49:40.5400781Z -            let arch_dir = "armeabi-v7a";
+2026-01-27T08:49:40.5401062Z -            #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5401335Z -            let arch_dir = "x86";
+2026-01-27T08:49:40.5401612Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5401891Z -            let arch_dir = "x86_64";
+2026-01-27T08:49:40.5402113Z -            
+2026-01-27T08:49:40.5402535Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("android").join(arch_dir);
+2026-01-27T08:49:40.5403266Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("android").join(arch_dir);
+2026-01-27T08:49:40.5403882Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5404351Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5404675Z -          }
+2026-01-27T08:49:40.5404842Z +    }
+2026-01-27T08:49:40.5405040Z +    #[cfg(target_os = "android")]
+2026-01-27T08:49:40.5405253Z +    {
+2026-01-27T08:49:40.5405413Z +      use std::env;
+2026-01-27T08:49:40.5405642Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5405949Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5406300Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5406657Z +          // Android app structure: app/lib/[arch]/
+2026-01-27T08:49:40.5406980Z +          #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5407265Z +          let arch_dir = "arm64-v8a";
+2026-01-27T08:49:40.5407545Z +          #[cfg(target_arch = "arm")]
+2026-01-27T08:49:40.5407817Z +          let arch_dir = "armeabi-v7a";
+2026-01-27T08:49:40.5408362Z +          #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5408632Z +          let arch_dir = "x86";
+2026-01-27T08:49:40.5408900Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5409178Z +          let arch_dir = "x86_64";
+2026-01-27T08:49:40.5409401Z +
+2026-01-27T08:49:40.5409597Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5409843Z +            .join("assets")
+2026-01-27T08:49:40.5410065Z +            .join("vc-libs")
+2026-01-27T08:49:40.5410287Z +            .join("android")
+2026-01-27T08:49:40.5410510Z +            .join(arch_dir);
+2026-01-27T08:49:40.5410760Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5411012Z +            .join("assets")
+2026-01-27T08:49:40.5411221Z +            .join("libs")
+2026-01-27T08:49:40.5411431Z +            .join("natives")
+2026-01-27T08:49:40.5411648Z +            .join("android")
+2026-01-27T08:49:40.5411856Z +            .join(arch_dir);
+2026-01-27T08:49:40.5412204Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5412670Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5413217Z          }
+2026-01-27T08:49:40.5413374Z        }
+2026-01-27T08:49:40.5413518Z -      
+2026-01-27T08:49:40.5413786Z -      // Combine natives directory and all library paths
+2026-01-27T08:49:40.5414353Z -      let mut java_library_path = "${natives_directory}".to_string();
+2026-01-27T08:49:40.5414663Z -      
+2026-01-27T08:49:40.5414869Z -      #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5415117Z -      let separator = ";";
+2026-01-27T08:49:40.5415386Z -      #[cfg(not(target_os = "windows"))]
+2026-01-27T08:49:40.5415647Z -      let separator = ":";
+2026-01-27T08:49:40.5415838Z -      
+2026-01-27T08:49:40.5416042Z -      for lib_path in lib_paths {
+2026-01-27T08:49:40.5416312Z -        if !lib_path.is_empty() {
+2026-01-27T08:49:40.5416710Z -          java_library_path.push_str(&format!("{}{}", separator, lib_path));
+2026-01-27T08:49:40.5417043Z -        }
+2026-01-27T08:49:40.5417192Z +    }
+2026-01-27T08:49:40.5417344Z +
+2026-01-27T08:49:40.5417600Z +    // Combine natives directory and all library paths
+2026-01-27T08:49:40.5418139Z +    let mut java_library_path = "${natives_directory}".to_string();
+2026-01-27T08:49:40.5418453Z +
+2026-01-27T08:49:40.5418642Z +    #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5418882Z +    let separator = ";";
+2026-01-27T08:49:40.5419134Z +    #[cfg(not(target_os = "windows"))]
+2026-01-27T08:49:40.5419383Z +    let separator = ":";
+2026-01-27T08:49:40.5419570Z +
+2026-01-27T08:49:40.5419761Z +    for lib_path in lib_paths {
+2026-01-27T08:49:40.5420019Z +      if !lib_path.is_empty() {
+2026-01-27T08:49:40.5420402Z +        java_library_path.push_str(&format!("{}{}", separator, lib_path));
+2026-01-27T08:49:40.5420724Z        }
+2026-01-27T08:49:40.5420875Z -      
+2026-01-27T08:49:40.5421076Z -      client_jvm_args.extend(vec![
+2026-01-27T08:49:40.5421435Z -        format!("-Djava.library.path={}", java_library_path),
+2026-01-27T08:49:40.5421883Z -        "-Dminecraft.launcher.brand=${launcher_name}".to_string(),
+2026-01-27T08:49:40.5422355Z -        "-Dminecraft.launcher.version=${launcher_version}".to_string(),
+2026-01-27T08:49:40.5422685Z -      ]);
+2026-01-27T08:49:40.5422840Z +    }
+2026-01-27T08:49:40.5422990Z +
+2026-01-27T08:49:40.5423186Z +    client_jvm_args.extend(vec![
+2026-01-27T08:49:40.5423524Z +      format!("-Djava.library.path={}", java_library_path),
+2026-01-27T08:49:40.5423954Z +      "-Dminecraft.launcher.brand=${launcher_name}".to_string(),
+2026-01-27T08:49:40.5424431Z +      "-Dminecraft.launcher.version=${launcher_version}".to_string(),
+2026-01-27T08:49:40.5424750Z +    ]);
+2026-01-27T08:49:40.5425005Z      cmd.extend(replace_arguments(client_jvm_args, &map));
+2026-01-27T08:49:40.5425287Z    }
+2026-01-27T08:49:40.5425426Z  
+2026-01-27T08:49:40.5425945Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/file_validator.rs:207:
+2026-01-27T08:49:40.5426402Z    })
+2026-01-27T08:49:40.5426550Z  }
+2026-01-27T08:49:40.5426693Z  
+2026-01-27T08:49:40.5427145Z -pub fn convert_library_name_to_path(name: &str, native: Option<String>) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.5427656Z +pub fn convert_library_name_to_path(
+2026-01-27T08:49:40.5428096Z +  name: &str,
+2026-01-27T08:49:40.5428334Z +  native: Option<String>,
+2026-01-27T08:49:40.5428602Z +) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.5428837Z    let LibraryParts {
+2026-01-27T08:49:40.5429031Z      path,
+2026-01-27T08:49:40.5429190Z      pack_name,
+2026-01-27T08:49:40.5508559Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:63:
+2026-01-27T08:49:40.5509703Z  
+2026-01-27T08:49:40.5510055Z  impl LaunchArguments {
+2026-01-27T08:49:40.5510853Z    pub fn into_hashmap(self) -> DSYCLauncherResult<HashMap<String, String>> {
+2026-01-27T08:49:40.5511601Z -    let value =
+2026-01-27T08:49:40.5512694Z -      serde_json::to_value(self).map_err(|e| DSYCLauncherError(format!("Serialization error: {}", e)))?;
+2026-01-27T08:49:40.5513375Z +    let value = serde_json::to_value(self)
+2026-01-27T08:49:40.5513959Z +      .map_err(|e| DSYCLauncherError(format!("Serialization error: {}", e)))?;
+2026-01-27T08:49:40.5514668Z      let obj = value
+2026-01-27T08:49:40.5514982Z        .as_object()
+2026-01-27T08:49:40.5515409Z        .ok_or_else(|| DSYCLauncherError("Failed to convert LaunchParams to HashMap".to_string()))?;
+2026-01-27T08:49:40.5516202Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:338:
+2026-01-27T08:49:40.5516675Z      }
+2026-01-27T08:49:40.5516828Z  
+2026-01-27T08:49:40.5517029Z      // Get library paths based on platform
+2026-01-27T08:49:40.5517344Z -      let mut lib_paths = Vec::new();
+2026-01-27T08:49:40.5517581Z -      
+2026-01-27T08:49:40.5517758Z -      // Add VC libs path
+2026-01-27T08:49:40.5518352Z -      #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5518584Z -      {
+2026-01-27T08:49:40.5518761Z -        use std::env;
+2026-01-27T08:49:40.5519003Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5519311Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5519690Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5520026Z -            #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5520525Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("windows").join("x86");
+2026-01-27T08:49:40.5520984Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5521467Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("windows").join("x64");
+2026-01-27T08:49:40.5522372Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("windows").join(if cfg!(target_arch = "x86") { "x86" } else { "x64" });
+2026-01-27T08:49:40.5523117Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5523595Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5523928Z -          }
+2026-01-27T08:49:40.5524151Z +    let mut lib_paths = Vec::new();
+2026-01-27T08:49:40.5524379Z +
+2026-01-27T08:49:40.5524554Z +    // Add VC libs path
+2026-01-27T08:49:40.5524800Z +    #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5525016Z +    {
+2026-01-27T08:49:40.5525183Z +      use std::env;
+2026-01-27T08:49:40.5525406Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5525701Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5526045Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5526348Z +          #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5526618Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5526859Z +            .join("assets")
+2026-01-27T08:49:40.5527087Z +            .join("vc-libs")
+2026-01-27T08:49:40.5527308Z +            .join("windows")
+2026-01-27T08:49:40.5527518Z +            .join("x86");
+2026-01-27T08:49:40.5527770Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5528181Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5528417Z +            .join("assets")
+2026-01-27T08:49:40.5528639Z +            .join("vc-libs")
+2026-01-27T08:49:40.5528850Z +            .join("windows")
+2026-01-27T08:49:40.5529063Z +            .join("x64");
+2026-01-27T08:49:40.5529319Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5529575Z +            .join("assets")
+2026-01-27T08:49:40.5529789Z +            .join("libs")
+2026-01-27T08:49:40.5529995Z +            .join("natives")
+2026-01-27T08:49:40.5530214Z +            .join("windows")
+2026-01-27T08:49:40.5530486Z +            .join(if cfg!(target_arch = "x86") {
+2026-01-27T08:49:40.5530740Z +              "x86"
+2026-01-27T08:49:40.5530927Z +            } else {
+2026-01-27T08:49:40.5531109Z +              "x64"
+2026-01-27T08:49:40.5531281Z +            });
+2026-01-27T08:49:40.5531602Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5532068Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5532383Z          }
+2026-01-27T08:49:40.5532538Z        }
+2026-01-27T08:49:40.5532899Z -      #[cfg(target_os = "macos")]
+2026-01-27T08:49:40.5533115Z -      {
+2026-01-27T08:49:40.5533290Z -        use std::env;
+2026-01-27T08:49:40.5533644Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5533953Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5534311Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5534565Z +    }
+2026-01-27T08:49:40.5534759Z +    #[cfg(target_os = "macos")]
+2026-01-27T08:49:40.5534958Z +    {
+2026-01-27T08:49:40.5535127Z +      use std::env;
+2026-01-27T08:49:40.5535355Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5535646Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5535983Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5536317Z +          if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:40.5536641Z              if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:40.5537003Z -              if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:40.5537622Z -                let vc_libs_dir = app_dir.join("Contents").join("Resources").join("assets").join("vc-libs").join("macos");
+2026-01-27T08:49:40.5538637Z -                let common_libs_dir = app_dir.join("Contents").join("Resources").join("assets").join("libs").join("natives").join("macos");
+2026-01-27T08:49:40.5539311Z -                lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5539790Z -                lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5540113Z -              }
+2026-01-27T08:49:40.5540339Z +              let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5540610Z +                .join("Contents")
+2026-01-27T08:49:40.5540872Z +                .join("Resources")
+2026-01-27T08:49:40.5541132Z +                .join("assets")
+2026-01-27T08:49:40.5541372Z +                .join("vc-libs")
+2026-01-27T08:49:40.5541623Z +                .join("macos");
+2026-01-27T08:49:40.5541885Z +              let common_libs_dir = app_dir
+2026-01-27T08:49:40.5542173Z +                .join("Contents")
+2026-01-27T08:49:40.5542427Z +                .join("Resources")
+2026-01-27T08:49:40.5542679Z +                .join("assets")
+2026-01-27T08:49:40.5542916Z +                .join("libs")
+2026-01-27T08:49:40.5543149Z +                .join("natives")
+2026-01-27T08:49:40.5543399Z +                .join("macos");
+2026-01-27T08:49:40.5543755Z +              lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5544229Z +              lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5544555Z              }
+2026-01-27T08:49:40.5544718Z            }
+2026-01-27T08:49:40.5544869Z          }
+2026-01-27T08:49:40.5545377Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:376:
+2026-01-27T08:49:40.5545840Z        }
+2026-01-27T08:49:40.5546043Z -      #[cfg(target_os = "linux")]
+2026-01-27T08:49:40.5546256Z -      {
+2026-01-27T08:49:40.5546427Z -        use std::env;
+2026-01-27T08:49:40.5546662Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5546960Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5547322Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5547773Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("linux");
+2026-01-27T08:49:40.5548292Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5548856Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("linux").join("x64");
+2026-01-27T08:49:40.5549377Z -            #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5549934Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("linux").join("arm64");
+2026-01-27T08:49:40.5550538Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5551018Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5551508Z -          }
+2026-01-27T08:49:40.5551671Z +    }
+2026-01-27T08:49:40.5551867Z +    #[cfg(target_os = "linux")]
+2026-01-27T08:49:40.5552191Z +    {
+2026-01-27T08:49:40.5552362Z +      use std::env;
+2026-01-27T08:49:40.5552591Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5552894Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5553243Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5553694Z +          let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("linux");
+2026-01-27T08:49:40.5554097Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5554422Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5554683Z +            .join("assets")
+2026-01-27T08:49:40.5554971Z +            .join("libs")
+2026-01-27T08:49:40.5555369Z +            .join("natives")
+2026-01-27T08:49:40.5555761Z +            .join("linux")
+2026-01-27T08:49:40.5556124Z +            .join("x64");
+2026-01-27T08:49:40.5556571Z +          #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5557093Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5557523Z +            .join("assets")
+2026-01-27T08:49:40.5558110Z +            .join("libs")
+2026-01-27T08:49:40.5558482Z +            .join("natives")
+2026-01-27T08:49:40.5558770Z +            .join("linux")
+2026-01-27T08:49:40.5558986Z +            .join("arm64");
+2026-01-27T08:49:40.5559332Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5559801Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5560121Z          }
+2026-01-27T08:49:40.5560270Z        }
+2026-01-27T08:49:40.5560471Z -      #[cfg(target_os = "android")]
+2026-01-27T08:49:40.5560689Z -      {
+2026-01-27T08:49:40.5560866Z -        use std::env;
+2026-01-27T08:49:40.5561108Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5561408Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5561760Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5562124Z -            // Android app structure: app/lib/[arch]/
+2026-01-27T08:49:40.5562447Z -            #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5562743Z -            let arch_dir = "arm64-v8a";
+2026-01-27T08:49:40.5563039Z -            #[cfg(target_arch = "arm")]
+2026-01-27T08:49:40.5563333Z -            let arch_dir = "armeabi-v7a";
+2026-01-27T08:49:40.5563615Z -            #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5563891Z -            let arch_dir = "x86";
+2026-01-27T08:49:40.5564166Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5564442Z -            let arch_dir = "x86_64";
+2026-01-27T08:49:40.5564662Z -            
+2026-01-27T08:49:40.5565093Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("android").join(arch_dir);
+2026-01-27T08:49:40.5565815Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("android").join(arch_dir);
+2026-01-27T08:49:40.5566421Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5566907Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5567228Z -          }
+2026-01-27T08:49:40.5567388Z +    }
+2026-01-27T08:49:40.5567589Z +    #[cfg(target_os = "android")]
+2026-01-27T08:49:40.5567804Z +    {
+2026-01-27T08:49:40.5568211Z +      use std::env;
+2026-01-27T08:49:40.5568448Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5568745Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5569082Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5569431Z +          // Android app structure: app/lib/[arch]/
+2026-01-27T08:49:40.5569748Z +          #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5570026Z +          let arch_dir = "arm64-v8a";
+2026-01-27T08:49:40.5570300Z +          #[cfg(target_arch = "arm")]
+2026-01-27T08:49:40.5570580Z +          let arch_dir = "armeabi-v7a";
+2026-01-27T08:49:40.5570850Z +          #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5571316Z +          let arch_dir = "x86";
+2026-01-27T08:49:40.5571586Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5571983Z +          let arch_dir = "x86_64";
+2026-01-27T08:49:40.5572196Z +
+2026-01-27T08:49:40.5572391Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5572636Z +            .join("assets")
+2026-01-27T08:49:40.5572858Z +            .join("vc-libs")
+2026-01-27T08:49:40.5573083Z +            .join("android")
+2026-01-27T08:49:40.5573301Z +            .join(arch_dir);
+2026-01-27T08:49:40.5573552Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5573805Z +            .join("assets")
+2026-01-27T08:49:40.5574020Z +            .join("libs")
+2026-01-27T08:49:40.5574228Z +            .join("natives")
+2026-01-27T08:49:40.5574454Z +            .join("android")
+2026-01-27T08:49:40.5574661Z +            .join(arch_dir);
+2026-01-27T08:49:40.5575004Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5575476Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5575784Z          }
+2026-01-27T08:49:40.5575943Z        }
+2026-01-27T08:49:40.5576090Z -      
+2026-01-27T08:49:40.5576358Z -      // Combine natives directory and all library paths
+2026-01-27T08:49:40.5576792Z -      let mut java_library_path = "${natives_directory}".to_string();
+2026-01-27T08:49:40.5577094Z -      
+2026-01-27T08:49:40.5577296Z -      #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5577544Z -      let separator = ";";
+2026-01-27T08:49:40.5577800Z -      #[cfg(not(target_os = "windows"))]
+2026-01-27T08:49:40.5578323Z -      let separator = ":";
+2026-01-27T08:49:40.5578518Z -      
+2026-01-27T08:49:40.5578722Z -      for lib_path in lib_paths {
+2026-01-27T08:49:40.5578988Z -        if !lib_path.is_empty() {
+2026-01-27T08:49:40.5579378Z -          java_library_path.push_str(&format!("{}{}", separator, lib_path));
+2026-01-27T08:49:40.5579708Z -        }
+2026-01-27T08:49:40.5579855Z +    }
+2026-01-27T08:49:40.5580009Z +
+2026-01-27T08:49:40.5580264Z +    // Combine natives directory and all library paths
+2026-01-27T08:49:40.5580682Z +    let mut java_library_path = "${natives_directory}".to_string();
+2026-01-27T08:49:40.5580984Z +
+2026-01-27T08:49:40.5581170Z +    #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5581408Z +    let separator = ";";
+2026-01-27T08:49:40.5581659Z +    #[cfg(not(target_os = "windows"))]
+2026-01-27T08:49:40.5581909Z +    let separator = ":";
+2026-01-27T08:49:40.5582094Z +
+2026-01-27T08:49:40.5582287Z +    for lib_path in lib_paths {
+2026-01-27T08:49:40.5582542Z +      if !lib_path.is_empty() {
+2026-01-27T08:49:40.5582924Z +        java_library_path.push_str(&format!("{}{}", separator, lib_path));
+2026-01-27T08:49:40.5583243Z        }
+2026-01-27T08:49:40.5583392Z -      
+2026-01-27T08:49:40.5583593Z -      client_jvm_args.extend(vec![
+2026-01-27T08:49:40.5583941Z -        format!("-Djava.library.path={}", java_library_path),
+2026-01-27T08:49:40.5584391Z -        "-Dminecraft.launcher.brand=${launcher_name}".to_string(),
+2026-01-27T08:49:40.5584873Z -        "-Dminecraft.launcher.version=${launcher_version}".to_string(),
+2026-01-27T08:49:40.5585202Z -      ]);
+2026-01-27T08:49:40.5585357Z +    }
+2026-01-27T08:49:40.5585497Z +
+2026-01-27T08:49:40.5585690Z +    client_jvm_args.extend(vec![
+2026-01-27T08:49:40.5586032Z +      format!("-Djava.library.path={}", java_library_path),
+2026-01-27T08:49:40.5586460Z +      "-Dminecraft.launcher.brand=${launcher_name}".to_string(),
+2026-01-27T08:49:40.5586930Z +      "-Dminecraft.launcher.version=${launcher_version}".to_string(),
+2026-01-27T08:49:40.5587245Z +    ]);
+2026-01-27T08:49:40.5587494Z      cmd.extend(replace_arguments(client_jvm_args, &map));
+2026-01-27T08:49:40.5587771Z    }
+2026-01-27T08:49:40.5588050Z  
+2026-01-27T08:49:40.5589085Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/file_validator.rs:207:
+2026-01-27T08:49:40.5589644Z    })
+2026-01-27T08:49:40.5589889Z  }
+2026-01-27T08:49:40.5590212Z  
+2026-01-27T08:49:40.5590991Z -pub fn convert_library_name_to_path(name: &str, native: Option<String>) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.5591771Z +pub fn convert_library_name_to_path(
+2026-01-27T08:49:40.5592028Z +  name: &str,
+2026-01-27T08:49:40.5592222Z +  native: Option<String>,
+2026-01-27T08:49:40.5592487Z +) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.5592725Z    let LibraryParts {
+2026-01-27T08:49:40.5592997Z      path,
+2026-01-27T08:49:40.5593245Z      pack_name,
+2026-01-27T08:49:40.5804879Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:63:
+2026-01-27T08:49:40.5805955Z  
+2026-01-27T08:49:40.5806291Z  impl LaunchArguments {
+2026-01-27T08:49:40.5806997Z    pub fn into_hashmap(self) -> DSYCLauncherResult<HashMap<String, String>> {
+2026-01-27T08:49:40.5807664Z -    let value =
+2026-01-27T08:49:40.5808856Z -      serde_json::to_value(self).map_err(|e| DSYCLauncherError(format!("Serialization error: {}", e)))?;
+2026-01-27T08:49:40.5809904Z +    let value = serde_json::to_value(self)
+2026-01-27T08:49:40.5810731Z +      .map_err(|e| DSYCLauncherError(format!("Serialization error: {}", e)))?;
+2026-01-27T08:49:40.5811410Z      let obj = value
+2026-01-27T08:49:40.5811748Z        .as_object()
+2026-01-27T08:49:40.5812494Z        .ok_or_else(|| DSYCLauncherError("Failed to convert LaunchParams to HashMap".to_string()))?;
+2026-01-27T08:49:40.5813953Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:338:
+2026-01-27T08:49:40.5814821Z      }
+2026-01-27T08:49:40.5815117Z  
+2026-01-27T08:49:40.5815499Z      // Get library paths based on platform
+2026-01-27T08:49:40.5816110Z -      let mut lib_paths = Vec::new();
+2026-01-27T08:49:40.5816557Z -      
+2026-01-27T08:49:40.5816902Z -      // Add VC libs path
+2026-01-27T08:49:40.5817392Z -      #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5817815Z -      {
+2026-01-27T08:49:40.5818415Z -        use std::env;
+2026-01-27T08:49:40.5818906Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5819508Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5820224Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5820800Z -            #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5821658Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("windows").join("x86");
+2026-01-27T08:49:40.5822528Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5823471Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("windows").join("x64");
+2026-01-27T08:49:40.5825151Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("windows").join(if cfg!(target_arch = "x86") { "x86" } else { "x64" });
+2026-01-27T08:49:40.5826588Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5827488Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5828332Z -          }
+2026-01-27T08:49:40.5828761Z +    let mut lib_paths = Vec::new();
+2026-01-27T08:49:40.5829172Z +
+2026-01-27T08:49:40.5829480Z +    // Add VC libs path
+2026-01-27T08:49:40.5829913Z +    #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5830272Z +    {
+2026-01-27T08:49:40.5830571Z +      use std::env;
+2026-01-27T08:49:40.5830973Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5831507Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5832136Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5832679Z +          #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5833179Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5833619Z +            .join("assets")
+2026-01-27T08:49:40.5834021Z +            .join("vc-libs")
+2026-01-27T08:49:40.5834424Z +            .join("windows")
+2026-01-27T08:49:40.5834824Z +            .join("x86");
+2026-01-27T08:49:40.5835285Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5835817Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5836734Z +            .join("assets")
+2026-01-27T08:49:40.5837168Z +            .join("vc-libs")
+2026-01-27T08:49:40.5837831Z +            .join("windows")
+2026-01-27T08:49:40.5838433Z +            .join("x64");
+2026-01-27T08:49:40.5838912Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5839387Z +            .join("assets")
+2026-01-27T08:49:40.5839786Z +            .join("libs")
+2026-01-27T08:49:40.5840185Z +            .join("natives")
+2026-01-27T08:49:40.5840585Z +            .join("windows")
+2026-01-27T08:49:40.5841089Z +            .join(if cfg!(target_arch = "x86") {
+2026-01-27T08:49:40.5841559Z +              "x86"
+2026-01-27T08:49:40.5841897Z +            } else {
+2026-01-27T08:49:40.5842225Z +              "x64"
+2026-01-27T08:49:40.5842528Z +            });
+2026-01-27T08:49:40.5843118Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5843991Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5844575Z          }
+2026-01-27T08:49:40.5844850Z        }
+2026-01-27T08:49:40.5845212Z -      #[cfg(target_os = "macos")]
+2026-01-27T08:49:40.5845676Z -      {
+2026-01-27T08:49:40.5846007Z -        use std::env;
+2026-01-27T08:49:40.5846453Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5847038Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5847736Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5848453Z +    }
+2026-01-27T08:49:40.5848831Z +    #[cfg(target_os = "macos")]
+2026-01-27T08:49:40.5849217Z +    {
+2026-01-27T08:49:40.5849528Z +      use std::env;
+2026-01-27T08:49:40.5849931Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5850475Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5851116Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5851746Z +          if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:40.5852345Z              if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:40.5853019Z -              if let Some(app_dir) = app_dir.parent() {
+2026-01-27T08:49:40.5854161Z -                let vc_libs_dir = app_dir.join("Contents").join("Resources").join("assets").join("vc-libs").join("macos");
+2026-01-27T08:49:40.5855839Z -                let common_libs_dir = app_dir.join("Contents").join("Resources").join("assets").join("libs").join("natives").join("macos");
+2026-01-27T08:49:40.5857128Z -                lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5858301Z -                lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5858934Z -              }
+2026-01-27T08:49:40.5859366Z +              let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5859836Z +                .join("Contents")
+2026-01-27T08:49:40.5860329Z +                .join("Resources")
+2026-01-27T08:49:40.5860813Z +                .join("assets")
+2026-01-27T08:49:40.5861325Z +                .join("vc-libs")
+2026-01-27T08:49:40.5861822Z +                .join("macos");
+2026-01-27T08:49:40.5862316Z +              let common_libs_dir = app_dir
+2026-01-27T08:49:40.5862855Z +                .join("Contents")
+2026-01-27T08:49:40.5863330Z +                .join("Resources")
+2026-01-27T08:49:40.5863793Z +                .join("assets")
+2026-01-27T08:49:40.5864228Z +                .join("libs")
+2026-01-27T08:49:40.5864661Z +                .join("natives")
+2026-01-27T08:49:40.5865109Z +                .join("macos");
+2026-01-27T08:49:40.5865779Z +              lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5866679Z +              lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5866811Z              }
+2026-01-27T08:49:40.5866928Z            }
+2026-01-27T08:49:40.5867039Z          }
+2026-01-27T08:49:40.5867809Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/command_generator.rs:376:
+2026-01-27T08:49:40.5868165Z        }
+2026-01-27T08:49:40.5868704Z -      #[cfg(target_os = "linux")]
+2026-01-27T08:49:40.5868827Z -      {
+2026-01-27T08:49:40.5868989Z -        use std::env;
+2026-01-27T08:49:40.5869408Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5869725Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5870028Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5870521Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("linux");
+2026-01-27T08:49:40.5870777Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5871486Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("linux").join("x64");
+2026-01-27T08:49:40.5871747Z -            #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5872497Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("linux").join("arm64");
+2026-01-27T08:49:40.5872923Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5873380Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5873501Z -          }
+2026-01-27T08:49:40.5873626Z +    }
+2026-01-27T08:49:40.5873842Z +    #[cfg(target_os = "linux")]
+2026-01-27T08:49:40.5873955Z +    {
+2026-01-27T08:49:40.5874112Z +      use std::env;
+2026-01-27T08:49:40.5874340Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5874637Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5874938Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5875411Z +          let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("linux");
+2026-01-27T08:49:40.5875645Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5875881Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5876056Z +            .join("assets")
+2026-01-27T08:49:40.5876221Z +            .join("libs")
+2026-01-27T08:49:40.5876401Z +            .join("natives")
+2026-01-27T08:49:40.5876570Z +            .join("linux")
+2026-01-27T08:49:40.5876749Z +            .join("x64");
+2026-01-27T08:49:40.5877011Z +          #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5877260Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5877431Z +            .join("assets")
+2026-01-27T08:49:40.5877600Z +            .join("libs")
+2026-01-27T08:49:40.5877766Z +            .join("natives")
+2026-01-27T08:49:40.5878158Z +            .join("linux")
+2026-01-27T08:49:40.5878351Z +            .join("arm64");
+2026-01-27T08:49:40.5878775Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5879240Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5879377Z          }
+2026-01-27T08:49:40.5879498Z        }
+2026-01-27T08:49:40.5879729Z -      #[cfg(target_os = "android")]
+2026-01-27T08:49:40.5879849Z -      {
+2026-01-27T08:49:40.5880018Z -        use std::env;
+2026-01-27T08:49:40.5880250Z -        use std::path::PathBuf;
+2026-01-27T08:49:40.5880550Z -        if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5880852Z -          if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5881185Z -            // Android app structure: app/lib/[arch]/
+2026-01-27T08:49:40.5881442Z -            #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5881692Z -            let arch_dir = "arm64-v8a";
+2026-01-27T08:49:40.5881923Z -            #[cfg(target_arch = "arm")]
+2026-01-27T08:49:40.5882169Z -            let arch_dir = "armeabi-v7a";
+2026-01-27T08:49:40.5882413Z -            #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5882624Z -            let arch_dir = "x86";
+2026-01-27T08:49:40.5882872Z -            #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5883111Z -            let arch_dir = "x86_64";
+2026-01-27T08:49:40.5883235Z -            
+2026-01-27T08:49:40.5883853Z -            let vc_libs_dir = app_dir.join("assets").join("vc-libs").join("android").join(arch_dir);
+2026-01-27T08:49:40.5884632Z -            let common_libs_dir = app_dir.join("assets").join("libs").join("natives").join("android").join(arch_dir);
+2026-01-27T08:49:40.5885400Z -            lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5886030Z -            lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5886159Z -          }
+2026-01-27T08:49:40.5886278Z +    }
+2026-01-27T08:49:40.5886514Z +    #[cfg(target_os = "android")]
+2026-01-27T08:49:40.5886631Z +    {
+2026-01-27T08:49:40.5886792Z +      use std::env;
+2026-01-27T08:49:40.5887012Z +      use std::path::PathBuf;
+2026-01-27T08:49:40.5887291Z +      if let Ok(exe_path) = env::current_exe() {
+2026-01-27T08:49:40.5887579Z +        if let Some(app_dir) = exe_path.parent() {
+2026-01-27T08:49:40.5888082Z +          // Android app structure: app/lib/[arch]/
+2026-01-27T08:49:40.5888336Z +          #[cfg(target_arch = "aarch64")]
+2026-01-27T08:49:40.5888566Z +          let arch_dir = "arm64-v8a";
+2026-01-27T08:49:40.5888800Z +          #[cfg(target_arch = "arm")]
+2026-01-27T08:49:40.5889042Z +          let arch_dir = "armeabi-v7a";
+2026-01-27T08:49:40.5889266Z +          #[cfg(target_arch = "x86")]
+2026-01-27T08:49:40.5889478Z +          let arch_dir = "x86";
+2026-01-27T08:49:40.5889709Z +          #[cfg(target_arch = "x86_64")]
+2026-01-27T08:49:40.5889921Z +          let arch_dir = "x86_64";
+2026-01-27T08:49:40.5890037Z +
+2026-01-27T08:49:40.5890254Z +          let vc_libs_dir = app_dir
+2026-01-27T08:49:40.5890445Z +            .join("assets")
+2026-01-27T08:49:40.5890610Z +            .join("vc-libs")
+2026-01-27T08:49:40.5890770Z +            .join("android")
+2026-01-27T08:49:40.5890935Z +            .join(arch_dir);
+2026-01-27T08:49:40.5891175Z +          let common_libs_dir = app_dir
+2026-01-27T08:49:40.5891335Z +            .join("assets")
+2026-01-27T08:49:40.5891502Z +            .join("libs")
+2026-01-27T08:49:40.5891668Z +            .join("natives")
+2026-01-27T08:49:40.5891829Z +            .join("android")
+2026-01-27T08:49:40.5892000Z +            .join(arch_dir);
+2026-01-27T08:49:40.5892466Z +          lib_paths.push(vc_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5892917Z +          lib_paths.push(common_libs_dir.to_string_lossy().to_string());
+2026-01-27T08:49:40.5893059Z          }
+2026-01-27T08:49:40.5893173Z        }
+2026-01-27T08:49:40.5893292Z -      
+2026-01-27T08:49:40.5893637Z -      // Combine natives directory and all library paths
+2026-01-27T08:49:40.5894057Z -      let mut java_library_path = "${natives_directory}".to_string();
+2026-01-27T08:49:40.5894190Z -      
+2026-01-27T08:49:40.5894420Z -      #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5894601Z -      let separator = ";";
+2026-01-27T08:49:40.5894857Z -      #[cfg(not(target_os = "windows"))]
+2026-01-27T08:49:40.5895031Z -      let separator = ":";
+2026-01-27T08:49:40.5895161Z -      
+2026-01-27T08:49:40.5895386Z -      for lib_path in lib_paths {
+2026-01-27T08:49:40.5895600Z -        if !lib_path.is_empty() {
+2026-01-27T08:49:40.5896085Z -          java_library_path.push_str(&format!("{}{}", separator, lib_path));
+2026-01-27T08:49:40.5896220Z -        }
+2026-01-27T08:49:40.5896333Z +    }
+2026-01-27T08:49:40.5896459Z +
+2026-01-27T08:49:40.5896786Z +    // Combine natives directory and all library paths
+2026-01-27T08:49:40.5897199Z +    let mut java_library_path = "${natives_directory}".to_string();
+2026-01-27T08:49:40.5897323Z +
+2026-01-27T08:49:40.5897544Z +    #[cfg(target_os = "windows")]
+2026-01-27T08:49:40.5897713Z +    let separator = ";";
+2026-01-27T08:49:40.5898175Z +    #[cfg(not(target_os = "windows"))]
+2026-01-27T08:49:40.5898361Z +    let separator = ":";
+2026-01-27T08:49:40.5898474Z +
+2026-01-27T08:49:40.5898699Z +    for lib_path in lib_paths {
+2026-01-27T08:49:40.5898912Z +      if !lib_path.is_empty() {
+2026-01-27T08:49:40.5899378Z +        java_library_path.push_str(&format!("{}{}", separator, lib_path));
+2026-01-27T08:49:40.5899504Z        }
+2026-01-27T08:49:40.5899619Z -      
+2026-01-27T08:49:40.5899852Z -      client_jvm_args.extend(vec![
+2026-01-27T08:49:40.5900231Z -        format!("-Djava.library.path={}", java_library_path),
+2026-01-27T08:49:40.5900930Z -        "-Dminecraft.launcher.brand=${launcher_name}".to_string(),
+2026-01-27T08:49:40.5901577Z -        "-Dminecraft.launcher.version=${launcher_version}".to_string(),
+2026-01-27T08:49:40.5901699Z -      ]);
+2026-01-27T08:49:40.5901817Z +    }
+2026-01-27T08:49:40.5901934Z +
+2026-01-27T08:49:40.5902158Z +    client_jvm_args.extend(vec![
+2026-01-27T08:49:40.5902523Z +      format!("-Djava.library.path={}", java_library_path),
+2026-01-27T08:49:40.5902951Z +      "-Dminecraft.launcher.brand=${launcher_name}".to_string(),
+2026-01-27T08:49:40.5903400Z +      "-Dminecraft.launcher.version=${launcher_version}".to_string(),
+2026-01-27T08:49:40.5903527Z +    ]);
+2026-01-27T08:49:40.5903829Z      cmd.extend(replace_arguments(client_jvm_args, &map));
+2026-01-27T08:49:40.5903942Z    }
+2026-01-27T08:49:40.5904051Z  
+2026-01-27T08:49:40.5904853Z Diff in /home/runner/work/DSYC-Launcher/DSYC-Launcher/src-tauri/src/launch/helpers/file_validator.rs:207:
+2026-01-27T08:49:40.5905000Z    })
+2026-01-27T08:49:40.5905128Z  }
+2026-01-27T08:49:40.5905239Z  
+2026-01-27T08:49:40.5905989Z -pub fn convert_library_name_to_path(name: &str, native: Option<String>) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.5906253Z +pub fn convert_library_name_to_path(
+2026-01-27T08:49:40.5906379Z +  name: &str,
+2026-01-27T08:49:40.5906549Z +  native: Option<String>,
+2026-01-27T08:49:40.5906784Z +) -> DSYCLauncherResult<String> {
+2026-01-27T08:49:40.5906924Z    let LibraryParts {
+2026-01-27T08:49:40.5907042Z      path,
+2026-01-27T08:49:40.5907175Z      pack_name,
+2026-01-27T08:49:40.6021122Z ##[error]Process completed with exit code 123.

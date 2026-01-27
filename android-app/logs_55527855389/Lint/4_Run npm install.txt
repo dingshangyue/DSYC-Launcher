@@ -1,0 +1,22 @@
+﻿2026-01-27T08:49:04.6357542Z ##[group]Run npm install
+2026-01-27T08:49:04.6358238Z [36;1mnpm install[0m
+2026-01-27T08:49:04.6401047Z shell: /usr/bin/bash -e {0}
+2026-01-27T08:49:04.6401345Z ##[endgroup]
+2026-01-27T08:49:10.3090905Z npm warn deprecated string-similarity@4.0.4: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+2026-01-27T08:49:10.8459591Z npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+2026-01-27T08:49:14.7846355Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2026-01-27T08:49:15.3210144Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2026-01-27T08:49:16.7327143Z npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+2026-01-27T08:49:20.1671901Z npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+2026-01-27T08:49:20.2039360Z npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+2026-01-27T08:49:23.1296503Z 
+2026-01-27T08:49:23.1297343Z > dsyclauncher@0.9.8 prepare
+2026-01-27T08:49:23.1298127Z > husky
+2026-01-27T08:49:23.1298339Z 
+2026-01-27T08:49:23.1942487Z 
+2026-01-27T08:49:23.1943881Z added 634 packages, and audited 635 packages in 18s
+2026-01-27T08:49:23.1944400Z 
+2026-01-27T08:49:23.1948562Z 259 packages are looking for funding
+2026-01-27T08:49:23.1949976Z   run `npm fund` for details
+2026-01-27T08:49:23.1961456Z 
+2026-01-27T08:49:23.1961866Z found 0 vulnerabilities
