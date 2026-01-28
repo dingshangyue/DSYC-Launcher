@@ -52,15 +52,26 @@ jobs:
       - name: Install dependencies
         run: |
           cd android-app
-          npm cache clean --force
+          # Clean up any existing files
+          rm -rf node_modules package-lock.json
+          # Create a simple test to verify directory structure
+          echo "Current directory: $(pwd)"
+          echo "Directory contents: $(ls -la)"
+          # Install dependencies with verbose output
           npm install --legacy-peer-deps --verbose
+          # Verify installation
+          echo "After installation - directory contents: $(ls -la)"
+          echo "Node modules exists: $(ls -la node_modules | head -20)"
           # Verify expo is installed
-          if ! npm list expo; then
-            echo "Expo not installed, installing..."
-            npm install expo@~54.0.32 --legacy-peer-deps
+          if [ -d "node_modules/expo" ]; then
+            echo "Expo directory exists"
+            echo "Expo package.json: $(cat node_modules/expo/package.json | grep version)"
+          else
+            echo "Expo directory does not exist"
+            npm list expo || echo "Expo not found in npm list"
           fi
           # List all installed packages for debugging
-          npm list | head -50
+          npm list | head -100
 
       - name: Prebuild Android project
         run: |
@@ -69,7 +80,19 @@ jobs:
 
       - name: Build Android APK
         run: |
-          cd android-app/android
+          cd android-app
+          # Set NODE_PATH to ensure node_modules is found
+          export NODE_PATH=$(pwd)/node_modules
+          echo "NODE_PATH set to: $NODE_PATH"
+          # Verify node_modules is accessible
+          if [ -d "node_modules/expo" ]; then
+            echo "Expo found at: $(pwd)/node_modules/expo"
+          else
+            echo "Expo not found, aborting build"
+            exit 1
+          fi
+          # Change to android directory and build
+          cd android
           # Build APK for specific architecture
           ./gradlew assembleRelease -x lint
           # Find the generated APK
