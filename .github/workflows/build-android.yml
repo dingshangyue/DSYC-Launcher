@@ -76,25 +76,101 @@ jobs:
       - name: Prebuild Android project
         run: |
           cd android-app
-          npx expo prebuild --clean
+          # Set NODE_PATH for prebuild
+          export NODE_PATH=$(pwd)/node_modules
+          echo "NODE_PATH set to: $NODE_PATH"
+          # Verify expo is available
+          if [ -d "node_modules/expo" ]; then
+            echo "Expo found, proceeding with prebuild"
+          else
+            echo "Expo not found, attempting to reinstall"
+            npm install expo@~54.0.32 --legacy-peer-deps
+          fi
+          # Run prebuild with verbose output
+          npx expo prebuild --clean --platform android --verbose
+          # Verify Android directory was created
+          if [ -d "android" ]; then
+            echo "Android directory created successfully"
+            ls -la android
+          else
+            echo "ERROR: Android directory not created"
+            exit 1
+          fi
 
       - name: Build Android APK
         run: |
           cd android-app
           # Set NODE_PATH to ensure node_modules is found
           export NODE_PATH=$(pwd)/node_modules
+          export ANDROID_HOME=$HOME/android-sdk
+          export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+          
           echo "NODE_PATH set to: $NODE_PATH"
-          # Verify node_modules is accessible
+          echo "Current directory: $(pwd)"
+          echo "Directory contents: $(ls -la)"
+          
+          # Verify expo is accessible
           if [ -d "node_modules/expo" ]; then
             echo "Expo found at: $(pwd)/node_modules/expo"
           else
             echo "Expo not found, aborting build"
             exit 1
           fi
+          
+          # Create a test script to verify module resolution
+          cat > test-expo-import.js << 'EOF'
+          try {
+            require('expo');
+            console.log('✓ Successfully imported expo module');
+          } catch (error) {
+            console.log('✗ Failed to import expo module:', error.message);
+            process.exit(1);
+          }
+          EOF
+          
+          # Test expo import
+          node test-expo-import.js
+          
+          # Create a custom Metro bundler script
+          cat > bundle-android.js << 'EOF'
+          const { execSync } = require('child_process');
+          const path = require('path');
+          
+          const projectRoot = path.resolve(__dirname);
+          console.log('Bundling from:', projectRoot);
+          
+          // Set NODE_PATH
+          process.env.NODE_PATH = path.join(projectRoot, 'node_modules');
+          console.log('NODE_PATH:', process.env.NODE_PATH);
+          
+          // Run Metro bundler directly
+          try {
+            console.log('Running Metro bundler...');
+            execSync(
+              'node node_modules/react-native/cli.js bundle --platform android --dev false --entry-file index.ts --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/',
+              { cwd: projectRoot, stdio: 'inherit' }
+            );
+            console.log('✓ Bundle created successfully');
+          } catch (error) {
+            console.error('✗ Bundling failed:', error.message);
+            process.exit(1);
+          }
+          EOF
+          
+          # Make the script executable
+          chmod +x bundle-android.js
+          
+          # Run the custom bundling script
+          echo "Running custom bundling script..."
+          node bundle-android.js
+          
           # Change to android directory and build
           cd android
-          # Build APK for specific architecture
-          ./gradlew assembleRelease -x lint
+          echo "Building from directory: $(pwd)"
+          
+          # Build APK with increased verbosity, skipping bundling since we already did it
+          ./gradlew assembleRelease -x lint -x createBundleReleaseJsAndAssets --info
+          
           # Find the generated APK
           find app/build/outputs/apk/release -name "*.apk" -type f
 
