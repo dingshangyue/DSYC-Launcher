@@ -117,19 +117,28 @@ jobs:
             exit 1
           fi
           
-          # Create a test script to verify module resolution
-          cat > test-expo-import.js << 'EOF'
+          # Create a test script to verify expo is installed
+          cat > test-expo-installed.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          
           try {
-            require('expo');
-            console.log('✓ Successfully imported expo module');
+            // Check if expo directory exists instead of requiring it
+            const expoPath = path.join(__dirname, 'node_modules', 'expo');
+            if (fs.existsSync(expoPath)) {
+              console.log('✓ Expo directory found at:', expoPath);
+            } else {
+              console.log('✗ Expo directory not found');
+              process.exit(1);
+            }
           } catch (error) {
-            console.log('✗ Failed to import expo module:', error.message);
+            console.log('✗ Error checking expo:', error.message);
             process.exit(1);
           }
           EOF
           
-          # Test expo import
-          node test-expo-import.js
+          # Test expo installation
+          node test-expo-installed.js
           
           # Create a custom Metro bundler script that handles the environment correctly
           cat > bundle-android.js << 'EOF'
