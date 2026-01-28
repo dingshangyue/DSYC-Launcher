@@ -86,8 +86,8 @@ jobs:
             echo "Expo not found, attempting to reinstall"
             npm install expo@~54.0.32 --legacy-peer-deps
           fi
-          # Run prebuild with verbose output
-          npx expo prebuild --clean --platform android --verbose
+          # Run prebuild with clean option
+          npx expo prebuild --clean --platform android
           # Verify Android directory was created
           if [ -d "android" ]; then
             echo "Android directory created successfully"
