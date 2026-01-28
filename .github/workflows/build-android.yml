@@ -131,7 +131,7 @@ jobs:
           # Test expo import
           node test-expo-import.js
           
-          # Create a custom Metro bundler script
+          # Create a custom Metro bundler script that handles the environment correctly
           cat > bundle-android.js << 'EOF'
           const { execSync } = require('child_process');
           const path = require('path');
@@ -139,15 +139,21 @@ jobs:
           const projectRoot = path.resolve(__dirname);
           console.log('Bundling from:', projectRoot);
           
-          // Set NODE_PATH
+          // Set NODE_PATH and other environment variables
           process.env.NODE_PATH = path.join(projectRoot, 'node_modules');
+          process.env.PWD = projectRoot;
           console.log('NODE_PATH:', process.env.NODE_PATH);
+          console.log('PWD:', process.env.PWD);
           
-          // Run Metro bundler directly
+          // Ensure the assets directory exists
+          const assetsDir = path.join(projectRoot, 'android', 'app', 'src', 'main', 'assets');
+          execSync(`mkdir -p "${assetsDir}"`, { cwd: projectRoot });
+          
+          // Run Metro bundler with explicit environment variables
           try {
             console.log('Running Metro bundler...');
             execSync(
-              'node node_modules/react-native/cli.js bundle --platform android --dev false --entry-file index.ts --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/',
+              'NODE_PATH="' + process.env.NODE_PATH + '" PWD="' + process.env.PWD + '" node node_modules/react-native/cli.js bundle --platform android --dev false --entry-file index.ts --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/',
               { cwd: projectRoot, stdio: 'inherit' }
             );
             console.log('✓ Bundle created successfully');
@@ -163,6 +169,14 @@ jobs:
           # Run the custom bundling script
           echo "Running custom bundling script..."
           node bundle-android.js
+          
+          # Verify the bundle was created
+          if [ -f "android/app/src/main/assets/index.android.bundle" ]; then
+            echo "✅ Bundle file created successfully"
+          else
+            echo "❌ Bundle file not created"
+            exit 1
+          fi
           
           # Change to android directory and build
           cd android

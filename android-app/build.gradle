@@ -1,0 +1,72 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        buildToolsVersion = "35.0.0"
+        minSdkVersion = 21
+        compileSdkVersion = 35
+        targetSdkVersion = 35
+        ndkVersion = "27.0.10479588"
+        kotlinVersion = "1.9.25"
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.6.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url("$rootDir/../node_modules/react-native/android")
+        }
+        maven {
+            // Android JSC is installed from npm
+            url("$rootDir/../node_modules/jsc-android/dist")
+        }
+        maven {
+            // Expo modules
+            url("$rootDir/../node_modules/expo/modules")
+        }
+        maven {
+            // Expo third-party dependencies
+            url("$rootDir/../node_modules/expo-third-party/react-native")
+        }
+        google()
+        mavenCentral()
+    }
+}
+
+// Fix for Metro bundler environment
+project.ext.react = [
+    enableHermes: true,
+    bundleInRelease: true,
+    bundleInDebug: false,
+    nodeExecutableAndArgs: [
+        "node",
+        "--require", "/home/runner/work/DSYC-Launcher/DSYC-Launcher/android-app/fix-env.js"
+    ]
+]
+
+// Ensure node_modules is accessible
+subprojects {
+    afterEvaluate {
+        project ->
+        if (project.name == "app") {
+            project.tasks.withType(com.android.build.gradle.tasks.BundleJsAndAssets) {
+                it.doFirst {
+                    // Set NODE_PATH for Metro bundler
+                    environment "NODE_PATH", "${rootDir}/../node_modules"
+                    environment "PWD", "${rootDir}/.."
+                    println "Setting NODE_PATH for Metro: ${rootDir}/../node_modules"
+                    println "Setting PWD for Metro: ${rootDir}/.."
+                }
+            }
+        }
+    }
+}
