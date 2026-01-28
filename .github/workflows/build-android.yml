@@ -52,7 +52,15 @@ jobs:
       - name: Install dependencies
         run: |
           cd android-app
-          npm install --legacy-peer-deps
+          npm cache clean --force
+          npm install --legacy-peer-deps --verbose
+          # Verify expo is installed
+          if ! npm list expo; then
+            echo "Expo not installed, installing..."
+            npm install expo@~54.0.32 --legacy-peer-deps
+          fi
+          # List all installed packages for debugging
+          npm list | head -50
 
       - name: Prebuild Android project
         run: |
