@@ -338,7 +338,7 @@ pub async fn generate_launch_command(
     }
 
     // Get library paths based on platform
-    let mut lib_paths = Vec::new();
+    let mut lib_paths: Vec<String> = Vec::new();
 
     // Add VC libs path
     #[cfg(target_os = "windows")]
@@ -347,18 +347,19 @@ pub async fn generate_launch_command(
       use std::path::PathBuf;
       if let Ok(exe_path) = env::current_exe() {
         if let Some(app_dir) = exe_path.parent() {
-          #[cfg(target_arch = "x86")]
-          let vc_libs_dir = app_dir
-            .join("assets")
-            .join("vc-libs")
-            .join("windows")
-            .join("x86");
-          #[cfg(target_arch = "x86_64")]
-          let vc_libs_dir = app_dir
-            .join("assets")
-            .join("vc-libs")
-            .join("windows")
-            .join("x64");
+          let vc_libs_dir = if cfg!(target_arch = "x86") {
+            app_dir
+              .join("assets")
+              .join("vc-libs")
+              .join("windows")
+              .join("x86")
+          } else {
+            app_dir
+              .join("assets")
+              .join("vc-libs")
+              .join("windows")
+              .join("x64")
+          };
           let common_libs_dir = app_dir
             .join("assets")
             .join("libs")
