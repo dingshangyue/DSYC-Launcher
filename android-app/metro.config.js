@@ -1,4 +1,4 @@
-const { getDefaultConfig } = require('@react-native/metro-config');
+const { getDefaultConfig } = require('expo/metro-config');
 
 // Ensure we're using the correct directory path
 const path = require('path');
@@ -18,8 +18,5 @@ config.resolver.nodeModulesPaths = [
   ...config.resolver.nodeModulesPaths
 ];
 
-// Add expo-specific configurations
-const { withExpoMetroConfig } = require('expo/metro-config');
-
 // Export the modified config
-module.exports = withExpoMetroConfig(config);
+module.exports = config;
